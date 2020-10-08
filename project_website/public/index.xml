@@ -6,7 +6,18 @@
     <description>Recent content on RONGJIV</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aboutus</title>
+      <link>/pages/aboutus/</link>
+      <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/aboutus/</guid>
+      <description>Hello this is about us page
+Lorem ipsum dolor sit amet, id omnis augue usu, cum inermis tincidunt ea, nec no vide explicari suscipiantur. Stet mucius verterem ut vel, augue intellegat nam no, eum melius electram ad. Eu pri illud fuisset accommodare, sonet legere delenit at pri. Rebum albucius mediocritatem eu nam, qui at amet vero nostrud.
+Purto recteque adversarium nam id. An has graeci pertinax petentium. Unum velit suscipit mea id.</description>
+    </item>
+    
     <item>
       <title>Hello R Markdown</title>
       <link>/2015/07/hello-r-markdown/</link>
@@ -133,6 +144,15 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
       
       <guid>/2013/01/japanese-test/</guid>
       <description>&lt;p&gt;This is a Japanese test post to show you how japanese is displayed.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Helo this is about us page</description>
     </item>
     
   </channel>

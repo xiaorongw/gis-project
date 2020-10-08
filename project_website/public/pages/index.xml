@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RONGJIV</title>
+    <link>/pages/</link>
+    <description>Recent content on RONGJIV</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/pages/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aboutus</title>
+      <link>/pages/aboutus/</link>
+      <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/aboutus/</guid>
+      <description>Hello this is about us page
+Lorem ipsum dolor sit amet, id omnis augue usu, cum inermis tincidunt ea, nec no vide explicari suscipiantur. Stet mucius verterem ut vel, augue intellegat nam no, eum melius electram ad. Eu pri illud fuisset accommodare, sonet legere delenit at pri. Rebum albucius mediocritatem eu nam, qui at amet vero nostrud.
+Purto recteque adversarium nam id. An has graeci pertinax petentium. Unum velit suscipit mea id.</description>
+    </item>
+    
+  </channel>
+</rss>
