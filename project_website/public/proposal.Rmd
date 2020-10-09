@@ -1,7 +1,6 @@
 ---
 title: Project Proposal
 date: '2020-10-09'
-slug: test
 categories: []
 tags: []
 output:
@@ -13,4 +12,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Test proposal
+# Scope of Work
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/gantt1.png', error=FALSE)
+```
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/gantt2.png', error=FALSE)
+```
