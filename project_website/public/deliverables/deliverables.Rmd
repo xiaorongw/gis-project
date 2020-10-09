@@ -1,0 +1,15 @@
+---
+title: "Project Deliverables"
+author: "Xiao Rong Wong"
+date: "10/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+content | link
+--------|------
+[Proposal](/deliverable/proposal.html)
+

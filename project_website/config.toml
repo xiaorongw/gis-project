@@ -57,7 +57,7 @@ canonifyurls = true
   identifier = "deliverables"
   name = "Project Deliverables"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
-  url = "/archives"
+  url = "/deliverables"
 [[menu.main]]
   weight = 3
   identifier = "categories"

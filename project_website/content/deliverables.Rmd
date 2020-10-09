@@ -1,0 +1,15 @@
+---
+title: "Project Deliverables"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Table of Contents
+
+Item         | Link
+-------------|------
+Proposal     | [Click here](/proposal/index.html)
+

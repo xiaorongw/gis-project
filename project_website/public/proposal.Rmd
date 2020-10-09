@@ -1,0 +1,16 @@
+---
+title: Project Proposal
+date: '2020-10-09'
+slug: test
+categories: []
+tags: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Test proposal
