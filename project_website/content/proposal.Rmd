@@ -12,6 +12,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Application System Architecture
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/architecturediag.png', error=FALSE)
+```
+
+<br>
+
 # Scope of Work
 
 ```{r echo=FALSE, fig.retina=2}
