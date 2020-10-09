@@ -24,6 +24,20 @@ This is especially relevant for public housing, that is sometimes at a disadvant
 
 <br>
 
+# Project Objective
+
+This project aims to:  
+
+* Investigate the spatial distribution of key factors of the built environment affecting child development, relative to public housing estates in Singapore.
+
+* Identify high risk areas for childhood development, based on the built environment.
+
+* Provide possible recommendations to mitigate these risks.
+
+* Utilise open source data to build a proof of concept web-based geospatial application.
+
+<br>
+
 # Application System Architecture
 
 ```{r echo=FALSE, fig.retina=2}
