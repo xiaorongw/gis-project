@@ -1,5 +1,5 @@
 ---
-title: Project Proposal
+title: Project Proposal - Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces
 date: '2020-10-09'
 categories: []
 tags: []
@@ -12,10 +12,22 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<br>
+
+# Project Motivation
+
+Children are the future of a nation's wellbeing. There is therefore an incentive for the nation to ensure the healthy development of a child into adulthood.  
+
+There have been studies on the how built spaces affect the development of children. Based on recurring key factors identified across these studies, geospatial analysis of Singapore’s neighborhoods can be conducted, to map and understand geospatial gaps, pinpointing risk areas that might require intervention.  
+
+This is especially relevant for public housing, that is sometimes at a disadvantage compared to private housing where developers are already incentivized or expected to provide some of these built environment factors (e.g. green spaces, recreation spaces). As such, risk areas for childhood development in public housing will be the focus area for this project.
+
+<br>
+
 # Application System Architecture
 
 ```{r echo=FALSE, fig.retina=2}
-knitr::include_graphics('/images/architecturediag.png', error=FALSE)
+knitr::include_graphics('/images/architecture.png', error=FALSE)
 ```
 
 <br>
@@ -29,3 +41,8 @@ knitr::include_graphics('/images/gantt1.png', error=FALSE)
 ```{r echo=FALSE, fig.retina=2}
 knitr::include_graphics('/images/gantt2.png', error=FALSE)
 ```
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/tasks.png', error=FALSE)
+```
+
