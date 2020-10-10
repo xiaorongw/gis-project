@@ -1,5 +1,4 @@
-
-<img width=“964” alt=“logo src=“https://raw.githubusercontent.com/xiaorongw/gis-project/master/project_website/static/images/logo.png?token=AHTAIVEPEKNYJLZAIWITXEK7QICDW”>
+<img src="xiaorongw\gis-project\master\project_website\static\images\logo.png" width="800px" height="auto">
 # Tiny Blocks: Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces 
 
 ## Project Motivation
