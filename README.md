@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/xiaorongw/gis-project/master/project_website/static/images/logo.png?token=AHTAIVFU556COXUKVBETN627QIDNQ" width="460" height="300">
 </p>
 
-# Tiny Blocks: Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces 
+# Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces 
 
 ## Project Motivation
 Children are the future of a nation's wellbeing. There is therefore an incentive for the nation to ensure the healthy development of a child into adulthood. 
