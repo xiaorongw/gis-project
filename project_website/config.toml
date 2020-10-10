@@ -66,10 +66,10 @@ canonifyurls = true
   url = "/categories"
 [[menu.main]]
   weight = 4
-  identifier = "about"
-  name = "About Us"
+  identifier = "about us"
+  name = "Who Are We?"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
-  url = "/#about"
+  url = "/aboutus"
 
 [[menu.links]]
   weight = 1
