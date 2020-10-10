@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Archives on RONGJIV</title>
+    <title>Archives on Tiny Blocks</title>
     <link>/archives/</link>
-    <description>Recent content in Archives on RONGJIV</description>
+    <description>Recent content in Archives on Tiny Blocks</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="/archives/index.xml" rel="self" type="application/rss+xml" />
   </channel>

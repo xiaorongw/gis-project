@@ -15,7 +15,7 @@
 baseURL = "https://example.org/"
 languageCode = "en-us"
 defaultContentLanguage = "en-us"
-title = "RONGJIV"
+title = "Tiny Blocks"
 theme = "hugo-tranquilpeak-theme"
 disqusShortname = "hugo-tranquilpeak-theme"
 # googleAnalytics = "UA-123-45"
@@ -31,10 +31,10 @@ canonifyurls = true
   archive = "archives"
 
 [author]
-  name = "Team 4"
+  name = "Tiny Blocks"
   bio = "Enabling Neighbourhoods for Healthy Child Development"
-  job = "Your job title"
-  location = "France"
+  #job = "Your job title"
+  #location = "France"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
   #gravatarEmail = "thibaud.lepretre@gmail.com"
   # Your profile picture
