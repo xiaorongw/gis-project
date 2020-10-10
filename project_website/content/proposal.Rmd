@@ -29,12 +29,31 @@ This is especially relevant for public housing, that is sometimes at a disadvant
 This project aims to:  
 
 * Investigate the spatial distribution of key factors of the built environment affecting child development, relative to public housing estates in Singapore.
-
 * Identify high risk areas for childhood development, based on the built environment.
-
 * Provide possible recommendations to mitigate these risks.
-
 * Utilise open source data to build a proof of concept web-based geospatial application.
+
+<br>
+
+# Application Design Storyboard
+
+The storyboard below will guide the development of the final application.
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/storyboard1.png', error=FALSE)
+```
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/storyboard2.png', error=FALSE)
+```
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/storyboard3.png', error=FALSE)
+```
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/storyboard4.png', error=FALSE)
+```
 
 <br>
 
