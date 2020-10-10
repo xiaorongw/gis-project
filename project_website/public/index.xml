@@ -7,6 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title></title>
+      <link>/aboutus/</link>
+      <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/aboutus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Project Deliverables</title>
       <link>/deliverables/</link>
       <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
@@ -22,15 +31,6 @@
       
       <guid>/proposal/</guid>
       <description>Project MotivationProject ObjectiveLiterature ReviewReview research on built environment relationship to child developmentLiterature Review 1: Relationship between the neighbourhood built environment and early child developmentLiterature Review 2: Levels of Influence in the Built Environment on the Promotion of Healthy Child DevelopmentReview research on Accessibility AnalysisLiterature Review 1: Accessibility analysis (Concepts and their application to transport policy, programme and project evaluation)Map PageData ExplorerApplication System ArchitectureDataChallenges and MitigationsTask Completion List</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/aboutus/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/aboutus/</guid>
-      <description></description>
     </item>
     
   </channel>
