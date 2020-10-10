@@ -1,4 +1,6 @@
-<img src="https://raw.githubusercontent.com/xiaorongw/gis-project/master/project_website/static/images/logo.png?token=AHTAIVEPEKNYJLZAIWITXEK7QICDW" align=centre width=auto height="300px">
+<center>
+<img src="https://raw.githubusercontent.com/xiaorongw/gis-project/master/project_website/static/images/logo.png?token=AHTAIVEPEKNYJLZAIWITXEK7QICDW" width=auto height="300px">
+</center>
 
 # Tiny Blocks: Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces 
 
