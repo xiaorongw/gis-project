@@ -5,7 +5,17 @@
     <link>/</link>
     <description>Recent content on Tiny Blocks</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>/aboutus/</link>
+      <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/aboutus/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Project Deliverables</title>
       <link>/deliverables/</link>
@@ -25,12 +35,12 @@
     </item>
     
     <item>
-      <title></title>
-      <link>/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Who are we?</title>
+      <link>/2020/10/who-are-we/</link>
+      <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
-      <description>Helo this is about us page</description>
+      <guid>/2020/10/who-are-we/</guid>
+      <description></description>
     </item>
     
   </channel>

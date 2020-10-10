@@ -66,17 +66,17 @@ canonifyurls = true
   url = "/categories"
 [[menu.main]]
   weight = 4
-  identifier = "about"
-  name = "About Us"
+  identifier = "about us"
+  name = "Who Are We?"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
-  url = "/#about"
+  url = "/aboutus"
 
 [[menu.links]]
   weight = 1
   identifier = "github"
   name = "GitHub"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
-  url = "https://github.com/kakawait"
+  url = "https://github.com/xiaorongw/gis-project"
 
 [params]
   # Customize date format use to render blog post date, categories and other
