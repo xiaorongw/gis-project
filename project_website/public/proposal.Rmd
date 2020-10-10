@@ -1,5 +1,5 @@
 ---
-title: Project Proposal - Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces
+title: "Project Proposal: Identifying Neighbourhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces"
 date: '2020-10-09'
 categories: []
 tags: []
@@ -12,13 +12,13 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<br>
+---
 
 # Project Motivation
 
-Children are the future of a nation's wellbeing. There is therefore an incentive for the nation to ensure the healthy development of a child into adulthood.  
+Children are the future of a nation's well-being. There is therefore an incentive for the nation to ensure the healthy development of a child into adulthood.  
 
-There have been studies on the how built spaces affect the development of children. Based on recurring key factors identified across these studies, geospatial analysis of Singapore’s neighborhoods can be conducted, to map and understand geospatial gaps, pinpointing risk areas that might require intervention.  
+There have been studies on how built spaces affect the development of children. Based on recurring key factors identified across these studies, geospatial analysis of Singapore’s neighborhoods can be conducted, to map and understand geospatial gaps, pinpointing risk areas that might require intervention.  
 
 This is especially relevant for public housing, that is sometimes at a disadvantage compared to private housing where developers are already incentivized or expected to provide some of these built environment factors (e.g. green spaces, recreation spaces). As such, risk areas for childhood development in public housing will be the focus area for this project.
 
@@ -26,134 +26,211 @@ This is especially relevant for public housing, that is sometimes at a disadvant
 
 # Project Objective
 
-Through this project we aim to:
+This project aims to:
 
-•	Investigate the spatial distribution of key factors of the built environment affecting child development, relative to public housing estates in Singapore.
-•	Identify high risk areas for childhood development, based on the built environment
-•	Provide possible recommendations to mitigate these risks
-•	Utilise open source data to build a proof of concept web-based geospatial application.
+*	Investigate the spatial distribution of key factors of the built environment affecting child development, relative to public housing estates in Singapore.
+
+* Identify high risk neighbourhoods for healthy child development, based on built environment factors.
+
+* Provide possible recommendations to mitigate these risks.
+
+* Utilise open source data to build a proof-of-concept web-based geospatial application.
 
 <br>
 
 # Literature Review
 
-To enable a more evidence-based project, we conducted literature reviews that will allow us to analyse and develop a web-based GIS application to identify neighborhoods with child development risk.
+Literature reviews were conducted for a more evidence-based project. This will better enable the analysis and development of a web-based Geographic Information System (GIS) application to identify at-risk neighbourhoods for healthy child development.
 
-## Review research on built environment relationship to child development 
-To understand the current state of the art in terms of built environment and its relationship to child development, we identified key literatures that draw from existing research knowledge and which have conducted real world experiments to identify these relationships. Through this literature review we aim to identify overarching development domains and their built environment factors to be utilised in our analysis and project. 
+## Reviewing Research on Relationship Between Built Environment and Child Development
 
-### Literature Review 1: [Relationship between the neighbourhood built environment and early child development](https://doi-org/10.1016/j.healthplace.2017.08.010)
+To understand the current state-of-the-art in terms of the built environment and its relationship to child development, we identified key literatures that draw from existing research knowledge, and which have conducted real world experiments to identify these relationships. Through the literature reviews, we aim to identify overarching domains for healthy child development and their corresponding built environment factors, for utilisation in our project analysis. 
+
+### Literature Review 1: [Relationship Between the Neighbourhood Built Environment and Early Child Development](https://doi-org/10.1016/j.healthplace.2017.08.010)
 
 **Aim**
-The researchers utilised area level data from the Australian Early Development Census (AEDC), that spatially maps the location of children who are developmentally vulnerable to identify if there are statistically significant relationships to built environments
+
+The researchers utilised area level data from the Australian Early Development Census (AEDC) that spatially maps the locations of children who are developmentally vulnerable, to identify if there are statistically significant relationships to the built environment.
+
 **Methods**
-To achieve the research aim they utilised the AEDC data to identify 3 child development domains:
-1.	Physical Health and Wellbeing - whether children are healthy, independent, and physically ready for the school day, and their gross and fine motor skills
-2.	Social Competence - children's overall social development including how they play, share and get along with other children
-3.	Emotional Maturity - whether children are able to concentrate during the school day, help others, are patient and not aggressive or angry.
 
-In the AEDC data, children can be developmentally vulnerable in none, any and all of these domains. The researchers then utilised GIS to develop area level measures of the various Australian local communities (walkability, availability of greenspaces, availability of child specific destinations etc.). They then utilised logistic regression to model variations in the communities and the odds of development vulnerability.
+To achieve the research aim, AEDC data was utilised to identify 3 child development domains:
 
-The choropleth maps below shows the spatial variation in the odds of children being developmentally vulnerable in the different development domains. 
+* **Physical Health and Wellbeing**: Whether children are healthy, independent, and physically ready for the school day, and their gross and fine motor skills.
+
+* **Social Competence**: Children's overall social development including how they play, share and get along with other children.
+
+* **Emotional Maturity**: Whether children are able to concentrate during the school day, help others, are patient and not aggressive or angry.
+
+In the AEDC data, children can be developmentally vulnerable in none, any and all of these domains. The researchers then utilised GIS to develop area level measures of the various Australian local communities, such as walkability, availability of green spaces, and availability of child specific destinations. They then utilised logistic regression to model variations in the communities and the odds of development vulnerability.
+
+The choropleth maps below illustrate the spatial variation in the odds of children being developmentally vulnerable in the different child development domains. 
 
 ```{r echo=FALSE, fig.retina=2}
 knitr::include_graphics('/images/lit1choro.png', error=FALSE)
 ```
 
 **Research Findings**
-The researchers were able to statistically identify that there are relationships between built environment and child development. Additionally they identified certain factors such as:
-•	Children living near big yard and green spaces had the lowest odds of poor emotional development
-•	Neighborhoods with less traffic result in kids with less odds of poor social development 
-•	Physical health improved the further away a school, childcare and park is (could be due to exercise received by children who walk to these locations)
+
+The researchers were able to statistically identify the existence of relationships between the built environment and child development. Additionally, they identified certain factors such as:
+
+* Children living near a big yard and green spaces had the lowest odds of poor emotional development.
+
+* Neighborhoods with less traffic result in children with lower odds of poor social development.
+
+* Physical health improved the further away a school, childcare or park is located (which could be attributed to the exercise received by children who walk to these locations).
 
 **Key Takeaways**
-The research has provided us with useful child development domain definitions and possible factors (e.g. Walkability, Green Space, Child Specific Destinations) that we can utilise as reference to create a risk matrices. This I especially useful reference in the Singapore context, where there is currently no similar publicly available definitions and research on built factors or on child development statistics. 
-From these matrices we will then be able to better derive risk scores for Singapore’s public housing neighbourhoods.
+
+The research provides useful child development domain definitions and possible factors (such as walkability, green spaces and child-specific destinations) that can be utilised as a reference in the creation of risk matrices. This is an especially useful reference in Singapore's context, where there is currently no publicly available child development domain definitions and child development statistics, and a lack of research on built environment factors for child development. The definitions and built factors pointed out by this research will therefore enable us to better derive risk scores for Singapore’s public housing neighbourhoods.
 
 ### Literature Review 2: [Levels of Influence in the Built Environment on the Promotion of Healthy Child Development](https://www.researchgate.net/publication/263324193_Levels_of_Influence_in_the_Built_Environment_on_the_Promotion_of_Healthy_Child_Development)
 
 **Aim**
+
 The author discusses the effects of the built environment on healthy child development, which is a departure from traditional research which focuses on the relationship of the built environment with child diseases and exposure to hazards and risks.
 
 **Methods**
+
 To study the impact of the built environment on healthy child development, the author first established key elements of child development, so that the relative influence of specific built environment factors can be investigated for each element. With reference to other research studies, the author defined the key elements of child development as:
-1.	**Social knowledge and competence**, which refers to the awareness of general standards of acceptable behaviour in a public place, the ability to control one's own behaviour and cooperate with others in working together on assignments, appropriate respect for adult authority, and the skills to communicate feelings and wants in socially acceptable ways.
-2.	**Emotional development and maturity**, which refers to the self-confidence to try new tasks and not fear failure.
-3.	**Language and cognitive development**, which refers to the ability to understand and communicate with others, as well as to perceive, organize, and analyze the masses of information provided by the social and physical environments.
-4.	**Healthy physical development**, which includes physical readiness for activities of daily life, physical independence, motor skills and general vitality and resistance to illnesses.
-5.	**Communication skills and general knowledge**, which refers to the ability to clearly communicate one's own needs and to understand others, active participation in story-telling and interest in general knowledge about the world
+
+* **Social knowledge and competence**: Awareness of general standards of acceptable behaviour in a public place, the ability to control one's own behaviour and cooperate with others in working together on assignments, appropriate respect for adult authority, and the skills to communicate feelings and wants in socially acceptable ways.
+
+* **Emotional development and maturity**: Self-confidence to try new tasks and not fear failure.
+
+* **Language and cognitive development**: Ability to understand and communicate with others, as well as to perceive, organize, and analyze the masses of information provided by the social and physical environments.
+
+* **Healthy physical development**: Includes physical readiness for activities of daily life, physical independence, motor skills and general vitality and resistance to illnesses.
+
+*	**Communication skills and general knowledge**: Ability to clearly communicate one's own needs and to understand others, active participation in story-telling and interest in general knowledge about the world.
 
 To understand the extent of impact of the built neighbourhoods on healthy child development the author then turns to empirical research from other studies. In particular, Oliver, et al. (2007) uses multi-level modelling, a statistical technique that can separate out the proportion of total variance in the outcome that can be attributed to the neighbourhood level, and the proportion of variance that can be attributed to the household level.
 
 **Findings**
+
 The studies suggest that child development aspects such as physical health and well-being, language and cognitive development and communication skills and general knowledge are more strongly influenced at the neighbourhood level.
 
 **Key Takeaways**
+
 The study provides positive evidence that the built environment can be altered to enhance several aspects of healthy child development. 
+
 * Infrastructure that encourages physical activity can enhance physical well-being of children.
+
 * Community recreation facilities and early learning programs that encourages cognitive, language and communication skills can significantly increase the external stimuli for children to develop lifelong skills.
+
 The study therefore provides useful childhood development domain definitions that can be utilised in this project, in union with those identified from the previous literature review. It also provides evidence of a relationship between the built environment and various aspects of child development, which can be utilised in this project to identify Singapore-specific built factors (e.g. playgrounds, community centres) that can influence child development.
 
-## Review research on Accessibility Analysis 
-Based on current research, the relationship between built environments and child development is often in relation to how accessible a certain built factor is to a child (e.g. accessibility to playgrounds, accessibility to greenspaces). As such, it will be useful for the project to conduct literature review on current state of the art methods for accessibility analysis, and how they are being utilised.
+<br>
+
+## Reviewing Research on Accessibility Analysis 
+
+Based on current research, the relationship between the built environment and child development is often in relation to how accessible a certain built factor is to a child (such as accessibility to playgrounds and green spaces). As such, it will be useful to conduct literature review on current state-of-the-art methods for accessibility analysis, and how they are being utilised.
 
 ### Literature Review 1: [Accessibility analysis (Concepts and their application to transport policy, programme and project evaluation)](https://www.researchgate.net/publication/283927928_Accessibility_analysis_Concepts_and_their_application_to_transport_policy_programme_and_project_evaluation)
+
 **Aim**
-The researcher aims to encourage the usage of accessibility analysis in policy formulation, through defining and educating current available accessibility analysis methods and providing a real-world case study on its usage 
+
+The researcher aims to encourage the usage of accessibility analysis in policy formulation, through defining and educating current available accessibility analysis methods and providing a real-world case study on its usage.
+
 **Methods**
-To achieve this aim the researcher first identifies that most accessibility analysis measures can be grouped under three general but similar indicators, these are:
 
-1.Simple Indicators
-Representation of transport and/or opportunity within the accessibility equation is simplified into thresholds. Time and distance thresholds adopted within these measures will depend upon the policy issue that we are analyzing. It can be applied to either the opportunities (i.e. shopping centres with more than 5,000 square metres floor space) or the deterrence functions (e.g. jobs within 60 minutes travel time), or both. 
-Under this indicator, the accessibility measure for a specified location (i) is calculated as a sum of the opportunities available at alternative locations (j) within the defined threshold. The notation for this indicator is as follows:
+To achieve this aim, the researcher first identifies that most accessibility analysis measures can be grouped under three general but similar indicators. These are:  
 
-A_i=\sum{O_j\delta_{ij}}
+<br>
 
-Where \delta=\ 1 if the opportunity is within the generalised time or cost threshold, and \delta=\ 1 otherwise.   
+1. **Simple Indicators**
 
-Example calculations/indices under this indicator are: 
-* Catchment/contour indices - Count/Number of people, jobs shops etc. within a threshold travel cost or buffer (distance, time etc.) from a defined location
-* Walking access time to public transport 
-* Time space geographic measures – Total Opportunities available within a travel time budget
+Representation of transport and/or opportunity within the accessibility equation is simplified into thresholds. Time and distance thresholds adopted within these measures will depend upon the policy issue that is analysed. It can be applied to either the opportunities (e.g. shopping centres with more than 5,000 squared metres floor space) or the deterrence functions (e.g. jobs within 60 minutes travel time), or both. 
 
-2. Opportunity Measures 
-The indicator assess accessibility by utilising a measure of deterrence (based upon how easily an opportunity can be reached) as a weight for the sum of all opportunities. Therefore, the opportunity measure for a location (i) is calculated by the sum of opportunities at (j) factored by the deterrence function, which is based on the travel time between i and j.
+Under this indicator, the accessibility measure for a specified location *i* is calculated as the sum of the opportunities available at alternative locations *j* within the defined threshold. The notation for this indicator is as follows:
 
-A_i=\ \sum O_j\ exp(-\alpha t_{ij})
+$$A_i = \sum{O_j\delta_{ij}}$$
 
-Where exp(-\alphat) is the deterrence function, and Oj is the opportunity available within zone j. The deterrence function is calibrated utilising the \alpha factor. This deterrence function will usually be calibrated based on observed local travel patterns so as to provide accurate trip distributions. 
+Where $\delta = 1$ if the opportunity is within the generalised time or cost threshold, and $\delta = 0$ otherwise.   
 
 Example calculations/indices under this indicator are: 
-* Hansen Indices 
-* Shimbel Measures 
+
+* **Catchment/contour indices**: Count or number of people, jobs, or shops etc. within a threshold travel cost or buffer (distance or time) from a defined location
+
+* **Walking access time to public transport**
+
+* **Time space geographic measures**: Total Opportunities available within a travel time budget
+
+<br>
+
+2. **Opportunity Measures**
+
+Such indicators assess accessibility by utilising a measure of deterrence (based on how easily an opportunity can be reached) as a weight for the sum of all opportunities. Therefore, the opportunity measure for a location *i* is calculated by the sum of opportunities at *j* factored by the deterrence function, which is based on the travel time between *i* and *j*.
+
+$$A_i=\ \sum O_j\ exp(-\alpha t_{ij})$$
+
+Where $exp(-\alpha t)$ is the deterrence function, and $O_j$ is the opportunity available within zone *j*. The deterrence function is calibrated utilising the $\alpha$ factor. This deterrence function will usually be calibrated based on observed local travel patterns, so as to provide accurate trip distributions. 
+
+Example calculations/indices under this indicator are: 
+
+* **Hansen Indices**
+
+* **Shimbel Measures** 
+
+<br>
 
 3. Value Measures 
-The value measure aims to define the attractiveness of the available opportunities to represent their values as a transport choice. It utilises the same input data as the opportunity measure but the equation is further transformed so that it is represented in terms of the value of  generalized opportunities in time, or cost. An example equation is as follows:
 
-A_i=\ \frac{1}{\alpha}ln\frac{\sum O_j\ exp(-\alpha t_{ij})}{\sum O_j\ }
+The value measure aims to define the attractiveness of available opportunities, to represent their values as a transport choice. It utilises the same input data as the opportunity measure, but the equation is further transformed so that it is represented in terms of the value of generalized opportunities in time or cost. An example equation is as follows:
+
+$$A_i=\ \frac{1}{\alpha}ln\frac{\sum O_j\ exp(-\alpha t_{ij})}{\sum O_j\ }$$
 
 Example calculations/indices under this indicator are: 
-* Utility based measures - These measure the value to an individual or group of the choices available to them. The indices are less sensitive  to large  changes  in  number  of  opportunities  so  are relatively  more  sensitive  to  transport  changes
+
+* **Utility based measures**: These measure the value to an individual or group of the choices available to them. The indices are less sensitive to large changes in the number of opportunities, and are relatively more sensitive to transport changes.
+
+<br>
 
 **Research Findings**
-Based on these indicators identified the researcher further presented a case study on a Scottish research which utilised the accessibility measures to analyse the accessibility from different parts of  Edinburgh  to  the  new  Royal Infirmary (that was under construction at the point of study). They created the below choropleth visualization, where the darker shades are areas with good accessibility. Through this alternative transport strategies can be tested and evaluated on their effectiveness (e.g. intro of new bus services).
+
+Based on these indicators identified, the researcher further presented a case study on a Scottish research, which utilised the accessibility measures to analyse the accessibility from different parts of Edinburgh to the new Royal Infirmary (that was under construction at the point of study). The choropleth map visualisation below was constructed, where the darker shades represent areas with good accessibility. Through this, alternative transport strategies (such as the introduction of new bus services) can be tested and evaluated on their effectiveness.
 
 ```{r echo=FALSE, fig.retina=2}
 knitr::include_graphics('/images/lit3scots.png', error=FALSE)
 ```
 
 **Key Takeaways**
-The researcher provides a compelling argument on the usage of accessibility analysis in the process of policy planning. He provides the below figure as an example of how the policy planning process can enable planners to study impacts to more user groups without affecting the complexity of the demand modelling.
+
+The researcher provides a compelling argument on the usage of accessibility analysis in the process of policy planning. He provides the figure below as an example of how the policy planning process can enable planners to study the impacts to more user groups without affecting the complexity of the demand modelling.
 
 ```{r echo=FALSE, fig.retina=2}
 knitr::include_graphics('/images/lit3policy.png', error=FALSE)
 ```
 
-This is especially thanks to deterrence functions in accessibility measures that allows for localized calibrations and as such provide a more evidence-based resolution to policy planning. 
-Through this project we aim to also affect changes in policy planning through an evidence-based approach. As such it will indeed be useful to utilise accessibility analysis in this project. It will especially be useful in assessing the child developmental risk scores of Singapore’s neighbourhoods.
+This is especially due to deterrence functions in accessibility measures that allow for localised calibrations, and as such provide a more evidence-based resolution to policy planning. 
+
+Through this project, we aim to also affect changes in policy planning through an evidence-based approach. As such, it will indeed be useful to utilise accessibility analysis in this project. It will especially be useful when assessing the child developmental risk scores of Singapore’s neighbourhoods.
 
 <br>
-# Methodology 
+
+### Literature Review 2: [How Accessibility Shapes Land Use](https://doi.org/10.1080/01944365908978307)
+
+**Aim**
+
+The author illustrates how a realistic measurement of accessibility, coupled with the availability of vacant developable land, can be used to develop a residential land use model. The land use model relates the accessibility (to commercial, industrial, and residential locations) of an area to the rate and intensity of residential land development in the area.
+
+**Methods**
+
+The author first presents an operational definition of accessibility, where accessibility is defined as the potential of opportunities for interaction. In contrast to traditional measures of accessibility that takes into account only the ease of interaction, this definition measures the intensity of the possibility of interaction. 
+The measure considers the spatial distribution of activities about a point, adjusted for the ability and the desire of people to overcome spatial separation. The accessibility at point 1 to a particular type of activity at area 2 (such as employment), is directly proportional to the size of the activity at area 2 (e.g. number of jobs), and inversely proportional to some function of the distance separating point 1 from area 2. Total accessibility at point 1 is then the summation of accessibility to each of the individual areas around point 1.
+
+$$A_1 = \frac{S_2}{T^X_{1-2}}$$
+
+Where
+* $A_1$ is a relative measure of the accessibility at Zone 1 to an activity located within Zone 2
+* $S_2$ is the size of the activity in Zone 2 (e.g. number of jobs, people)
+* $T_{1-2}$ is the travel time or distance between Zones 1 and 2
+* $X$ is an exponent describing the effect of the travel time between the zones
+
+<br>
+
+# Methodology
+
 Based on the literature reviews conducted we can start to formulate a possible method to tackle the research problem and identify neighbourhoods that child developmentally at risk.
 
 The project will take the following steps in its development:
