@@ -29,4 +29,4 @@ The project will take the following steps in its development:
 ## Application System Architecture 
 The Project will be developed utilising R as it will allow us to utilise geospatial analytics and data manipulation packages in union with R Shiny to create an integrated web-based GIS application. The R shiny application runs on a shiny server, to be hosted by shinyapps.io along with the data for the application. The data and maps will be loaded by the application and displayed to the user whenever they access the application.
 
-![Architecture](https://raw.githubusercontent.com/xiaorongw/gis-project/master/project_website/static/images/architecture.png?token=AHTAIVFGXWQJANGYGCJWIF27QIB34)
+![Architecture](https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/architecture.png)
