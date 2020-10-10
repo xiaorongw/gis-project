@@ -277,13 +277,13 @@ Based on the literature reviews conducted, the methodology to tackle this projec
 
 The project will take the following steps in its development:
 
-* Identify key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research.
+* Identify key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research
 
-* Data collection from various governmental data and open data.
+* Data collection from various governmental data and open data
 
-* Data cleaning and wrangling.
+* Data cleaning and wrangling
 
-* Formulate risk matrices based on built environment factors (e.g. proximity to green spaces).
+* Formulate risk matrices based on built environment factors (e.g. proximity to green spaces)
 
 * Spatially map and analyse built factors and their spatial relation to public housing (e.g. point pattern analysis)
 
