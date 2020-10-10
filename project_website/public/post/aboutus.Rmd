@@ -1,0 +1,9 @@
+---
+title: Who are we?
+date: '2020-10-09'
+output: html_document
+---
+
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/About_Us.png', error=FALSE)
+```
