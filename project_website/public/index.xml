@@ -7,6 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Project Deliverables</title>
+      <link>/deliverables/</link>
+      <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/deliverables/</guid>
+      <description>Table of ContentsItemLinkProposalClick here</description>
+    </item>
+    
+    <item>
       <title>Project Proposal - Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces</title>
       <link>/proposal/</link>
       <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
@@ -24,15 +33,6 @@ There have been studies on the how built spaces affect the development of childr
       
       <guid>/about/</guid>
       <description>Helo this is about us page</description>
-    </item>
-    
-    <item>
-      <title>Project Deliverables</title>
-      <link>/deliverables/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/deliverables/</guid>
-      <description>Table of ContentsItemLinkProposalClick here</description>
     </item>
     
   </channel>
