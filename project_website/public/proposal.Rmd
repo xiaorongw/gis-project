@@ -137,7 +137,7 @@ The researcher aims to encourage the usage of accessibility analysis in policy f
 
 To achieve this aim, the researcher first identifies that most accessibility analysis measures can be grouped under three general but similar indicators. These are:  
 
-<br>
+---
 
 1. **Simple Indicators**
 
@@ -184,6 +184,7 @@ Example calculations/indices under this indicator are:
 
 * Utility based measures: These measure the value to an individual or group of the choices available to them. The indices are less sensitive to large changes in the number of opportunities, and are relatively more sensitive to transport changes.
 
+---
 
 **Research Findings**
 
@@ -229,6 +230,7 @@ Where
 
 The following data was then used for accessibility calculations in the study.  
 
+<br>
 
 Accessibility to | Units used for activity level or size | Exponent of distance*
 -----------------|---------------------------------------|----------------------
@@ -238,7 +240,9 @@ Residential activity | Population | 2.35
 
 *Distance was expressed in terms of minutes of off-peak driving time, plus 5 to 8 minutes of terminal time (to account for the variation between intra- and inter-urban travel).
 
-Next was to determine the relationship between accessibility and residential development. The author accounted for zonal variation in land available for residential development by distributing total metropolitan growth to the individual zones on the basis of vacant developable land (the proportion assigned to each zone is termed *probable development*). Residential development ratio was then calculated for each area (*actual development* divided by *probable development*), where its variance is assumed to be related to accessibility. With high correlation between the development ratio and the accessibility measures, the following relationship was established.
+Next was to determine the relationship between accessibility and residential development. The author accounted for zonal variation in land available for residential development by distributing total metropolitan growth to the individual zones on the basis of vacant developable land (the proportion assigned to each zone is termed *probable development*).
+
+Residential development ratio was then calculated for each area (*actual development* divided by *probable development*), where its variance is assumed to be related to accessibility. With high correlation between the development ratio and the accessibility measures, the following relationship was established.
 
 $$D_1 = KA^X_1$$
 
@@ -253,11 +257,16 @@ The relationship constructed above made it possible for to estimate the resident
 
 **Research Findings**
 
-The calculations demonstrate the potential value of the land use model to city and transportation planners. The land use model can assist the planner in assessing the probable effects of a given action, such as the construction of an express highway or a policy of decentralizing employment. This determination of consequences need not be limited to some predetermined area of "influence," but can easily be assessed for the entire metropolitan region. It is also possible to isolate and examine empirically the effect of other factors on land development, such as income, zoning, taxes, and land costs. 
+The calculations demonstrate the potential value of the land use model to city and transportation planners. The land use model can assist the planner in assessing the probable effects of a given action, such as the construction of an express highway or a policy of decentralizing employment.
+
+This determination of consequences need not be limited to some predetermined area of "influence," but can easily be assessed for the entire metropolitan region. It is also possible to isolate and examine empirically the effect of other factors on land development, such as income, zoning, taxes, and land costs. 
 
 **Key Takeaways**
 
-This study provides a useful measure of accessibility that can potentially be used in this project. Traditional methods measure accessibility solely based on the travel time. While travelling time may be a good indicator, it does not account for other factors that may also influence the choice of journey. The Hansen gravity model (1959) illustrated in this study addresses this problem, by accounting for various factors on top of travelling time, to measure accessibility by taking into account journey time as well as the attractiveness of destinations based on perceived opportunities. Using such accessibility measure will also enable us to map accessibility as a spatially continuous measurement.
+This study provides a useful measure of accessibility that can potentially be used in this project. Traditional methods measure accessibility solely based on the travel time. While travelling time may be a good indicator, it does not account for other factors that may also influence the choice of journey.
+
+The Hansen gravity model (1959) illustrated in this study addresses this problem, by accounting for various factors on top of travelling time, to measure accessibility by taking into account journey time as well as the attractiveness of destinations based on perceived opportunities. Using such accessibility measure will also enable us to map accessibility as a spatially continuous measurement.
+
 Furthermore, the study reveals the suitability of using such an accessibility measure as a planning tool. The land use model illustrated in this study can possibly be utilised for scenario planning, as it enables the potential effects of a given action to be assessed. 
 
 <br>
@@ -300,7 +309,7 @@ The interactive maps tab will allow users to view the various spatial analysis t
 knitr::include_graphics('/images/storyboard1.png', error=FALSE)
 ```
 
-For the risk map, users will additionally be able to view the computed risk scores for each public housing estate, and will be able to further view the breakdown by subzones. 
+For the risk map, users will additionally be able to view the computed risk scores for each public housing estate and breakdown by subzone.
 
 ```{r echo=FALSE, fig.retina=2}
 knitr::include_graphics('/images/storyboard2.png', error=FALSE)
@@ -370,6 +379,8 @@ Inexperience with R Shiny | As this is a new package that we are exploring, it w
 
 # Scope of Work
 
+The gantt chart below outlines the scope of work and timeline that will be undertaken in this project.
+
 ```{r echo=FALSE, fig.retina=2}
 knitr::include_graphics('/images/gantt1.png', error=FALSE)
 ```
@@ -381,6 +392,8 @@ knitr::include_graphics('/images/gantt2.png', error=FALSE)
 <br>
 
 # Task Completion List
+
+The table below tracks task completion for the project.
 
 ```{r echo=FALSE, fig.retina=2}
 knitr::include_graphics('/images/tasks.png', error=FALSE)
