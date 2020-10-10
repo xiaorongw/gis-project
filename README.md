@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/xiaorongw/gis-project/master/project_website/static/images/logo.png?token=AHTAIVFU556COXUKVBETN627QIDNQ" width="460" height="300">
+<img src="https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/logo.png" width="460" height="300">
 </p>
 
 # Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces 
