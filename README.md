@@ -19,10 +19,10 @@ Through this project we aim to:
 
 ## Methodology 
 The project will take the following steps in its development:
-+ Identify key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research.
-+ Data collection from various governmental data and open data.
-+ Data cleaning and wrangling.
-+ Formulate risk matrices based on built environment factors (e.g. proximity to green spaces).
++ Identify key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research
++ Data collection from various governmental data and open data
++ Data cleaning and wrangling
++ Formulate risk matrices based on built environment factors (e.g. proximity to green spaces)
 + Spatially map and analyse built factors and their spatial relation to public housing (e.g. point pattern analysis)
 + Utilise risk matrices to compute risk scores for each HDB new town (e.g. accessibility analysis)
 + Identify at-risk areas for healthy child development in relation to public housing (e.g. localised geospatial analysis)
