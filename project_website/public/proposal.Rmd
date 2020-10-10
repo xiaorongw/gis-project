@@ -42,6 +42,8 @@ This project aims to:
 
 Literature reviews were conducted for a more evidence-based project. This will better enable the analysis and development of a web-based Geographic Information System (GIS) application to identify at-risk neighbourhoods for healthy child development.
 
+<br>
+
 ## Reviewing Research on Relationship Between Built Environment and Child Development
 
 To understand the current state-of-the-art in terms of the built environment and its relationship to child development, we identified key literatures that draw from existing research knowledge, and which have conducted real world experiments to identify these relationships. Through the literature reviews, we aim to identify overarching domains for healthy child development and their corresponding built environment factors, for utilisation in our project analysis. 
@@ -150,11 +152,9 @@ Where $\delta = 1$ if the opportunity is within the generalised time or cost thr
 
 Example calculations/indices under this indicator are: 
 
-* **Catchment/contour indices**: Count or number of people, jobs, or shops etc. within a threshold travel cost or buffer (distance or time) from a defined location
-
-* **Walking access time to public transport**
-
-* **Time space geographic measures**: Total Opportunities available within a travel time budget
+* Catchment/contour indices: Count or number of people, jobs, or shops etc. within a threshold travel cost or buffer (distance or time) from a defined location
+* Walking access time to public transport
+* Time space geographic measures: Total Opportunities available within a travel time budget
 
 <br>
 
@@ -164,25 +164,26 @@ Such indicators assess accessibility by utilising a measure of deterrence (based
 
 $$A_i=\ \sum O_j\ exp(-\alpha t_{ij})$$
 
-Where $exp(-\alpha t)$ is the deterrence function, and $O_j$ is the opportunity available within zone *j*. The deterrence function is calibrated utilising the $\alpha$ factor. This deterrence function will usually be calibrated based on observed local travel patterns, so as to provide accurate trip distributions. 
+Where $exp(-\alpha t_{ij})$ is the deterrence function, and $O_j$ is the opportunity available within zone *j*. The deterrence function is calibrated utilising the $\alpha$ factor. This deterrence function will usually be calibrated based on observed local travel patterns, so as to provide accurate trip distributions. 
 
 Example calculations/indices under this indicator are: 
 
-* **Hansen Indices**
-
-* **Shimbel Measures** 
+* Hansen Indices
+* Shimbel Measures 
 
 <br>
 
-3. Value Measures 
+3. **Value Measures** 
 
 The value measure aims to define the attractiveness of available opportunities, to represent their values as a transport choice. It utilises the same input data as the opportunity measure, but the equation is further transformed so that it is represented in terms of the value of generalized opportunities in time or cost. An example equation is as follows:
 
 $$A_i=\ \frac{1}{\alpha}ln\frac{\sum O_j\ exp(-\alpha t_{ij})}{\sum O_j\ }$$
 
-Example calculations/indices under this indicator are: 
+<br>
 
-* **Utility based measures**: These measure the value to an individual or group of the choices available to them. The indices are less sensitive to large changes in the number of opportunities, and are relatively more sensitive to transport changes.
+Example calculations/indices under this indicator are:
+
+* Utility based measures: These measure the value to an individual or group of the choices available to them. The indices are less sensitive to large changes in the number of opportunities, and are relatively more sensitive to transport changes.
 
 <br>
 
@@ -193,6 +194,8 @@ Based on these indicators identified, the researcher further presented a case st
 ```{r echo=FALSE, fig.retina=2}
 knitr::include_graphics('/images/lit3scots.png', error=FALSE)
 ```
+
+<br>
 
 **Key Takeaways**
 

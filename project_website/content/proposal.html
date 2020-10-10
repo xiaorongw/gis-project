@@ -56,6 +56,7 @@ output:
 <div id="literature-review" class="section level1">
 <h1>Literature Review</h1>
 <p>Literature reviews were conducted for a more evidence-based project. This will better enable the analysis and development of a web-based Geographic Information System (GIS) application to identify at-risk neighbourhoods for healthy child development.</p>
+<p><br></p>
 <div id="reviewing-research-on-relationship-between-built-environment-and-child-development" class="section level2">
 <h2>Reviewing Research on Relationship Between Built Environment and Child Development</h2>
 <p>To understand the current state-of-the-art in terms of the built environment and its relationship to child development, we identified key literatures that draw from existing research knowledge, and which have conducted real world experiments to identify these relationships. Through the literature reviews, we aim to identify overarching domains for healthy child development and their corresponding built environment factors, for utilisation in our project analysis.</p>
@@ -128,9 +129,9 @@ output:
 <p>Where <span class="math inline">\(\delta = 1\)</span> if the opportunity is within the generalised time or cost threshold, and <span class="math inline">\(\delta = 0\)</span> otherwise.</p>
 <p>Example calculations/indices under this indicator are:</p>
 <ul>
-<li><p><strong>Catchment/contour indices</strong>: Count or number of people, jobs, or shops etc. within a threshold travel cost or buffer (distance or time) from a defined location</p></li>
-<li><p><strong>Walking access time to public transport</strong></p></li>
-<li><p><strong>Time space geographic measures</strong>: Total Opportunities available within a travel time budget</p></li>
+<li>Catchment/contour indices: Count or number of people, jobs, or shops etc. within a threshold travel cost or buffer (distance or time) from a defined location</li>
+<li>Walking access time to public transport</li>
+<li>Time space geographic measures: Total Opportunities available within a travel time budget</li>
 </ul>
 <p><br></p>
 <ol start="2" style="list-style-type: decimal">
@@ -138,26 +139,28 @@ output:
 </ol>
 <p>Such indicators assess accessibility by utilising a measure of deterrence (based on how easily an opportunity can be reached) as a weight for the sum of all opportunities. Therefore, the opportunity measure for a location <em>i</em> is calculated by the sum of opportunities at <em>j</em> factored by the deterrence function, which is based on the travel time between <em>i</em> and <em>j</em>.</p>
 <p><span class="math display">\[A_i=\ \sum O_j\ exp(-\alpha t_{ij})\]</span></p>
-<p>Where <span class="math inline">\(exp(-\alpha t)\)</span> is the deterrence function, and <span class="math inline">\(O_j\)</span> is the opportunity available within zone <em>j</em>. The deterrence function is calibrated utilising the <span class="math inline">\(\alpha\)</span> factor. This deterrence function will usually be calibrated based on observed local travel patterns, so as to provide accurate trip distributions.</p>
+<p>Where <span class="math inline">\(exp(-\alpha t_{ij})\)</span> is the deterrence function, and <span class="math inline">\(O_j\)</span> is the opportunity available within zone <em>j</em>. The deterrence function is calibrated utilising the <span class="math inline">\(\alpha\)</span> factor. This deterrence function will usually be calibrated based on observed local travel patterns, so as to provide accurate trip distributions.</p>
 <p>Example calculations/indices under this indicator are:</p>
 <ul>
-<li><p><strong>Hansen Indices</strong></p></li>
-<li><p><strong>Shimbel Measures</strong></p></li>
+<li>Hansen Indices</li>
+<li>Shimbel Measures</li>
 </ul>
 <p><br></p>
 <ol start="3" style="list-style-type: decimal">
-<li>Value Measures</li>
+<li><strong>Value Measures</strong></li>
 </ol>
 <p>The value measure aims to define the attractiveness of available opportunities, to represent their values as a transport choice. It utilises the same input data as the opportunity measure, but the equation is further transformed so that it is represented in terms of the value of generalized opportunities in time or cost. An example equation is as follows:</p>
 <p><span class="math display">\[A_i=\ \frac{1}{\alpha}ln\frac{\sum O_j\ exp(-\alpha t_{ij})}{\sum O_j\ }\]</span></p>
+<p><br></p>
 <p>Example calculations/indices under this indicator are:</p>
 <ul>
-<li><strong>Utility based measures</strong>: These measure the value to an individual or group of the choices available to them. The indices are less sensitive to large changes in the number of opportunities, and are relatively more sensitive to transport changes.</li>
+<li>Utility based measures: These measure the value to an individual or group of the choices available to them. The indices are less sensitive to large changes in the number of opportunities, and are relatively more sensitive to transport changes.</li>
 </ul>
 <p><br></p>
 <p><strong>Research Findings</strong></p>
 <p>Based on these indicators identified, the researcher further presented a case study on a Scottish research, which utilised the accessibility measures to analyse the accessibility from different parts of Edinburgh to the new Royal Infirmary (that was under construction at the point of study). The choropleth map visualisation below was constructed, where the darker shades represent areas with good accessibility. Through this, alternative transport strategies (such as the introduction of new bus services) can be tested and evaluated on their effectiveness.</p>
 <p><img src="/images/lit3scots.png" /><!-- --></p>
+<p><br></p>
 <p><strong>Key Takeaways</strong></p>
 <p>The researcher provides a compelling argument on the usage of accessibility analysis in the process of policy planning. He provides the figure below as an example of how the policy planning process can enable planners to study the impacts to more user groups without affecting the complexity of the demand modelling.</p>
 <p><img src="/images/lit3policy.png" /><!-- --></p>
