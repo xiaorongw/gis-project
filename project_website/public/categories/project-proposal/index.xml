@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Project Proposal on Tiny Blocks</title>
+    <link>/categories/project-proposal/</link>
+    <description>Recent content in Project Proposal on Tiny Blocks</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/project-proposal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project Proposal: Identifying Neighbourhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces</title>
+      <link>/proposal/</link>
+      <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/proposal/</guid>
+      <description>Project MotivationProject ObjectiveLiterature ReviewReviewing Research on Relationship Between Built Environment and Child DevelopmentLiterature Review 1: Relationship Between the Neighbourhood Built Environment and Early Child DevelopmentLiterature Review 2: Levels of Influence in the Built Environment on the Promotion of Healthy Child DevelopmentReviewing Research on Accessibility AnalysisLiterature Review 1: Accessibility analysis (Concepts and their application to transport policy, programme and project evaluation)Literature Review 2: How Accessibility Shapes Land UseMethodologyApplication Design StoryboardInteractive MapsData ExplorerApplication System ArchitectureDataChallenges and MitigationScope of WorkTask Completion ListProject MotivationChildren are the future of a nation’s well-being.</description>
+    </item>
+    
+  </channel>
+</rss>
