@@ -32,3 +32,6 @@ The project will take the following steps in its development:
 This project will be developed with R, as it will enable us to utilise the geospatial analysis and data manipulation libraries, in union with R Shiny to create an integrated web-based GIS application. The R Shiny application runs on a Shiny server, hosted on shinyapps.io along with the data for the application. The data and maps will be loaded by the application and displayed to the user whenever they access the application.
 
 ![Architecture](https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/architecture.png)
+
+## Project Website
+You can follow our project progress via our [project website](https://nostalgic-bose-3a08f1.netlify.app) as well. 
