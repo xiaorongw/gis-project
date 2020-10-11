@@ -1,6 +1,9 @@
 ---
 title: Who are we?
 date: '2020-10-09'
+summary: "A quick look at the people behind this project."
+thumbnailImage: "images/logo.png"
+thumbnailImagePosition: "right"
 output: html_document
 ---
 

@@ -58,14 +58,14 @@ canonifyurls = true
   name = "Project Deliverables"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
   url = "/deliverables"
+#[[menu.main]]
+#  weight = 3
+#  identifier = "categories"
+#  name = "Categories"
+#  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
+#  url = "/categories"
 [[menu.main]]
   weight = 3
-  identifier = "categories"
-  name = "Categories"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
-  url = "/categories"
-[[menu.main]]
-  weight = 4
   identifier = "about us"
   name = "Who Are We?"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
