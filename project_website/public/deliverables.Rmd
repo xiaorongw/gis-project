@@ -1,6 +1,7 @@
 ---
 title: "Project Deliverables"
 date: '2020-10-09'
+clearReading: true 
 output: html_document
 ---
 
@@ -12,5 +13,5 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Item         | Link
 -------------|------
-Proposal     | [Click here](/proposal/index.html)
+Proposal     | [Click here](https://tinyblocks.rbind.io/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/)
 
