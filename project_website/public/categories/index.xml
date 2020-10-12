@@ -5,25 +5,6 @@
     <link>/categories/</link>
     <description>Recent content in Categories on Tiny Blocks</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Project Deliverable</title>
-      <link>/categories/project-deliverable/</link>
-      <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/project-deliverable/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Project Proposal</title>
-      <link>/categories/project-proposal/</link>
-      <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/project-proposal/</guid>
-      <description></description>
-    </item>
-    
+    <language>en-us</language><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
