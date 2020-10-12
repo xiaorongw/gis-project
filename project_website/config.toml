@@ -76,7 +76,7 @@ canonifyurls = true
   identifier = "github"
   name = "GitHub"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
-  url = "https://github.com/xiaorongw/gis-project"
+  url = "https://github.com/xiaorongw/tinyblocks"
 
 [params]
   # Customize date format use to render blog post date, categories and other
