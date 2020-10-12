@@ -34,4 +34,4 @@ This project will be developed with R, as it will enable us to utilise the geosp
 ![Architecture](https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/architecture.png)
 
 ## Project Website
-You can follow our project progress via our [project website](https://nostalgic-bose-3a08f1.netlify.app) as well. 
+You can follow our project progress via our [project website](https://tinyblocks.rbind.io/) as well. 
