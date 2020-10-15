@@ -35,3 +35,5 @@ This project will be developed with R, as it will enable us to utilise the geosp
 
 ## Project Website
 You can follow our project progress via our [project website](https://tinyblocks.rbind.io/) as well. 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ebd33618-12ef-46d6-8a43-2d51b31a52f0/deploy-status)](https://app.netlify.com/sites/nostalgic-bose-3a08f1/deploys)
