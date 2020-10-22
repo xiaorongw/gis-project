@@ -1,0 +1,18 @@
+---
+title: "Data Preparation"
+author: "Xiao Rong Wong"
+date: "10/22/2020"
+output:
+  html_document:
+    theme: spacelab 
+    toc: true
+    toc_depth: 5
+    toc_float: true
+    code_folding: show
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
