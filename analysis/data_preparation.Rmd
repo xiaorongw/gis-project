@@ -17,9 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r message=FALSE, warning=FALSE}
-packages = c('tmap', 'SpatialAcc',
-             'sf', 'ggstatsplot',
-             'tidyverse')
+packages = c('tmap', 'SpatialAcc', 'sf', 'ggstatsplot', 'tidyverse')
 
 for(p in packages){
   if(!require(p, character.only = T)){
@@ -56,12 +54,31 @@ schools = st_read(dsn = "data/geospatial", layer = "schools")
 student_care = st_read(dsn = "data/geospatial/student_care.kml")
 sportsg_facilities= st_read(dsn = "data/geospatial/sportsg_sports_facilities.kml")
 watersports_facilities = st_read(dsn = "data/geospatial", layer = "water_sport_facilities")
-
-
 ```
 
 ```{r}
 na_validity_check(mpsz)
 ```
+
+```{r}
+hdb <- read_csv('data/aspatial/hdb.csv')
+hdb <- hdb %>%
+  st_as_sf(coords = c('longtitude', 'latitude'),
+           crs = 3414)
+```
+
+```{r}
+st_crs(hdb)
+```
+
+```{r}
+population <- read_csv('data/aspatial/population.csv')
+```
+
+```{r}
+
+```
+
+
 
 
