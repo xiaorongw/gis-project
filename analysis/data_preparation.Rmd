@@ -16,7 +16,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 packages = c('tmap', 'SpatialAcc',
              'sf', 'ggstatsplot',
              'tidyverse')
@@ -32,18 +32,36 @@ for(p in packages){
 # Importing Geospatial Data
 ```{r}
 na_validity_check <-function(input){
-  input[rowSums(is.na(input))!=0,]
-  test <- st_is_valid(datacheck,reason=TRUE)
+  print("Check for NA...")
+  print(input[rowSums(is.na(input))!=0,])
+  test <- st_is_valid(input,reason=TRUE)
+  print("Check for invalid geometry...")
   length(which(test!= "Valid Geometry"))
 }
 ```
 
-```{r}
-mpsz = st_read(dsn = "data/geospatial", layer = "")
+```{r message=FALSE, warning=FALSE}
+mpsz = st_read(dsn = "data/geospatial", layer = "subzone")
+cib = st_read(dsn = "data/geospatial", layer = "cib_gardens")
+comm_club = st_read(dsn = "data/geospatial/community_clubs.kml")
+comm_use_site = st_read(dsn = "data/geospatial/community_use_sites.kml")
+dus_sports_facilities = st_read(dsn = "data/geospatial", layer = "dus_school_sports_facilities")
+nature_areas = st_read(dsn = "data/geospatial/nature_areas.kml")
+np_activity_area = st_read(dsn = "data/geospatial/nparks_activity_area.kml")
+np_parks = st_read(dsn = "data/geospatial/nparks_parks.kml")
+np_play_fitness = st_read(dsn = "data/geospatial/nparks_play_fitness_equipment.kml")
+park_loop = st_read(dsn = "data/geospatial/park_connector_loop.kml")
+preschools = st_read(dsn = "data/geospatial/preschools.kml")
+schools = st_read(dsn = "data/geospatial", layer = "schools")
+student_care = st_read(dsn = "data/geospatial/student_care.kml")
+sportsg_facilities= st_read(dsn = "data/geospatial/sportsg_sports_facilities.kml")
+watersports_facilities = st_read(dsn = "data/geospatial", layer = "water_sport_facilities")
+
+
 ```
 
 ```{r}
-
+na_validity_check(mpsz)
 ```
 
 
