@@ -16,13 +16,31 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ```{r}
-datacheck <-function(input){
+packages = c('tmap', 'SpatialAcc',
+             'sf', 'ggstatsplot',
+             'tidyverse')
+
+for(p in packages){
+  if(!require(p, character.only = T)){
+    install.packages(p)
+  }
+  library(p, character.only = T)
+}
+```
+
+# Importing Geospatial Data
+```{r}
+na_validity_check <-function(input){
   input[rowSums(is.na(input))!=0,]
   test <- st_is_valid(datacheck,reason=TRUE)
   length(which(test!= "Valid Geometry"))
 }
 ```
+
+```{r}
+mpsz = st_read(dsn = "data/geospatial", layer = "")
+```
+
 
 
