@@ -1,8 +1,8 @@
 ---
-title: "Data Preparation"
+title: "Data Sources"
 author: "Tiny Blocks"
-date: "10/22/2020"
-output:
+date: "10/27/2020"
+output: 
   html_document:
     theme: spacelab 
     toc: true
@@ -16,13 +16,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Data Sources
 
-```{r}
-datacheck <-function(input){
-  input[rowSums(is.na(input))!=0,]
-  test <- st_is_valid(datacheck,reason=TRUE)
-  length(which(test!= "Valid Geometry"))
-}
-```
-
-
+* HDB Location Data - 
+* 
