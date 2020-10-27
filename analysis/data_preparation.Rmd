@@ -67,13 +67,31 @@ na_validity_check(subzone)
 ```{r warning=FALSE}
 subzone <- st_set_crs(subzone, 3414)
 subzone<- st_make_valid(subzone)
-subzone
 ```
 
 ```{r}
+getName <- function(input){
+  noHtml <- str_replace_all(input,"<.*?>","")
+  matched_str <- str_match(noHtml, "\\sSUBZONE_N (.*?) SUBZONE_C")[,2]
+  return(str_trim(matched_str))
+}
+
+subzone <- subzone %>%
+  mutate(`SUBZONE_N` = getName(subzone$Description)) 
+head(subzone, 1)
+```
+
+```{r}
+na_validity_check(nature_areas)
+```
+
+```{r warning=FALSE}
+nature_areas <- st_transform(nature_areas, 3414)
+nature_areas<- st_make_valid(nature_areas)
 
 ```
 
+# Import Aspatial Data
 ```{r}
 hdb <- read_csv('data/aspatial/hdb.csv')
 hdb <- hdb %>%
