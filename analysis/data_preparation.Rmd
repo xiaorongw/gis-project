@@ -42,5 +42,8 @@ na_validity_check <-function(input){
 mpsz = st_read(dsn = "data/geospatial", layer = "")
 ```
 
+```{r}
+
+```
 
 
