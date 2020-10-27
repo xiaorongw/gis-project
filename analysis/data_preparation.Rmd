@@ -10,6 +10,8 @@ output:
     toc_float: true
     code_folding: show
     number_sections: true
+    df_print: paged
+    
 ---
 
 ```{r setup, include=FALSE}
@@ -30,6 +32,8 @@ for(p in packages){
 # Importing Geospatial Data
 ```{r}
 na_validity_check <-function(input){
+  print("Check for CRS...")
+  print(st_crs(input))
   print("Check for NA...")
   print(input[rowSums(is.na(input))!=0,])
   test <- st_is_valid(input,reason=TRUE)
@@ -58,6 +62,16 @@ watersports_facilities = st_read(dsn = "data/geospatial", layer = "water_sport_f
 
 ```{r}
 na_validity_check(subzone)
+```
+
+```{r warning=FALSE}
+subzone <- st_set_crs(subzone, 3414)
+subzone<- st_make_valid(subzone)
+subzone
+```
+
+```{r}
+
 ```
 
 ```{r}
@@ -94,7 +108,7 @@ population_20 <- population %>%
   rename(dwelling_type = TOD) %>%
   mutate_at(.vars = vars(PA, SZ), .funs = funs(toupper))
 
-length(unique(population_20$SZ))\
+length(unique(population_20$SZ))
 ```
 
 
