@@ -39,7 +39,7 @@ na_validity_check <-function(input){
 ```
 
 ```{r message=FALSE, warning=FALSE}
-mpsz = st_read(dsn = "data/geospatial", layer = "subzone")
+subzone = st_read(dsn = "data/geospatial/subzone.kml")
 cib = st_read(dsn = "data/geospatial", layer = "cib_gardens")
 comm_club = st_read(dsn = "data/geospatial/community_clubs.kml")
 comm_use_site = st_read(dsn = "data/geospatial/community_use_sites.kml")
@@ -57,7 +57,7 @@ watersports_facilities = st_read(dsn = "data/geospatial", layer = "water_sport_f
 ```
 
 ```{r}
-na_validity_check(mpsz)
+na_validity_check(subzone)
 ```
 
 ```{r}
@@ -75,8 +75,26 @@ st_crs(hdb)
 population <- read_csv('data/aspatial/population.csv')
 ```
 
-```{r}
+<br>
 
+# Join population data with subzone data
+
+* Extract population data for 2020 only
+* Calculate total population
+* Calculate children population: children aged 0 to 7
+  * Number of children aged 5 to 7 is estimated as 3/5 of the total number of children aged 5 to 9
+
+
+```{r}
+population_20 <- population %>%
+  filter(Time == 2020) %>%
+  spread(AG, Pop) %>%
+  mutate(total_population = rowSums(.[5:22])) %>%  
+  mutate(children_population = `0_to_4` + (3/5 * `5_to_9`)) %>%
+  rename(dwelling_type = TOD) %>%
+  mutate_at(.vars = vars(PA, SZ), .funs = funs(toupper))
+
+length(unique(population_20$SZ))\
 ```
 
 
