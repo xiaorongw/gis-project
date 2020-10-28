@@ -1,12 +1,6 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-packages = c('shiny','shinydashboard')
+
+
+packages = c('shiny','shinydashboard','shinydashboardPlus')
 
 for(p in packages){
     if(!require(p, character.only = T)){
@@ -15,21 +9,22 @@ for(p in packages){
     library(p, character.only = T)
 }
 
-# Define UI for application that draws a histogram
 ui <- dashboardPage(
+    skin = "purple",
     dashboardHeader(title = "Basic dashboard"),
     ## Sidebar content
     dashboardSidebar(
         sidebarMenu(
-            menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-            menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+            menuItem("Risk Map", tabName = "Risk", icon = icon("exclamation-triangle")),
+            menuItem("Acessibility Map", tabName = "Acessibility", icon = icon("directions")),
+            menuItem("Data Explorer", tabName = "Data", icon = icon("table"))
         )
     ),
     ## Body content
     dashboardBody(
         tabItems(
             # First tab content
-            tabItem(tabName = "dashboard",
+            tabItem(tabName = "Risk",
                     fluidRow(
                         box(plotOutput("plot1", height = 250)),
                         
@@ -41,9 +36,11 @@ ui <- dashboardPage(
             ),
             
             # Second tab content
-            tabItem(tabName = "widgets",
+            tabItem(tabName = "Acessibility",
                     h2("Widgets tab content")
-            )
+            ),
+            # Third tab content
+            tabItem(tabName = "Data")
         )
     ))
 
