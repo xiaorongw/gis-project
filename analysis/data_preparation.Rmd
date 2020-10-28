@@ -44,7 +44,6 @@ na_validity_check <-function(input){
 
 ```{r message=FALSE, warning=FALSE}
 subzone = st_read(dsn = "data/geospatial/subzone.kml")
-hdb = st_read(dsn = "data/geospatial", layer = "hdb_osm_wgs84")
 cib = st_read(dsn = "data/geospatial", layer = "cib_gardens")
 comm_club = st_read(dsn = "data/geospatial/community_clubs.kml")
 comm_use_site = st_read(dsn = "data/geospatial/community_use_sites.kml")
@@ -86,7 +85,6 @@ head(subzone, 1)
 ## Data transformation for required layers
 
 ```{r warning=FALSE}
-hdb <- st_transform(hdb, 3414)
 nature_areas <- st_transform(nature_areas, 3414)
 nature_areas<- st_make_valid(nature_areas)
 np_activity_area <- st_transform(np_activity_area, 3414)
@@ -102,14 +100,22 @@ cib <- st_set_crs(cib, 3414)
 comm_club <- st_transform(comm_club, 3414)
 comm_use_site <- st_transform(comm_use_site, 3414)
 dus_sports_facilities <- st_set_crs(dus_sports_facilities, 3414)
-
 ```
 
 # Import Aspatial Data
 
+**HDB**
+
 ```{r}
-st_crs(hdb)
+hdb <- read_csv('data/aspatial/hdb_osm.csv')
 ```
+```{r warning=FALSE}
+hdb <- st_as_sf(hdb, 
+                coords = c('X', 'Y'),
+                crs = 3414) %>%
+  st_set_crs(3414)
+```
+
 
 ```{r}
 population <- read_csv('data/aspatial/population.csv')
@@ -171,39 +177,10 @@ subzone_children$num_hdb <- lengths(st_intersects(subzone_children, hdb))
 
 summary(subzone_children$num_hdb)
 ```
-```{r}
-glimpse(subzone_children)
-```
-```{r}
-st_bbox(subzone_children)
-```
-```{r}
-st_bbox(hdb)
-```
-
 
 ```{r}
-qtm(subzone_children, 'children_hdb')
-```
-```{r}
-qtm(hdb)
+qtm(subzone_children, 'num_hdb')
 ```
 
-
-```{r}
-qtm(subzone)
-```
-
-```{r}
-building_residential <- st_read(dsn='data/geospatial', layer='hdb_osm_extent')
-```
-```{r}
-building_residential <- st_transform(building_residential,3414)
-st_crs(building_residential)
-```
-
-```{r}
-st_bbox(building_residential)
-```
 
 

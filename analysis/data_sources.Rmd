@@ -22,6 +22,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
+* Footpaths to calculate network distance -- walking distance
+
+<br>
+
 | Data | Description | Geometry | Format | Source |
 |------|-------------|----------|--------|--------|
 | HDB Flats | Location of HDB flats, retrieved from OpenStreetMap | Point | Shapefile | OpenStreetMap |
@@ -30,3 +34,4 @@ knitr::opts_chunk$set(echo = TRUE)
 | Pre-Schools | Location of childcare centres and kindergartens | Point | KML | [data.gov.sg](https://data.gov.sg/dataset/pre-schools-location) |
 | Nature Areas | Boundary of nature reserves, national parks and nature areas | Polygon | KML | [data.gov.sg](https://data.gov.sg/dataset/master-plan-2019-sdcp-nature-boundary-layer) |
 | Parks | Boundary of parks managed by NParks | Polygon | KML | [data.gov.sg](https://data.gov.sg/dataset/nparks-parks) |
+| Footpaths | Paths for pedestrians | Polyline | Shapefile | [LTA Datamall](mytransport.sg/content/mytransport/home/dataMall/search_datasets.html?searchText=footpath) |
