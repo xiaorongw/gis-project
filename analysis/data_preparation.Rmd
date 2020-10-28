@@ -123,12 +123,12 @@ population <- read_csv('data/aspatial/population.csv')
 
 <br>
 
-
 # Data preparation
 
+<br>
+
 * Extract population data for 2020 only
-* Calculate total population
-* Calculate children population: children aged 0 to 7
+* **Calculate children population living in HDB: children aged 0 to 7**
   * Number of children aged 5 to 7 is estimated as 3/5 of the total number of children aged 5 to 9
   
 $$Number\ of\ children\ aged\ 0\ to\ 7\ in\ subzone\ =\ Number\ of\ children\ aged\ 0\ to\ 4 + (\frac{3}{5}*Number\ of\ children\  aged\ 5\ to\ 9)$$
@@ -163,12 +163,14 @@ glimpse(subzone_children)
 ```
 <br>
 
-**Calculate number of children aged 0 to 7 in each hdb block**
+**Calculate number of children aged 0 to 7 in each HDB block**
 
 * Children aged 0 to 7 are the key focus of this project, as these are the [formative years of children development]().
 * The number of children residing in each HDB block of a subzone will be estimated by dividing the total number of children living in the subzone, by the total number of HDB blocks in that subzone.
 
 $$Number\ of\ children\ in\ each\ HDB\ =\ \frac{Number\ of\ children\ in\ subzone}{Number\ of\ HDB\ blocks\ in\ subzone}$$
+
+<br>
 
 **Count number of HDB blocks in each subzone**
 
@@ -182,5 +184,42 @@ summary(subzone_children$num_hdb)
 qtm(subzone_children, 'num_hdb')
 ```
 
+```{r}
+qtm(subzone_children, 'children_hdb')
+```
 
+
+<br>
+
+**Calculate number of children in each HDB: demand**
+
+```{r}
+subzone_children <- subzone_children %>%
+  # Calculate demand. If there are no HDB
+  mutate(children_each_hdb = ifelse(num_hdb != 0, children_hdb / num_hdb, 0))
+
+summary(subzone_children$children_each_hdb)
+```
+
+```{r}
+tm_shape(subzone_children) +
+  tm_polygons('children_each_hdb',
+              style = 'jenks')
+```
+
+<br>
+
+**Add information on number of children for each HDB to HDB data**
+
+```{r}
+hdb <- hdb %>%
+  select(`ID`, `addr_house`, `addr_postc`, `addr_stree`, `building_l`) %>%
+  rename(house_number = addr_house,
+         postal_code = addr_postc,
+         street = addr_stree,
+         num_levels = building_l) %>%
+  st_join(subzone_children, join = st_intersects)
+
+glimpse(hdb)
+```
 

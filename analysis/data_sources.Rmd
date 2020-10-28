@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
-* Footpaths to calculate network distance -- walking distance
+* Footpaths to calculate network distance -- walking distance (6.15km/h walking speed)
 
 <br>
 
@@ -34,4 +34,4 @@ knitr::opts_chunk$set(echo = TRUE)
 | Pre-Schools | Location of childcare centres and kindergartens | Point | KML | [data.gov.sg](https://data.gov.sg/dataset/pre-schools-location) |
 | Nature Areas | Boundary of nature reserves, national parks and nature areas | Polygon | KML | [data.gov.sg](https://data.gov.sg/dataset/master-plan-2019-sdcp-nature-boundary-layer) |
 | Parks | Boundary of parks managed by NParks | Polygon | KML | [data.gov.sg](https://data.gov.sg/dataset/nparks-parks) |
-| Footpaths | Paths for pedestrians | Polyline | Shapefile | [LTA Datamall](mytransport.sg/content/mytransport/home/dataMall/search_datasets.html?searchText=footpath) |
+| Roads | Road network | Polyline | KML | [data.gov.sg](https://data.gov.sg/dataset/master-plan-2019-road-name-layer?resource_id=667b3f04-38d7-4be1-bb0e-6aa4141a03ee) |
