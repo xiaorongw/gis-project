@@ -9,9 +9,17 @@ for(p in packages){
     library(p, character.only = T)
 }
 
-ui <- dashboardPage(
+ui <- dashboardPagePlus(
     skin = "purple",
-    dashboardHeader(title = "Tiny Block"),
+    dashboardHeaderPlus(
+        title = tagList(
+        span(class = "logo-lg", "Tiny Block"), 
+        #need to change to our icon
+        img(src = "https://image.flaticon.com/icons/svg/204/204074.svg"))
+        #img(src="logo.png"))
+    ),
+    
+    title = "Tiny Block",
     ## Sidebar content
     dashboardSidebar(
         sidebarMenu(
@@ -25,14 +33,31 @@ ui <- dashboardPage(
         tabItems(
             # First tab content
             tabItem(tabName = "Risk",
-                    fluidRow(
-                        box(plotOutput("plot1", height = 250)),
-                        
-                        box(
-                            title = "Controls",
-                            sliderInput("slider", "Number of observations:", 1, 100, 50)
-                        )
+                # Can include our map in this box
+                boxPlus(
+                width = 12,
+                title = "boxPlus with sidebar", 
+                closable = FALSE, 
+                status = "warning", 
+                solidHeader = FALSE, 
+                collapsible = TRUE,
+                enable_sidebar = TRUE,
+                sidebar_width = 25,
+                sidebar_start_open = TRUE,
+                sidebar_content = tagList(
+                    checkboxInput("somevalue", "Some value", FALSE),
+                    verbatimTextOutput("value"),
+                    sliderInput(
+                        "slider_boxsidebar", 
+                        "Number of observations:",
+                        min = 0, 
+                        max = 1000, 
+                        value = 500
                     )
+                ),
+                #sample does not work
+                plotOutput("boxSidebarPlot")
+            )
             ),
             
             # Second tab content
