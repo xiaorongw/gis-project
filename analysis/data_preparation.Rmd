@@ -223,3 +223,512 @@ hdb <- hdb %>%
 glimpse(hdb)
 ```
 
+<br>
+
+# Calculate accessibility
+
+<br>
+
+## Student care
+
+```{r}
+student_care <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'student_care') %>%
+  select(ID, Name, ADDRESSSTR, ADDRESSPOS) %>%
+  rename(name = Name,
+         address = ADDRESSSTR,
+         postal_code = ADDRESSPOS)
+
+glimpse(student_care)
+```
+```{r}
+dm_student_care <- read_csv('data/aspatial/distance matrix/hdb_studentcare.csv')
+```
+```{r}
+glimpse(dm_student_care)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_student_care <- dm_student_care %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_student_care <- as.matrix(dm_student_care/1000)
+# dm_student_care
+```
+
+<br>
+
+**Calculate average student care capacity for each student care centre**
+
+* Total capacity of all student care centres in Singapore is [42,907 in 2019](https://www.msf.gov.sg/research-and-data/Research-and-Statistics/Pages/Family-Services-Statistics-on-Student-Care-Centres.aspx).
+* Total number of student care centres in Singapore is 425.
+
+$$Average\ student\ care\ capacity\ for\ each\ centre\ = \frac{Total\ capacity\ of\ student\ care\ in\ Singapore}{Number\ of\ student\ care\ centres\ in\ Singapore}$$
+```{r}
+student_care_capacity <- round(42907 / nrow(student_care), 0)
+student_care_capacity
+```
+
+<br>
+
+* Average student care capacity for each centre is estimated to be 101.
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+student_care_capacity_list <- rep(student_care_capacity, nrow(student_care))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  student_care_capacity_list,
+                  dm_student_care, 
+                  d0 = 50,
+                  power = 1.5, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_student_care <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_student_care
+```
+
+<br>
+
+## School
+
+**Import schools**
+
+```{r}
+pri_schools <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'schools_primary') %>%
+  select(ID, school_nam, address, postal_cod) %>%
+  rename(name = school_nam,
+         postal_code = postal_cod)
+
+glimpse(pri_schools)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_pri_schools <- read_csv('data/aspatial/distance matrix/hdb_school.csv')
+```
+
+```{r}
+glimpse(dm_pri_schools)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_pri_schools <- dm_pri_schools %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_pri_schools <- as.matrix(dm_pri_schools/1000)
+```
+
+<br>
+
+**Calculate average primary school capacity for each school**
+
+* Enrolment for primary 1 will be utilised to calculate primary school capacity.
+* Total number of primary schools in Singapore is 170.
+* Primary 1 enrolment for 2019 is [37,671](https://www.moe.gov.sg/docs/default-source/document/publications/education-statistics-digest/esd_2019.pdf)
+
+```{r}
+school_capacity <- round(37671 / nrow(pri_schools))
+school_capacity
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+school_capacity_list <- rep(school_capacity, nrow(pri_schools))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  school_capacity_list,
+                  dm_pri_schools, 
+                  d0 = 50,
+                  power = 2, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_pri_schools <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_pri_schools
+```
+
+<br>
+
+## Water sports facilities
+
+<br>
+
+**Import water sports facilities**
+
+```{r}
+watersports_facilities <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'water_sport_facilities') %>%
+  select(ID, NAME, ADDRESSSTR, ADDRESSPOS) %>%
+  rename(name = NAME,
+         address = ADDRESSSTR,
+         postal_code = ADDRESSPOS)
+
+glimpse(watersports_facilities)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_watersports_facilities <- read_csv('data/aspatial/distance matrix/hdb_watersports.csv')
+```
+
+```{r}
+glimpse(dm_watersports_facilities)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_watersports_facilities <- dm_watersports_facilities %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_watersports_facilities <- as.matrix(dm_watersports_facilities/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+watersports_capacity_list <- rep(1, nrow(watersports_facilities))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  watersports_capacity_list,
+                  dm_watersports_facilities, 
+                  d0 = 50,
+                  power = 1.5, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_watersports_facilities <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_watersports_facilities
+```
+
+<br>
+
+# Dual-use scheme school sports facilities
+
+<br>
+
+**Import DUS sports facilities**
+
+```{r}
+dus_sports_facilities <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'dus_school_sports_facilities') %>%
+  select(ID, SCHOOL_NAM, ADDRESS, POSTAL_COD, FACILITIES) %>%
+  rename(name = SCHOOL_NAM,
+         address = ADDRESS,
+         postal_code = POSTAL_COD,
+         facilities = FACILITIES)
+
+glimpse(dus_sports_facilities)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_dus_school_sports_facilities <- read_csv('data/aspatial/distance matrix/hdb_dus.csv')
+```
+
+```{r}
+glimpse(dm_dus_school_sports_facilities)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_dus_school_sports_facilities <- dm_dus_school_sports_facilities %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_dus_school_sports_facilities <- as.matrix(dm_dus_school_sports_facilities/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+dus_capacity_list <- rep(1, nrow(dus_sports_facilities))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  dus_capacity_list,
+                  dm_dus_school_sports_facilities, 
+                  d0 = 50,
+                  power = 2, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_dus_school_sports_facilities <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_dus_school_sports_facilities
+```
+
+<br>
+
+# Community in bloom gardens
+
+<br>
+
+**Import community in bloom gardens**
+
+```{r}
+cib_gardens <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'cib_gardens') %>%
+  select(ID, ADDRESS, DIVISION, CONSTITUEN, CATEGORY) %>%
+  rename(address = ADDRESS,
+         division = DIVISION, 
+         constituency = CONSTITUEN,
+         category = CATEGORY)
+  
+glimpse(cib_gardens)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_cib_gardens <- read_csv('data/aspatial/distance matrix/hdb_cib.csv')
+```
+
+```{r}
+glimpse(dm_cib_gardens)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_cib_gardens <- dm_cib_gardens %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_cib_gardens <- as.matrix(dm_cib_gardens/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+cib_capacity_list <- rep(1, nrow(cib_gardens))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  cib_capacity_list,
+                  dm_cib_gardens, 
+                  d0 = 50,
+                  power = 2.5, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_cib_gardens <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_cib_gardens
+```
+
+<br>
+
+# Pre-schools
+
+<br>
+
+**Import pre-schools**
+
+```{r}
+preschools <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'preschools') %>%
+  select(ID, CENTRE_NAM, ADDRESS, POSTAL_COD) %>%
+  rename(name = CENTRE_NAM,
+         address = ADDRESS,
+         postal_code = POSTAL_COD)
+
+  
+glimpse(preschools)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_preschools <- read_csv('data/aspatial/distance matrix/hdb_preschools.csv')
+```
+
+```{r}
+glimpse(dm_preschools)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_preschools <- dm_preschools %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_preschools <- as.matrix(dm_preschools/1000)
+```
+
+<br>
+
+**Calculate average pre-school capacity**
+
+* Pre-schools include childcare centres and kindergartens.
+* Average capacity for a pre-school is estimated using the total capacity of pre-schools in Singapore, divided by the total number of pre-schools in Singapore.
+* Form the data, the total number of pre-schools in Singapore is 1925.
+* Total capacity of pre-schools (childcare and kindergartens) is [215,579](https://www.ecda.gov.sg/Operators/Pages/Statistics-n-Reports.aspx)
+
+```{r}
+preschool_capacity <- round(215579 / nrow(preschools))
+preschool_capacity
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+preschool_capacity_list <- rep(preschool_capacity, nrow(preschools))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  preschool_capacity_list,
+                  dm_preschools, 
+                  d0 = 50,
+                  power = 2, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_preschools <- bind_cols(hdb, acc_Hansen)
+```
+
+
+
+```{r}
+hansen_preschools
+```
+
+<br>
+
+```{r}
+hansen_preschools[is.na(hansen_preschools)] <- 0
+```
+
+
+```{r}
+glimpse(hansen_preschools)
+```
+
+<br>
+
+**Function to compute risk weights**
+
+```{r}
+compute_risk_weights <- function(df, name) {
+  first_quantile_hansen <- quantile(df$accHansen, 0.25)[[1]]
+  median_hansen <- median(df$accHansen)
+  third_quantile_hansen <- quantile(df$accHansen, 0.75)[[1]]
+  max_hansen <- max(df$accHansen)
+
+  df1 <- df %>%
+    mutate('risk_{name}' := case_when(
+      accHansen < first_quantile_hansen ~ 4,
+      (accHansen >= first_quantile_hansen) & (accHansen < median_hansen) ~ 3,
+      (accHansen >= median_hansen) & (accHansen < third_quantile_hansen) ~ 2,
+      (accHansen >= third_quantile_hansen) ~ 1))
+  
+  return(df1)
+}
+```
+
+<br>
+
+**Compute risk weights**
+
+```{r}
+hansen_cib_gardens <- compute_risk_weights(hansen_cib_gardens, 'cib_gardens')
+hansen_dus_school_sports_facilities <- compute_risk_weights(hansen_dus_school_sports_facilities, 'dus_sports')
+hansen_preschools <- compute_risk_weights(hansen_preschools, 'preschools')
+hansen_pri_schools <- compute_risk_weights(hansen_pri_schools, 'pri_schools')
+hansen_student_care <- compute_risk_weights(hansen_student_care, 'student_care')
+hansen_watersports_facilities <- compute_risk_weights(hansen_watersports_facilities, 'watersports_facilities')
+```
+
+<br>
+
+```{r}
+hdb_risk <- hdb %>%
+  cbind(hansen_cib_gardens$risk_cib_gardens,
+        hansen_dus_school_sports_facilities$risk_dus_sports,
+        hansen_preschools$risk_preschools,
+        hansen_pri_schools$risk_pri_schools,
+        hansen_student_care$risk_student_care,
+        hansen_watersports_facilities$risk_watersports_facilities) %>%
+  rename(risk_cib_gardens = hansen_cib_gardens.risk_cib_gardens,
+         risk_dus_sports = hansen_dus_school_sports_facilities.risk_dus_sports,
+         risk_preschools = hansen_preschools.risk_preschools,
+         risk_pri_schools = hansen_pri_schools.risk_pri_schools,
+         risk_student_care = hansen_student_care.risk_student_care,
+         risk_watersports_facilities = hansen_watersports_facilities.risk_watersports_facilities) %>%
+  mutate(physical_health_risk = (risk_dus_sports + risk_watersports_facilities) / 2) %>%
+  mutate(social_competence_risk = (risk_dus_sports + risk_preschools + risk_pri_schools + risk_student_care + risk_watersports_facilities) / 5) %>%
+  mutate(emotional_maturity_risk = risk_cib_gardens) %>%
+  mutate(composite_risk = (physical_health_risk + social_competence_risk + emotional_maturity_risk) / 3)
+
+glimpse(hdb_risk)
+```
+
+<br>
+
+# Visualise risk score
+```{r}
+tm_shape(subzone_children) +
+  tm_polygons(col = 'gray90') +
+  tm_shape(hdb_risk) +
+  tm_bubbles(col = 'composite_risk', 
+             size = 0.1,
+             alpha = 0.5,
+             border.lwd = NA)
+```
+
+<br>
+
+```{r}
+
+```
+
