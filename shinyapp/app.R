@@ -11,7 +11,7 @@ for(p in packages){
 
 ui <- dashboardPage(
     skin = "purple",
-    dashboardHeader(title = "Basic dashboard"),
+    dashboardHeader(title = "Tiny Block"),
     ## Sidebar content
     dashboardSidebar(
         sidebarMenu(
