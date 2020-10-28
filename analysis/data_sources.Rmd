@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 | Data | Description | Geometry | Format | Source |
 |------|-------------|----------|--------|--------|
-| HDB Flats | Location of HDB flats in Singapore | Point | CSV | [MyleeSG on kaggle](kaggle.com/mylee2009/singapore-postal-code-mapper) |
+| HDB Flats | Location of HDB flats, retrieved from OpenStreetMap | Point | Shapefile | OpenStreetMap |
 | Schools | Location of schools, geocoded from CSV | Point | Shapefile | [data.gov.sg](https://data.gov.sg/dataset/school-directory-and-information) |
 | Population | Resident data by planning subzone, age group, sex and type of dwelling | NA | CSV | [Department of Statistics Singapore](https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data) |
 | Pre-Schools | Location of childcare centres and kindergartens | Point | KML | [data.gov.sg](https://data.gov.sg/dataset/pre-schools-location) |

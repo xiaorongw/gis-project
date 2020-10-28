@@ -44,6 +44,7 @@ na_validity_check <-function(input){
 
 ```{r message=FALSE, warning=FALSE}
 subzone = st_read(dsn = "data/geospatial/subzone.kml")
+hdb = st_read(dsn = "data/geospatial", layer = "hdb_osm_wgs84")
 cib = st_read(dsn = "data/geospatial", layer = "cib_gardens")
 comm_club = st_read(dsn = "data/geospatial/community_clubs.kml")
 comm_use_site = st_read(dsn = "data/geospatial/community_use_sites.kml")
@@ -60,7 +61,7 @@ sportsg_facilities= st_read(dsn = "data/geospatial/sportsg_sports_facilities.kml
 watersports_facilities = st_read(dsn = "data/geospatial", layer = "water_sport_facilities")
 ```
 
-## Data Cleaning and Transfoming Subzone Layer
+## Data Cleaning and Transforming Subzone Layer
 ```{r}
 na_validity_check(subzone)
 ```
@@ -85,6 +86,7 @@ head(subzone, 1)
 ## Data transformation for required layers
 
 ```{r warning=FALSE}
+hdb <- st_transform(hdb, 3414)
 nature_areas <- st_transform(nature_areas, 3414)
 nature_areas<- st_make_valid(nature_areas)
 np_activity_area <- st_transform(np_activity_area, 3414)
@@ -104,12 +106,6 @@ dus_sports_facilities <- st_set_crs(dus_sports_facilities, 3414)
 ```
 
 # Import Aspatial Data
-```{r}
-hdb <- read_csv('data/aspatial/hdb.csv')
-hdb <- hdb %>%
-  st_as_sf(coords = c('longtitude', 'latitude'),
-           crs = 3414)
-```
 
 ```{r}
 st_crs(hdb)
@@ -121,26 +117,93 @@ population <- read_csv('data/aspatial/population.csv')
 
 <br>
 
-# Join population data with subzone data
+
+# Data preparation
 
 * Extract population data for 2020 only
 * Calculate total population
 * Calculate children population: children aged 0 to 7
   * Number of children aged 5 to 7 is estimated as 3/5 of the total number of children aged 5 to 9
-
+  
+$$Number\ of\ children\ aged\ 0\ to\ 7\ in\ subzone\ =\ Number\ of\ children\ aged\ 0\ to\ 4 + (\frac{3}{5}*Number\ of\ children\  aged\ 5\ to\ 9)$$
 
 ```{r}
-population_20 <- population %>%
+children_population <- population %>%
   filter(Time == 2020) %>%
-  spread(AG, Pop) %>%
-  mutate(total_population = rowSums(.[5:22])) %>%  
+  group_by(PA, SZ, AG, TOD) %>%
+  summarise(`POP` = sum(`Pop`)) %>%
+  ungroup() %>%
+  pivot_wider(names_from = AG, values_from = POP) %>%
   mutate(children_population = `0_to_4` + (3/5 * `5_to_9`)) %>%
-  rename(dwelling_type = TOD) %>%
-  mutate_at(.vars = vars(PA, SZ), .funs = funs(toupper))
+  select(PA, SZ, TOD, children_population) %>%
+  pivot_wider(names_from = TOD, values_from = children_population) %>%
+  mutate_at(.vars = vars(PA, SZ), .funs = ~ toupper(.)) %>%
+  mutate(children_hdb = rowSums(.[4:7])) %>%
+  select(SZ, children_hdb)
 
-length(unique(population_20$SZ))
+children_population
+```
+
+<br>
+
+**Join population data with subzone data**
+
+```{r}
+subzone_children <- subzone %>%
+  left_join(children_population, by = c('SUBZONE_N' = 'SZ')) %>%
+  select(-c(Description, Name))
+
+glimpse(subzone_children)
+```
+<br>
+
+**Calculate number of children aged 0 to 7 in each hdb block**
+
+* Children aged 0 to 7 are the key focus of this project, as these are the [formative years of children development]().
+* The number of children residing in each HDB block of a subzone will be estimated by dividing the total number of children living in the subzone, by the total number of HDB blocks in that subzone.
+
+$$Number\ of\ children\ in\ each\ HDB\ =\ \frac{Number\ of\ children\ in\ subzone}{Number\ of\ HDB\ blocks\ in\ subzone}$$
+
+**Count number of HDB blocks in each subzone**
+
+```{r}
+subzone_children$num_hdb <- lengths(st_intersects(subzone_children, hdb))
+
+summary(subzone_children$num_hdb)
+```
+```{r}
+glimpse(subzone_children)
+```
+```{r}
+st_bbox(subzone_children)
+```
+```{r}
+st_bbox(hdb)
 ```
 
 
+```{r}
+qtm(subzone_children, 'children_hdb')
+```
+```{r}
+qtm(hdb)
+```
+
+
+```{r}
+qtm(subzone)
+```
+
+```{r}
+building_residential <- st_read(dsn='data/geospatial', layer='hdb_osm_extent')
+```
+```{r}
+building_residential <- st_transform(building_residential,3414)
+st_crs(building_residential)
+```
+
+```{r}
+st_bbox(building_residential)
+```
 
 
