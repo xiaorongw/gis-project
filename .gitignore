@@ -3,3 +3,11 @@
 .RData
 .Ruserdata
 analysis/data/od_matrix
+analysis/data/aspatial/distance matrix/hdb_cib.csv
+analysis/data/aspatial/distance matrix/hdb_community_clubs.csv
+analysis/data/aspatial/distance matrix/hdb_dus.csv
+analysis/data/aspatial/distance matrix/hdb_preschools.csv
+analysis/data/aspatial/distance matrix/hdb_watersports.csv
+analysis/data/aspatial/distance matrix/hdb_school.csv
+analysis/data/aspatial/distance matrix/hdb_school.csv
+analysis/data/aspatial/distance matrix/hdb_studentcare.csv
