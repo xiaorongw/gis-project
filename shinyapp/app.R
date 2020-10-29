@@ -8,13 +8,22 @@ for(p in packages){
 }
 
 # Import maps
-#source("prep.R")
-hdb_risk <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
-hdb_risk <-as(hdb_risk, "Spatial")
+# source("prep.R")
 
-print(hdb_risk)
-#subzone_children <- st_read(dsn = 'data/geospatial', layer = 'subzone_children')
-# subzone_children <-as(subzone_children,"Spatial")
+hdb_risk_sf <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
+hdb_risk_sf <- hdb_risk_sf%>%
+    rename(risk_cib_gardens = rsk_cb_,
+           risk_dus_sports = "rsk_ds_",
+           risk_preschools = "rsk_prs",
+           risk_pri_schools = "rsk_pr_",
+           risk_student_care = "rsk_st_",
+           risk_watersports_facilities = "rsk_wt_")
+hdb_risk <-as(hdb_risk_sf, "Spatial")
+
+
+hdb_accessibility <- st_read(dsn = 'data/geospatial', layer = 'hdb_accessibility') 
+hdb_accessibility <-as(hdb_accessibility, "Spatial")
+print(hdb_accessibility)
 
 
 # UI
@@ -70,10 +79,61 @@ ui <- dashboardPagePlus(
             
             # Second tab content
             tabItem(tabName = "Acessibility",
-                    h2("Widgets tab content")
+                    boxPlus(
+                        width = 12,
+                        title = "Accessibility Map: Community in Bloom Gardens", 
+                        closable = FALSE, 
+                        status = "warning", 
+                        solidHeader = FALSE, 
+                        collapsible = TRUE,
+                        enable_sidebar = FALSE,
+                        sidebar_width = 25,
+                        sidebar_start_open = FALSE,
+                        sidebar_content = tagList(
+                            selectInput(
+                                inputId = 'acc_select',
+                                label = 'Accessbility to Amenity',
+                                choices = c('Community in Bloom Gardens' = 'hnsn_c_',
+                                            'Dual Use Scheme School Sports Facility' = 'hnsn_d_',
+                                            'Pre-schools' = 'hnsn_pr',
+                                            'Primary Schools' = 'hnsn_p_',
+                                            'Student Care' = 'hnsn_s_',
+                                            'Water Sports Facilities' = 'hnsn_w_'),
+                                selected = 'hnsn_pr'
+                            )
+                        ),
+                        tmapOutput("accessibility_map1")
+                    ),
+                    boxPlus(
+                        width = 12,
+                        title = "Accessibility Map: Preschools", 
+                        closable = FALSE, 
+                        status = "warning", 
+                        solidHeader = FALSE, 
+                        collapsible = TRUE,
+                        enable_sidebar = FALSE,
+                        sidebar_width = 25,
+                        sidebar_start_open = FALSE,
+                        sidebar_content = tagList(
+                            selectInput(
+                                inputId = 'acc_select',
+                                label = 'Accessbility to Amenity',
+                                choices = c('Community in Bloom Gardens' = 'hnsn_c_',
+                                            'Dual Use Scheme School Sports Facility' = 'hnsn_d_',
+                                            'Pre-schools' = 'hnsn_pr',
+                                            'Primary Schools' = 'hnsn_p_',
+                                            'Student Care' = 'hnsn_s_',
+                                            'Water Sports Facilities' = 'hnsn_w_'),
+                                selected = 'hnsn_pr'
+                            )
+                        ),
+                        tmapOutput("accessibility_map2")
+                    ),
             ),
             # Third tab content
-            tabItem(tabName = "Data")
+            tabItem(tabName = "Data",
+                    DT::dataTableOutput('Table'),
+            )
         )
     ))
 
@@ -89,6 +149,31 @@ server <- function(input, output) {
                        size = 0.1,
                        alpha = 0.5,
                        border.lwd = 0.01)
+    })
+    
+    output$accessibility_map1 <- renderTmap({
+        tm_shape(hdb_accessibility) +
+            tm_bubbles(col = 'hnsn_c_',
+                       size = 0.1,
+                       alpha = 0.5,
+                       border.lwd = 0.01)
+
+    })
+    
+    output$accessibility_map2 <- renderTmap({
+        tm_shape(hdb_accessibility) +
+            tm_bubbles(col = 'hnsn_pr',
+                       size = 0.1,
+                       alpha = 0.5,
+                       border.lwd = 0.01)
+        
+    })
+    
+    output$Table <- DT::renderDataTable({
+        DT::datatable(data = hdb_risk_sf %>%
+                          select(1:15),
+                      options = list(pageLength = 10),
+                      rownames = FALSE)
     })
     
 }

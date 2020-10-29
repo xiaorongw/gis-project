@@ -743,10 +743,43 @@ tm_shape(subzone_children) +
 tmap_mode('view')
 
 tm_shape(hdb_risk) +
-tm_bubbles()
+  tm_bubbles()
 ```
 
 ```{r}
 tmap_mode('plot')
+```
+
+```{r}
+hdb_accessibility <- hdb %>%
+  cbind(hansen_cib_gardens$accHansen,
+        hansen_dus_school_sports_facilities$accHansen,
+        hansen_preschools$accHansen,
+        hansen_pri_schools$accHansen,
+        hansen_student_care$accHansen,
+        hansen_watersports_facilities$accHansen) %>%
+  rename(hansen_cib_gardens = hansen_cib_gardens.accHansen,
+         hansen_dus_sports = hansen_dus_school_sports_facilities.accHansen,
+         hansen_preschools = hansen_preschools.accHansen,
+         hansen_pri_schools = hansen_pri_schools.accHansen,
+         hansen_student_care = hansen_student_care.accHansen,
+         hansen_watersports_facilities = hansen_watersports_facilities.accHansen)
+hdb_accessibility
+```
+
+<br>
+
+# Export accessibility data file
+
+```{r}
+# st_write(hdb_accessibility, '../shinyapp/data/geospatial/hdb_accessibility.shp', driver = 'ESRI Shapefile')
+```
+
+
+```{r}
+tmap_mode('view')
+
+tm_shape(hdb_accessibility) +
+  tm_bubbles(col = 'hansen_student_care')
 ```
 
