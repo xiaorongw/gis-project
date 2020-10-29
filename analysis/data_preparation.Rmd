@@ -112,8 +112,8 @@ hdb <- read_csv('data/aspatial/hdb_osm.csv')
 ```{r warning=FALSE}
 hdb <- st_as_sf(hdb, 
                 coords = c('X', 'Y'),
-                crs = 3414) %>%
-  st_set_crs(3414)
+                crs = 4326) %>%
+  st_transform(3414)
 ```
 
 
@@ -731,10 +731,22 @@ tm_shape(subzone_children) +
 # Save data files to shiny app
 
 ```{r}
-# st_write(hdb_risk, '../shinyapp/data/geospatial/hdb_risk.shp', driver = 'ESRI Shapefile')
-```
-```{r}
-st_write(subzone_children, '../shinyapp/data/geospatial/subzone_children.shp', driver = 'ESRI Shapefile')
+st_write(hdb_risk, '../shinyapp/data/geospatial/hdb_risk.shp', driver = 'ESRI Shapefile')
 ```
 
+```{r}
+# st_write(subzone_children, '../shinyapp/data/geospatial/subzone_children.shp', driver = 'ESRI Shapefile')
+```
+
+
+```{r}
+tmap_mode('view')
+
+tm_shape(hdb_risk) +
+tm_bubbles()
+```
+
+```{r}
+tmap_mode('plot')
+```
 
