@@ -1,6 +1,6 @@
 
 
-packages = c('shiny','shinydashboard','shinydashboardPlus')
+packages = c('shiny','shinydashboard','shinydashboardPlus', 'tidyverse', 'sf', 'tmap')
 
 for(p in packages){
     if(!require(p, character.only = T)){
@@ -8,6 +8,13 @@ for(p in packages){
     }
     library(p, character.only = T)
 }
+
+# Import maps
+
+hdb_risk <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
+subzone_children <- st_read(dsn = 'data/geospatial', layer = 'subzone_children')
+
+# UI
 
 ui <- dashboardPagePlus(
     skin = "purple",
@@ -36,7 +43,7 @@ ui <- dashboardPagePlus(
                 # Can include our map in this box
                 boxPlus(
                 width = 12,
-                title = "boxPlus with sidebar", 
+                title = "Risk map", 
                 closable = FALSE, 
                 status = "warning", 
                 solidHeader = FALSE, 
@@ -55,8 +62,7 @@ ui <- dashboardPagePlus(
                         value = 500
                     )
                 ),
-                #sample does not work
-                plotOutput("boxSidebarPlot")
+                tmapOutput('risk_map')
             )
             ),
             
@@ -69,14 +75,31 @@ ui <- dashboardPagePlus(
         )
     ))
 
+
+# Server
+
 server <- function(input, output) {
-    set.seed(122)
-    histdata <- rnorm(500)
     
-    output$plot1 <- renderPlot({
-        data <- histdata[seq_len(input$slider)]
-        hist(data)
+    # Interactive tmap output 
+    output$risk_map <- renderTmap({
+        tm_shape(subzone_children) +
+            tm_polygons() +
+        tm_shape(hdb_risk) +
+            tm_bubbles(col = 'cmpst_r',
+                       size = 0.1,
+                       alpha = 0.5,
+                       border.lwd = NA)
     })
+    
+    # Static tmap output
+    # output$risk_map <- renderPlot({
+    #     tm_shape(hdb_risk) +
+    #         tm_bubbles(col = 'cmpst_r', 
+    #                    size = 0.1,
+    #                    alpha = 0.5,
+    #                    border.lwd = NA)
+    # })
+    
 }
 
 # Run the application 

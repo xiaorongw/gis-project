@@ -728,7 +728,13 @@ tm_shape(subzone_children) +
 
 <br>
 
-```{r}
+# Save data files to shiny app
 
+```{r}
+# st_write(hdb_risk, '../shinyapp/data/geospatial/hdb_risk.shp', driver = 'ESRI Shapefile')
 ```
+```{r}
+st_write(subzone_children, '../shinyapp/data/geospatial/subzone_children.shp', driver = 'ESRI Shapefile')
+```
+
 
