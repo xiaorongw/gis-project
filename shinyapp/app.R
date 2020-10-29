@@ -1,6 +1,4 @@
-
-
-packages = c('shiny','shinydashboard','shinydashboardPlus', 'tidyverse', 'sf', 'tmap')
+packages = c('shiny','shinydashboard','shinydashboardPlus', 'tidyverse', 'sf', 'sp', 'tmap')
 
 for(p in packages){
     if(!require(p, character.only = T)){
@@ -10,19 +8,23 @@ for(p in packages){
 }
 
 # Import maps
-
+#source("prep.R")
 hdb_risk <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
-subzone_children <- st_read(dsn = 'data/geospatial', layer = 'subzone_children')
+hdb_risk <-as(hdb_risk, "Spatial")
+
+print(hdb_risk)
+#subzone_children <- st_read(dsn = 'data/geospatial', layer = 'subzone_children')
+# subzone_children <-as(subzone_children,"Spatial")
+
 
 # UI
-
 ui <- dashboardPagePlus(
     skin = "purple",
     dashboardHeaderPlus(
         title = tagList(
-        span(class = "logo-lg", "Tiny Block"), 
-        #need to change to our icon
-        img(src = "https://image.flaticon.com/icons/svg/204/204074.svg"))
+            span(class = "logo-lg", "Tiny Blocks"), 
+            #need to change to our icon
+            img(src = "https://image.flaticon.com/icons/svg/204/204074.svg"))
         #img(src="logo.png"))
     ),
     
@@ -40,30 +42,30 @@ ui <- dashboardPagePlus(
         tabItems(
             # First tab content
             tabItem(tabName = "Risk",
-                # Can include our map in this box
-                boxPlus(
-                width = 12,
-                title = "Risk map", 
-                closable = FALSE, 
-                status = "warning", 
-                solidHeader = FALSE, 
-                collapsible = TRUE,
-                enable_sidebar = TRUE,
-                sidebar_width = 25,
-                sidebar_start_open = TRUE,
-                sidebar_content = tagList(
-                    checkboxInput("somevalue", "Some value", FALSE),
-                    verbatimTextOutput("value"),
-                    sliderInput(
-                        "slider_boxsidebar", 
-                        "Number of observations:",
-                        min = 0, 
-                        max = 1000, 
-                        value = 500
+                    # Can include our map in this box
+                    boxPlus(
+                        width = 12,
+                        title = "Risk map", 
+                        closable = FALSE, 
+                        status = "warning", 
+                        solidHeader = FALSE, 
+                        collapsible = TRUE,
+                        enable_sidebar = FALSE,
+                        sidebar_width = 25,
+                        sidebar_start_open = FALSE,
+                        sidebar_content = tagList(
+                            checkboxInput("somevalue", "Some value", FALSE),
+                            verbatimTextOutput("value"),
+                            sliderInput(
+                                "slider_boxsidebar", 
+                                "Number of observations:",
+                                min = 0, 
+                                max = 1000, 
+                                value = 500
+                            )
+                        ),
+                        tmapOutput("risk_map")
                     )
-                ),
-                tmapOutput('risk_map')
-            )
             ),
             
             # Second tab content
@@ -82,23 +84,12 @@ server <- function(input, output) {
     
     # Interactive tmap output 
     output$risk_map <- renderTmap({
-        tm_shape(subzone_children) +
-            tm_polygons() +
         tm_shape(hdb_risk) +
             tm_bubbles(col = 'cmpst_r',
                        size = 0.1,
                        alpha = 0.5,
-                       border.lwd = NA)
+                       border.lwd = 0.01)
     })
-    
-    # Static tmap output
-    # output$risk_map <- renderPlot({
-    #     tm_shape(hdb_risk) +
-    #         tm_bubbles(col = 'cmpst_r', 
-    #                    size = 0.1,
-    #                    alpha = 0.5,
-    #                    border.lwd = NA)
-    # })
     
 }
 
