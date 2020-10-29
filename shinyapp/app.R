@@ -28,7 +28,7 @@ ui <- dashboardPagePlus(
         #img(src="logo.png"))
     ),
     
-    title = "Tiny Block",
+    title = "Tiny Blocks",
     ## Sidebar content
     dashboardSidebar(
         sidebarMenu(
