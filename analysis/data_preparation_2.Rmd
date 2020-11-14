@@ -58,6 +58,7 @@ schools = st_read(dsn = "data/geospatial", layer = "schools")
 student_care = st_read(dsn = "data/geospatial/student_care.kml")
 sportsg_facilities= st_read(dsn = "data/geospatial/sportsg_sports_facilities.kml")
 watersports_facilities = st_read(dsn = "data/geospatial", layer = "water_sport_facilities")
+towns = st_read(dsn = "data/geospatial", layer = "HDB_Towns_Boundary")
 ```
 
 ## Data Cleaning and Transforming Subzone Layer
@@ -100,6 +101,7 @@ cib <- st_set_crs(cib, 3414)
 comm_club <- st_transform(comm_club, 3414)
 comm_use_site <- st_transform(comm_use_site, 3414)
 dus_sports_facilities <- st_set_crs(dus_sports_facilities, 3414)
+towns <- st_transform(towns, 3414)
 ```
 
 # Import Aspatial Data
@@ -109,11 +111,11 @@ dus_sports_facilities <- st_set_crs(dus_sports_facilities, 3414)
 ```{r}
 hdb <- read_csv('data/aspatial/hdb_osm.csv')
 ```
+
 ```{r warning=FALSE}
 hdb <- st_as_sf(hdb, 
                 coords = c('X', 'Y'),
-                crs = 4326) %>%
-  st_transform(3414)
+                crs = 3414) 
 ```
 
 
