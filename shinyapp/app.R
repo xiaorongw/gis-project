@@ -1,4 +1,4 @@
-packages = c('shiny','shinydashboard','shinydashboardPlus', 'tidyverse', 'sf', 'sp', 'tmap')
+packages = c('shiny','shinydashboard','shinydashboardPlus', 'tidyverse', 'sf', 'sp', 'tmap', 'SpatialAcc')
 
 for(p in packages){
     if(!require(p, character.only = T)){
@@ -12,12 +12,29 @@ for(p in packages){
 
 ###################################################################################################################
 
-# Import data
+# Data preparation
 
 towns <- st_read(dsn = 'data/geospatial', layer = 'hdb_towns')
 towns <- st_transform(towns, 3414)
 
 hdb <- st_read(dsn = 'data/geospatial', layer = 'hdb_processed')
+
+### data from distance_matrix_ ###
+## Student care
+student_care <- st_read(dsn = 'data/geospatial', layer = 'student_care') %>%
+    select(ID, Name, ADDRESSSTR, ADDRESSPOS) %>%
+    rename(name = Name,
+           address = ADDRESSSTR,
+           postal_code = ADDRESSPOS)
+dm_student_care <- read_csv('data/aspatial/distance matrix/hdb_studentcare.csv')
+dm_student_care <- dm_student_care %>%
+    select(origin_id, destination_id, total_cost) %>%
+    pivot_wider(names_from = destination_id, values_from = total_cost)
+student_care_capacity <- round(42907 / nrow(student_care), 0)
+student_care_capacity_list <- rep(student_care_capacity, nrow(student_care))
+
+##
+
 
 
 hdb_risk_sf <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
@@ -107,8 +124,8 @@ ui <- dashboardPagePlus(
                                 choices = sort(towns$Town)
                             ),
                             selectInput(
-                                inputId = 'select_acc',
-                                label = 'Accessbility to Amenity',
+                                inputId = 'select_amenity',
+                                label = 'Amenity',
                                 choices = c('Community in Bloom Gardens' = 'hnsn_c_',
                                             'Dual Use Scheme School Sports Facility' = 'hnsn_d_',
                                             'Pre-schools' = 'hnsn_pr',
@@ -116,9 +133,26 @@ ui <- dashboardPagePlus(
                                             'Student Care' = 'hnsn_s_',
                                             'Water Sports Facilities' = 'hnsn_w_'),
                                 selected = 'hnsn_pr'
+                            ),
+                            tags$style(type = "text/css", ".irs-grid-pol.small {height: 0px;}"),
+                            sliderInput("select_power",
+                                        "Distance Decay Parameter",
+                                        min = 0.5,
+                                        max = 2.5, 
+                                        value = 2,
+                                        step = 0.1),
+                            radioButtons(
+                                inputId = 'select_class',
+                                label = 'Classification Method',
+                                choices = sort(c('Quantile' = 'quantile',
+                                            'Pretty' = 'pretty',
+                                            'Equal Interval' = 'equal',
+                                            'Standard Deviation' = 'sd',
+                                            'Jenks' = 'jenks')),
+                                selected = 'quantile'
                             )
                         ),
-                        tmapOutput("accessibility_map")
+                        tmapOutput("accessibility_map", height='80vh')
                     )
             ),
             # Third tab content
@@ -150,13 +184,46 @@ server <- function(input, output) {
         subset(towns, Town == input$select_town)
     })
     
+    dm_clipped <- reactive({
+        dm <- subset(dm_student_care, origin_id %in% hdb_clipped()$ID) %>%
+            select(-origin_id)
+        as.matrix(dm/1000)
+    })
+    
+    accessibility <- reactive({
+        acc <- data.frame(ac(hdb_clipped()$children_each_hdb,
+                             student_care_capacity_list,
+                             dm_clipped(), 
+                             d0 = 50,
+                             power = input$select_power, 
+                             family = 'Hansen'))
+        
+        colnames(acc) <- "acc"
+        acc <- as_tibble(acc)
+        bind_cols(hdb_clipped(), acc)
+    })
+    
     output$accessibility_map <- renderTmap({
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
         tm_shape(town_clipped()) +
-            tm_fill(col = 'darkgray', alpha = 0.8) +
+            tm_fill(col = 'gray',
+                    alpha = 0.5,
+                    id = 'Town',
+                    popup.vars = c()
+                    ) +
             tm_borders(alpha = 0.6, lwd = 0.3) +
-        tm_shape(hdb_clipped()) +
-            tm_dots()
+            tm_text('Town') +
+        tm_shape(accessibility()) +
+            tm_dots(col = 'acc',
+                    palette = '-Oranges',
+                    style = input$select_class,
+                    id = 'street',
+                    popup.vars = c('Town' = 'Town',
+                                   'House Number' = 'hs_nmbr',
+                                   'Street' = 'street',
+                                   'Postal Code' = 'pstl_cd',
+                                   'Number of Levels' = 'nm_lvls',
+                                   'Number of Children' = 'chldr__'))
     })
     
     output$Table <- DT::renderDataTable({

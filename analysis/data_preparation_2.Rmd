@@ -44,20 +44,6 @@ na_validity_check <-function(input){
 
 ```{r message=FALSE, warning=FALSE}
 subzone = st_read(dsn = "data/geospatial/subzone.kml")
-cib = st_read(dsn = "data/geospatial", layer = "cib_gardens")
-comm_club = st_read(dsn = "data/geospatial/community_clubs.kml")
-comm_use_site = st_read(dsn = "data/geospatial/community_use_sites.kml")
-dus_sports_facilities = st_read(dsn = "data/geospatial", layer = "dus_school_sports_facilities")
-nature_areas = st_read(dsn = "data/geospatial/nature_areas.kml")
-np_activity_area = st_read(dsn = "data/geospatial/nparks_activity_area.kml")
-np_parks = st_read(dsn = "data/geospatial/nparks_parks.kml")
-np_play_fitness = st_read(dsn = "data/geospatial/nparks_play_fitness_equipment.kml")
-park_loop = st_read(dsn = "data/geospatial/park_connector_loop.kml")
-preschools = st_read(dsn = "data/geospatial/preschools.kml")
-schools = st_read(dsn = "data/geospatial", layer = "schools")
-student_care = st_read(dsn = "data/geospatial/student_care.kml")
-sportsg_facilities= st_read(dsn = "data/geospatial/sportsg_sports_facilities.kml")
-watersports_facilities = st_read(dsn = "data/geospatial", layer = "water_sport_facilities")
 towns = st_read(dsn = "data/geospatial", layer = "hdb_towns")
 ```
 
@@ -83,28 +69,15 @@ subzone <- subzone %>%
 head(subzone, 1)
 ```
 
-## Data transformation for required layers
-
 ```{r warning=FALSE}
-nature_areas <- st_transform(nature_areas, 3414)
-nature_areas<- st_make_valid(nature_areas)
-np_activity_area <- st_transform(np_activity_area, 3414)
-np_parks <- st_transform(np_parks, 3414)
-np_parks<- st_make_valid(np_parks)
-np_play_fitness <- st_transform(np_play_fitness, 3414)
-park_loop <- st_transform(park_loop, 3414)
-preschools <- st_transform(preschools, 3414)
-sportsg_facilities <- st_transform(sportsg_facilities, 3414)
-student_care <- st_transform(student_care, 3414)
-watersports_facilities <- st_set_crs(watersports_facilities, 3414)
-cib <- st_set_crs(cib, 3414)
-comm_club <- st_transform(comm_club, 3414)
-comm_use_site <- st_transform(comm_use_site, 3414)
-dus_sports_facilities <- st_set_crs(dus_sports_facilities, 3414)
 towns <- st_transform(towns, 3414)
 ```
 
+<br>
+
 # Import Aspatial Data
+
+<br>
 
 **HDB**
 
@@ -234,16 +207,17 @@ glimpse(hdb)
 
 
 ```{r}
-tmap_mode('plot')
-tm_shape(subset(towns, Town == 'SENGKANG')) +
-  tm_polygons() +
-  tm_shape(hdb)+
-  tm_dots()
+# tmap_mode('plot')
+# tm_shape(subset(towns, Town == 'SENGKANG')) +
+#   tm_polygons() +
+#   tm_shape(hdb)+
+#   tm_dots()
 ```
 
 
 ```{r warning=FALSE}
-st_intersection(hdb, subset(towns, Town == 'PUNGGOL'))
+hdb_clipped <- st_intersection(hdb, subset(towns, Town == 'PUNGGOL'))
+hdb_clipped
 ```
 
 
@@ -262,12 +236,17 @@ student_care <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'stude
 
 glimpse(student_care)
 ```
+
 ```{r}
 dm_student_care <- read_csv('data/aspatial/distance matrix/hdb_studentcare.csv')
 ```
 ```{r}
 glimpse(dm_student_care)
 ```
+```{r}
+# subset(dm_student_care, origin_id %in% hdb_clipped$ID)
+```
+
 
 **Tidy matrix -- make wider**
 ```{r}
