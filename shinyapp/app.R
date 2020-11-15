@@ -33,8 +33,7 @@ dm_student_care <- dm_student_care %>%
 student_care_capacity <- round(42907 / nrow(student_care), 0)
 student_care_capacity_list <- rep(student_care_capacity, nrow(student_care))
 
-##
-
+## 
 
 
 hdb_risk_sf <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
@@ -206,13 +205,19 @@ server <- function(input, output) {
     output$accessibility_map <- renderTmap({
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
         tm_shape(town_clipped()) +
-            tm_fill(col = 'gray',
-                    alpha = 0.5,
+            tm_fill(col = 'lightgray',
+                    alpha = 0.85,
                     id = 'Town',
                     popup.vars = c()
                     ) +
-            tm_borders(alpha = 0.6, lwd = 0.3) +
-            tm_text('Town') +
+            tm_borders(alpha = 0.6, lwd = 0.5) +
+            # tm_text('Town') +
+        tm_shape(student_care) +
+            tm_symbols(col = 'black',
+                       size = 0.5,
+                       shape = tmap_icons('icons/book.png', width = 20),
+                       id = 'name',
+                       popup.vars = c()) +
         tm_shape(accessibility()) +
             tm_dots(col = 'acc',
                     palette = '-Oranges',
@@ -223,7 +228,7 @@ server <- function(input, output) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__'))
+                                   'Number of Children' = 'chldr__')) 
     })
     
     output$Table <- DT::renderDataTable({
