@@ -66,7 +66,7 @@ na_validity_check(subzone)
 ```
 
 ```{r warning=FALSE}
-subzone <- st_set_crs(subzone, 3414)
+subzone <- st_transform(subzone, 3414)
 subzone<- st_make_valid(subzone)
 ```
 
