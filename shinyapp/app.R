@@ -10,6 +10,16 @@ for(p in packages){
 # Import maps
 # source("prep.R")
 
+###################################################################################################################
+
+# Import data
+
+towns <- st_read(dsn = 'data/geospatial', layer = 'hdb_towns')
+towns <- st_transform(towns, 3414)
+
+hdb <- st_read(dsn = 'data/geospatial', layer = 'hdb_processed')
+
+
 hdb_risk_sf <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
 hdb_risk_sf <- hdb_risk_sf%>%
     rename(risk_cib_gardens = rsk_cb_,
@@ -23,7 +33,8 @@ hdb_risk <-as(hdb_risk_sf, "Spatial")
 
 hdb_accessibility <- st_read(dsn = 'data/geospatial', layer = 'hdb_accessibility') 
 hdb_accessibility <-as(hdb_accessibility, "Spatial")
-print(hdb_accessibility)
+
+###################################################################################################################
 
 
 # UI
@@ -81,17 +92,22 @@ ui <- dashboardPagePlus(
             tabItem(tabName = "Acessibility",
                     boxPlus(
                         width = 12,
-                        title = "Accessibility Map: Community in Bloom Gardens", 
+                        title = "Accessibility Map", 
                         closable = FALSE, 
                         status = "warning", 
                         solidHeader = FALSE, 
                         collapsible = TRUE,
-                        enable_sidebar = FALSE,
+                        enable_sidebar = TRUE,
                         sidebar_width = 25,
-                        sidebar_start_open = FALSE,
+                        sidebar_start_open = TRUE,
                         sidebar_content = tagList(
                             selectInput(
-                                inputId = 'acc_select',
+                                inputId = 'select_town',
+                                label = 'HDB Town',
+                                choices = sort(towns$Town)
+                            ),
+                            selectInput(
+                                inputId = 'select_acc',
                                 label = 'Accessbility to Amenity',
                                 choices = c('Community in Bloom Gardens' = 'hnsn_c_',
                                             'Dual Use Scheme School Sports Facility' = 'hnsn_d_',
@@ -102,33 +118,8 @@ ui <- dashboardPagePlus(
                                 selected = 'hnsn_pr'
                             )
                         ),
-                        tmapOutput("accessibility_map1")
-                    ),
-                    boxPlus(
-                        width = 12,
-                        title = "Accessibility Map: Preschools", 
-                        closable = FALSE, 
-                        status = "warning", 
-                        solidHeader = FALSE, 
-                        collapsible = TRUE,
-                        enable_sidebar = FALSE,
-                        sidebar_width = 25,
-                        sidebar_start_open = FALSE,
-                        sidebar_content = tagList(
-                            selectInput(
-                                inputId = 'acc_select',
-                                label = 'Accessbility to Amenity',
-                                choices = c('Community in Bloom Gardens' = 'hnsn_c_',
-                                            'Dual Use Scheme School Sports Facility' = 'hnsn_d_',
-                                            'Pre-schools' = 'hnsn_pr',
-                                            'Primary Schools' = 'hnsn_p_',
-                                            'Student Care' = 'hnsn_s_',
-                                            'Water Sports Facilities' = 'hnsn_w_'),
-                                selected = 'hnsn_pr'
-                            )
-                        ),
-                        tmapOutput("accessibility_map2")
-                    ),
+                        tmapOutput("accessibility_map")
+                    )
             ),
             # Third tab content
             tabItem(tabName = "Data",
@@ -151,22 +142,21 @@ server <- function(input, output) {
                        border.lwd = 0.01)
     })
     
-    output$accessibility_map1 <- renderTmap({
-        tm_shape(hdb_accessibility) +
-            tm_bubbles(col = 'hnsn_c_',
-                       size = 0.1,
-                       alpha = 0.5,
-                       border.lwd = 0.01)
-
+    hdb_clipped <- reactive({
+        st_intersection(hdb, subset(towns, Town == input$select_town))
     })
     
-    output$accessibility_map2 <- renderTmap({
-        tm_shape(hdb_accessibility) +
-            tm_bubbles(col = 'hnsn_pr',
-                       size = 0.1,
-                       alpha = 0.5,
-                       border.lwd = 0.01)
-        
+    town_clipped <- reactive({
+        subset(towns, Town == input$select_town)
+    })
+    
+    output$accessibility_map <- renderTmap({
+        tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
+        tm_shape(town_clipped()) +
+            tm_fill(col = 'darkgray', alpha = 0.8) +
+            tm_borders(alpha = 0.6, lwd = 0.3) +
+        tm_shape(hdb_clipped()) +
+            tm_dots()
     })
     
     output$Table <- DT::renderDataTable({

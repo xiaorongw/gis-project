@@ -58,7 +58,7 @@ schools = st_read(dsn = "data/geospatial", layer = "schools")
 student_care = st_read(dsn = "data/geospatial/student_care.kml")
 sportsg_facilities= st_read(dsn = "data/geospatial/sportsg_sports_facilities.kml")
 watersports_facilities = st_read(dsn = "data/geospatial", layer = "water_sport_facilities")
-towns = st_read(dsn = "data/geospatial", layer = "HDB_Towns_Boundary")
+towns = st_read(dsn = "data/geospatial", layer = "hdb_towns")
 ```
 
 ## Data Cleaning and Transforming Subzone Layer
@@ -67,7 +67,7 @@ na_validity_check(subzone)
 ```
 
 ```{r warning=FALSE}
-subzone <- st_set_crs(subzone, 3414)
+subzone <- st_transform(subzone, 3414)
 subzone<- st_make_valid(subzone)
 ```
 
@@ -115,7 +115,8 @@ hdb <- read_csv('data/aspatial/hdb_osm.csv')
 ```{r warning=FALSE}
 hdb <- st_as_sf(hdb, 
                 coords = c('X', 'Y'),
-                crs = 3414) 
+                crs = 4326) %>%
+  st_transform(3414)
 ```
 
 
@@ -198,7 +199,7 @@ qtm(subzone_children, 'children_hdb')
 ```{r}
 subzone_children <- subzone_children %>%
   # Calculate demand. If there are no HDB
-  mutate(children_each_hdb = ifelse(num_hdb != 0, children_hdb / num_hdb, 0))
+  mutate(children_each_hdb = round(ifelse(num_hdb != 0, children_hdb / num_hdb, 0), 0))
 
 summary(subzone_children$children_each_hdb)
 ```
@@ -226,6 +227,25 @@ glimpse(hdb)
 ```
 
 <br>
+
+```{r}
+# st_write(hdb, '../shinyapp/data/geospatial/hdb_processed.shp', driver = 'ESRI Shapefile')
+```
+
+
+```{r}
+tmap_mode('plot')
+tm_shape(subset(towns, Town == 'SENGKANG')) +
+  tm_polygons() +
+  tm_shape(hdb)+
+  tm_dots()
+```
+
+
+```{r warning=FALSE}
+st_intersection(hdb, subset(towns, Town == 'PUNGGOL'))
+```
+
 
 # Calculate accessibility
 
