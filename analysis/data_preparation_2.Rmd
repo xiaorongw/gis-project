@@ -289,7 +289,7 @@ acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
                   dm_student_care, 
                   d0 = 50,
                   power = 1.5, 
-                  family = "Hansen"))
+                  family = "SAM"))
 
 colnames(acc_Hansen) <- "accHansen"
 acc_Hansen <- as_tibble(acc_Hansen)
@@ -656,6 +656,72 @@ glimpse(hansen_preschools)
 ```
 
 <br>
+
+# Sportsg sports facilities
+
+<br>
+
+**Import sportsg facilities**
+
+```{r}
+sportsg_facilities <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'sportsg_sports_facilities') %>%
+  select(ROAD_NAME, FACILITIES) %>%
+  rename(address = ROAD_NAME,
+         facilities = FACILITIES)
+
+glimpse(sportsg_facilities)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_sportsg_facilities <- read_csv('data/aspatial/distance matrix/hdb_sportsg.csv')
+```
+
+```{r}
+glimpse(dm_sportsg_facilities)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_sportsg_facilities <- dm_sportsg_facilities %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_sportsg_facilities <- as.matrix(dm_sportsg_facilities/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+sportsg_capacity_list <- rep(1, nrow(sportsg_facilities))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  sportsg_capacity_list,
+                  dm_sportsg_facilities, 
+                  d0 = 50,
+                  power = 1.5, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_sportsg_facilities <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_sportsg_facilities
+```
+
+<br>
+
+```{r}
+glimpse(hansen_sportsg_facilities)
+```
 
 **Function to compute risk weights**
 
