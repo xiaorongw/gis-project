@@ -723,6 +723,376 @@ hansen_sportsg_facilities
 glimpse(hansen_sportsg_facilities)
 ```
 
+<br>
+
+# Play and fitness equipment
+
+<br>
+
+**Import play and fitness equipment**
+
+```{r}
+play_fitness <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'nparks_play_fitness_equipment') %>%
+  select(geometry)
+
+glimpse(play_fitness)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_play_fitness <- read_csv('data/aspatial/distance matrix/hdb_play_fitness.csv')
+```
+
+```{r}
+glimpse(dm_play_fitness)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_play_fitness <- dm_play_fitness %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_play_fitness <- as.matrix(dm_play_fitness/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+play_fitness_capacity_list <- rep(1, nrow(play_fitness))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  play_fitness_capacity_list,
+                  dm_play_fitness, 
+                  d0 = 50,
+                  power = 2, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_play_fitness <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_play_fitness
+```
+
+<br>
+
+# Parks
+
+<br>
+
+**Import parks**
+
+```{r}
+parks <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'nparks_parks')  %>%
+  select(Name) %>%
+  rename(name = Name)
+
+glimpse(parks)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_parks <- read_csv('data/aspatial/distance matrix/hdb_nparks.csv')
+```
+
+```{r}
+glimpse(dm_parks)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_parks <- dm_parks %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_parks <- as.matrix(dm_parks/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+parks_capacity_list <- rep(1, nrow(parks))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  parks_capacity_list,
+                  dm_parks, 
+                  d0 = 50,
+                  power = 1, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_parks <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_parks
+```
+
+<br>
+
+# Community use sites
+
+<br>
+
+**Import community use sites**
+
+```{r}
+community_use_sites <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'community_use_sites') %>%
+  select(Name) %>%
+  rename(name = Name)
+
+glimpse(community_use_sites)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_community_use_sites <- read_csv('data/aspatial/distance matrix/hdb_community_use_sites.csv')
+```
+
+```{r}
+glimpse(dm_community_use_sites)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_community_use_sites <- dm_community_use_sites %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_community_use_sites <- as.matrix(dm_community_use_sites/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+community_use_sites_capacity_list <- rep(1, nrow(community_use_sites))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  community_use_sites_capacity_list,
+                  dm_community_use_sites, 
+                  d0 = 50,
+                  power = 2, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_community_use_sites <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_community_use_sites
+```
+
+<br>
+
+# Activity areas
+
+<br>
+
+**Import activity areas**
+
+```{r}
+activity_area <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'nparks_activity_area') %>%
+  select(geometry)
+
+glimpse(activity_area)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_activity_area <- read_csv('data/aspatial/distance matrix/hdb_activity_areas.csv')
+```
+
+```{r}
+glimpse(dm_activity_area)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_activity_area <- dm_activity_area %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_activity_area <- as.matrix(dm_activity_area/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+activity_area_capacity_list <- rep(1, nrow(activity_area))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  activity_area_capacity_list,
+                  dm_activity_area, 
+                  d0 = 50,
+                  power = 2, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_activity_area <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_activity_area
+```
+
+<br>
+
+# Nature areas
+
+<br>
+
+**Import nature areas**
+
+```{r}
+nature_area <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'nature_areas') %>%
+  select(geometry)
+
+glimpse(nature_area)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_nature_area <- read_csv('data/aspatial/distance matrix/hdb_nature_areas.csv')
+```
+
+```{r}
+glimpse(dm_nature_area)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_nature_area <- dm_nature_area %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_nature_area <- as.matrix(dm_nature_area/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+nature_area_capacity_list <- rep(1, nrow(nature_area))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  nature_area_capacity_list,
+                  dm_nature_area, 
+                  d0 = 50,
+                  power = 1.5, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_nature_area <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_nature_area
+```
+
+<br>
+
+# Community clubs
+
+<br>
+
+**Import community clubs**
+
+```{r}
+community_clubs <- st_read(dsn = 'data/geospatial/distance_matrix_', layer = 'community_clubs') %>%
+  select(Name, descriptio, ADDRESSSTR, ADDRESSPOS) %>%
+  rename(name = Name,
+         type = descriptio,
+         address = ADDRESSSTR,
+         postal_code = ADDRESSPOS)
+
+glimpse(community_clubs)
+```
+
+<br>
+
+**Import distance matrix**
+```{r}
+dm_community_clubs <- read_csv('data/aspatial/distance matrix/hdb_community_clubs.csv')
+```
+
+```{r}
+glimpse(dm_community_clubs)
+```
+
+**Tidy matrix -- make wider**
+```{r}
+dm_community_clubs <- dm_community_clubs %>%
+  # Obtain final matrix
+  select(origin_id, destination_id, total_cost) %>%
+  pivot_wider(names_from = destination_id, values_from = total_cost) %>%
+  select(-origin_id)
+  
+# Convert to km
+dm_community_clubs <- as.matrix(dm_community_clubs/1000)
+```
+
+<br>
+
+**Calculate Hansen accessibility**
+```{r}
+community_clubs_capacity_list <- rep(1, nrow(community_clubs))
+
+acc_Hansen <- data.frame(ac(hdb$children_each_hdb,
+                  community_clubs_capacity_list,
+                  dm_community_clubs, 
+                  d0 = 50,
+                  power = 2, 
+                  family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hansen_community_clubs <- bind_cols(hdb, acc_Hansen)
+```
+
+```{r}
+hansen_community_clubs
+```
+
+<br>
+
+
+
 **Function to compute risk weights**
 
 ```{r}

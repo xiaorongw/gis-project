@@ -20,16 +20,19 @@ towns <- st_transform(towns, 3414)
 hdb <- st_read(dsn = 'data/geospatial', layer = 'hdb_processed')
 
 ### data from distance_matrix_ ###
+
+load(file = 'distance_matrices.rda')
+
 ## Student care
 student_care <- st_read(dsn = 'data/geospatial', layer = 'student_care') %>%
     select(ID, Name, ADDRESSSTR, ADDRESSPOS) %>%
     rename(name = Name,
            address = ADDRESSSTR,
            postal_code = ADDRESSPOS)
-dm_student_care <- read_csv('data/aspatial/distance matrix/hdb_studentcare.csv')
-dm_student_care <- dm_student_care %>%
-    select(origin_id, destination_id, total_cost) %>%
-    pivot_wider(names_from = destination_id, values_from = total_cost)
+# dm_student_care <- read_csv('data/aspatial/distance matrix/hdb_studentcare.csv')
+# dm_student_care <- dm_student_care %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
 student_care_capacity <- round(42907 / nrow(student_care), 0)
 student_care_capacity_list <- rep(student_care_capacity, nrow(student_care))
 
@@ -38,10 +41,10 @@ pri_schools <- st_read(dsn = 'data/geospatial', layer = 'schools_primary') %>%
     select(ID, school_nam, address, postal_cod) %>%
     rename(name = school_nam,
            postal_code = postal_cod)
-dm_pri_schools <- read_csv('data/aspatial/distance matrix/hdb_school.csv')
-dm_pri_schools <- dm_pri_schools %>%
-    select(origin_id, destination_id, total_cost) %>%
-    pivot_wider(names_from = destination_id, values_from = total_cost)
+# dm_pri_schools <- read_csv('data/aspatial/distance matrix/hdb_school.csv')
+# dm_pri_schools <- dm_pri_schools %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
 school_capacity <- round(37671 / nrow(pri_schools))
 school_capacity_list <- rep(school_capacity, nrow(pri_schools))
 
@@ -51,10 +54,10 @@ watersports_facilities <- st_read(dsn = 'data/geospatial', layer = 'water_sport_
     rename(name = NAME,
            address = ADDRESSSTR,
            postal_code = ADDRESSPOS)
-dm_watersports_facilities <- read_csv('data/aspatial/distance matrix/hdb_watersports.csv')
-dm_watersports_facilities <- dm_watersports_facilities %>%
-    select(origin_id, destination_id, total_cost) %>%
-    pivot_wider(names_from = destination_id, values_from = total_cost) 
+# dm_watersports_facilities <- read_csv('data/aspatial/distance matrix/hdb_watersports.csv')
+# dm_watersports_facilities <- dm_watersports_facilities %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost) 
 watersports_capacity_list <- rep(1, nrow(watersports_facilities))
 
 ## DUS sports facilities
@@ -64,10 +67,10 @@ dus_sports_facilities <- st_read(dsn = 'data/geospatial', layer = 'dus_school_sp
            address = ADDRESS,
            postal_code = POSTAL_COD,
            facilities = FACILITIES)
-dm_dus_school_sports_facilities <- read_csv('data/aspatial/distance matrix/hdb_dus.csv')
-dm_dus_school_sports_facilities <- dm_dus_school_sports_facilities %>%
-    select(origin_id, destination_id, total_cost) %>%
-    pivot_wider(names_from = destination_id, values_from = total_cost) 
+# dm_dus_school_sports_facilities <- read_csv('data/aspatial/distance matrix/hdb_dus.csv')
+# dm_dus_school_sports_facilities <- dm_dus_school_sports_facilities %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost) 
 dus_capacity_list <- rep(1, nrow(dus_sports_facilities))
 
 ## Community in bloom garden
@@ -77,10 +80,10 @@ cib_gardens <- st_read(dsn = 'data/geospatial', layer = 'cib_gardens') %>%
            division = DIVISION, 
            constituency = CONSTITUEN,
            category = CATEGORY)
-dm_cib_gardens <- read_csv('data/aspatial/distance matrix/hdb_cib.csv')
-dm_cib_gardens <- dm_cib_gardens %>%
-    select(origin_id, destination_id, total_cost) %>%
-    pivot_wider(names_from = destination_id, values_from = total_cost)
+# dm_cib_gardens <- read_csv('data/aspatial/distance matrix/hdb_cib.csv')
+# dm_cib_gardens <- dm_cib_gardens %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
 cib_capacity_list <- rep(1, nrow(cib_gardens))
 
 ## Preschools
@@ -89,10 +92,10 @@ preschools <- st_read(dsn = 'data/geospatial', layer = 'preschools') %>%
     rename(name = CENTRE_NAM,
            address = ADDRESS,
            postal_code = POSTAL_COD)
-dm_preschools <- read_csv('data/aspatial/distance matrix/hdb_preschools.csv')
-dm_preschools <- dm_preschools %>%
-    select(origin_id, destination_id, total_cost) %>%
-    pivot_wider(names_from = destination_id, values_from = total_cost)
+# dm_preschools <- read_csv('data/aspatial/distance matrix/hdb_preschools.csv')
+# dm_preschools <- dm_preschools %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
 preschool_capacity <- round(215579 / nrow(preschools))
 preschool_capacity_list <- rep(preschool_capacity, nrow(preschools))
 
@@ -101,11 +104,77 @@ sportsg_facilities <- st_read(dsn = 'data/geospatial', layer = 'sportsg_sports_f
     select(ROAD_NAME, FACILITIES) %>%
     rename(address = ROAD_NAME,
            facilities = FACILITIES)
-dm_sportsg_facilities <- read_csv('data/aspatial/distance matrix/hdb_sportsg.csv')
-dm_sportsg_facilities <- dm_sportsg_facilities %>%
-    select(origin_id, destination_id, total_cost) %>%
-    pivot_wider(names_from = destination_id, values_from = total_cost)
+# dm_sportsg_facilities <- read_csv('data/aspatial/distance matrix/hdb_sportsg.csv')
+# dm_sportsg_facilities <- dm_sportsg_facilities %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
 sportsg_capacity_list <- rep(1, nrow(sportsg_facilities))
+
+## Play and fitness equipment
+play_fitness <- st_read(dsn = 'data/geospatial', layer = 'nparks_play_fitness_equipment') %>%
+    select(geometry)
+# dm_play_fitness <- read_csv('data/aspatial/distance matrix/hdb_play_fitness.csv')
+# dm_play_fitness <- dm_play_fitness %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
+play_fitness_capacity_list <- rep(1, nrow(play_fitness))
+
+## Parks
+parks <- st_read(dsn = 'data/geospatial', layer = 'nparks_parks')  %>%
+    select(Name) %>%
+    rename(name = Name)
+# dm_parks <- read_csv('data/aspatial/distance matrix/hdb_nparks.csv')
+# dm_parks <- dm_parks %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
+parks_capacity_list <- rep(1, nrow(parks))
+
+## Community use sites
+community_use_sites <- st_read(dsn = 'data/geospatial', layer = 'community_use_sites') %>%
+    select(Name) %>%
+    rename(name = Name)
+# dm_community_use_sites <- read_csv('data/aspatial/distance matrix/hdb_community_use_sites.csv')
+# dm_community_use_sites <- dm_community_use_sites %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
+community_use_sites_capacity_list <- rep(1, nrow(community_use_sites))
+
+## Activity areas
+activity_area <- st_read(dsn = 'data/geospatial', layer = 'nparks_activity_area') %>%
+    select(geometry)
+# dm_activity_area <- read_csv('data/aspatial/distance matrix/hdb_activity_areas.csv')
+# dm_activity_area <- dm_activity_area %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
+activity_area_capacity_list <- rep(1, nrow(activity_area))
+
+
+## Nature areas
+nature_area <- st_read(dsn = 'data/geospatial', layer = 'nature_areas') %>%
+    select(geometry)
+# dm_nature_area <- read_csv('data/aspatial/distance matrix/hdb_nature_areas.csv')
+# dm_nature_area <- dm_nature_area %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
+nature_area_capacity_list <- rep(1, nrow(nature_area))
+
+## Community clubs
+community_clubs <- st_read(dsn = 'data/geospatial', layer = 'community_clubs') %>%
+    select(Name, descriptio, ADDRESSSTR, ADDRESSPOS) %>%
+    rename(name = Name,
+           type = descriptio,
+           address = ADDRESSSTR,
+           postal_code = ADDRESSPOS)
+# dm_community_clubs <- read_csv('data/aspatial/distance matrix/hdb_community_clubs.csv')
+# dm_community_clubs <- dm_community_clubs %>%
+#     select(origin_id, destination_id, total_cost) %>%
+#     pivot_wider(names_from = destination_id, values_from = total_cost)
+community_clubs_capacity_list <- rep(1, nrow(community_clubs))
+
+# save(dm_activity_area, dm_cib_gardens, dm_community_clubs, dm_community_use_sites,
+#      dm_dus_school_sports_facilities, dm_nature_area, dm_parks, dm_play_fitness,
+#      dm_preschools, dm_pri_schools, dm_sportsg_facilities, dm_student_care, dm_watersports_facilities,
+#      file = 'distance_matrices.rda')
 
 ####################################################################################################
 
@@ -160,20 +229,25 @@ ui <- dashboardPagePlus(
                         solidHeader = FALSE, 
                         collapsible = TRUE,
                         enable_sidebar = FALSE,
-                        sidebar_width = 25,
-                        sidebar_start_open = FALSE,
-                        sidebar_content = tagList(
-                            checkboxInput("somevalue", "Some value", FALSE),
-                            verbatimTextOutput("value"),
-                            sliderInput(
-                                "slider_boxsidebar", 
-                                "Number of observations:",
-                                min = 0, 
-                                max = 1000, 
-                                value = 500
-                            )
-                        ),
                         tmapOutput("risk_map")
+                    ),
+                    boxPlus(
+                        width = 12,
+                        title = 'settings',
+                        closable = FALSE,
+                        solidHeader = FALSE, 
+                        collapsible = TRUE,
+                        enable_sidebar = FALSE,
+                        fluidRow(
+                            column(width = 3,
+                                   'test'),
+                            column(width = 3,
+                                   'test'),
+                            column(width = 3,
+                                   'test'),
+                            column(width = 3,
+                                   'test'),
+                        )
                     )
             ),
             
@@ -198,14 +272,20 @@ ui <- dashboardPagePlus(
                             selectInput(
                                 inputId = 'select_amenity',
                                 label = 'Amenity',
-                                choices = c('Community in Bloom Gardens' = 'cib_gardens',
+                                choices = c('Activity Areas' = 'activity_area',
+                                            'Community Clubs' = 'community_clubs',
+                                            'Community in Bloom Gardens' = 'cib_gardens',
+                                            'Community Use Sites' = 'community_use_sites',
                                             'Dual Use Scheme School Sports Facility' = 'dus_sports',
+                                            'Nature Areas' = 'nature_areas',
+                                            'Parks' = 'parks',
+                                            'Play and Fitness Equipment' = 'play_fitness',
                                             'Pre-schools' = 'preschools',
                                             'Primary Schools' = 'pri_school',
                                             'SportSG Facilities' = 'sportsg',
                                             'Student Care' = 'student_care',
                                             'Water Sports Facilities' = 'water_sports'),
-                                selected = 'student_care'
+                                selected = 'preschools'
                             ),
                             tags$style(type = "text/css", ".irs-grid-pol.small {height: 0px;}"),
                             sliderInput("select_power",
@@ -223,7 +303,13 @@ ui <- dashboardPagePlus(
                                             'Standard Deviation' = 'sd',
                                             'Jenks' = 'jenks')),
                                 selected = 'quantile'
-                            )
+                            ),
+                            sliderInput("select_numclass",
+                                        "Number of Classes",
+                                        min = 4,
+                                        max = 12, 
+                                        value = 5,
+                                        step = 1),
                         ),
                         conditionalPanel('input.select_amenity == "student_care"', tmapOutput("accmap_student_care", height='80vh')),
                         conditionalPanel('input.select_amenity == "pri_school"', tmapOutput("accmap_pri_school", height='80vh')),
@@ -231,7 +317,13 @@ ui <- dashboardPagePlus(
                         conditionalPanel('input.select_amenity == "dus_sports"', tmapOutput("accmap_dus_sports", height='80vh')),
                         conditionalPanel('input.select_amenity == "cib_gardens"', tmapOutput("accmap_cib_gardens", height='80vh')),
                         conditionalPanel('input.select_amenity == "preschools"', tmapOutput("accmap_preschools", height='80vh')),
-                        conditionalPanel('input.select_amenity == "sportsg"', tmapOutput("accmap_sportsg", height='80vh'))
+                        conditionalPanel('input.select_amenity == "sportsg"', tmapOutput("accmap_sportsg", height='80vh')),
+                        conditionalPanel('input.select_amenity == "play_fitness"', tmapOutput("accmap_play_fitness", height='80vh')),
+                        conditionalPanel('input.select_amenity == "parks"', tmapOutput("accmap_parks", height='80vh')),
+                        conditionalPanel('input.select_amenity == "community_use_sites"', tmapOutput("accmap_community_use_sites", height='80vh')),
+                        conditionalPanel('input.select_amenity == "activity_area"', tmapOutput("accmap_activity_area", height='80vh')),
+                        conditionalPanel('input.select_amenity == "nature_areas"', tmapOutput("accmap_nature_areas", height='80vh')),
+                        conditionalPanel('input.select_amenity == "community_clubs"', tmapOutput("accmap_community_clubs", height='80vh'))
                     )
             ),
             # Third tab content
@@ -313,13 +405,14 @@ server <- function(input, output, session) {
         tm_shape(student_care) +
             tm_symbols(col = 'black',
                        size = 0.5,
-                       shape = tmap_icons('icons/teddy-bear.png', width = 20),
+                       shape = tmap_icons('icons/school-book-bag.png', width = 20),
                        id = 'name',
                        popup.vars = c()) +
         tm_shape(accessibility) +
             tm_dots(col = 'acc',
                     palette = '-Oranges',
                     style = input$select_class,
+                    n = input$select_numclass,
                     id = 'street',
                     title = 'Hansen Accessibility',
                     popup.vars = c('Town' = 'Town',
@@ -370,6 +463,7 @@ server <- function(input, output, session) {
             tm_dots(col = 'acc',
                     palette = '-Oranges',
                     style = input$select_class,
+                    n = input$select_numclass,
                     id = 'street',
                     title = 'Hansen Accessibility',
                     popup.vars = c('Town' = 'Town',
@@ -418,6 +512,7 @@ server <- function(input, output, session) {
             tm_dots(col = 'acc',
                     palette = '-Oranges',
                     style = input$select_class,
+                    n = input$select_numclass,
                     id = 'street',
                     title = 'Hansen Accessibility',
                     popup.vars = c('Town' = 'Town',
@@ -466,6 +561,7 @@ server <- function(input, output, session) {
             tm_dots(col = 'acc',
                     palette = '-Oranges',
                     style = input$select_class,
+                    n = input$select_numclass,
                     id = 'street',
                     title = 'Hansen Accessibility',
                     popup.vars = c('Town' = 'Town',
@@ -515,6 +611,7 @@ server <- function(input, output, session) {
             tm_dots(col = 'acc',
                     palette = '-Oranges',
                     style = input$select_class,
+                    n = input$select_numclass,
                     id = 'street',
                     title = 'Hansen Accessibility',
                     popup.vars = c('Town' = 'Town',
@@ -558,13 +655,14 @@ server <- function(input, output, session) {
             tm_shape(preschools) +
             tm_symbols(col = 'black',
                        size = 0.5,
-                       shape = tmap_icons('icons/school.png', width = 20),
+                       shape = tmap_icons('icons/teddy-bear.png', width = 20),
                        id = 'name',
                        popup.vars = c()) +
             tm_shape(accessibility) +
             tm_dots(col = 'acc',
                     palette = '-Oranges',
                     style = input$select_class,
+                    n = input$select_numclass,
                     id = 'street',
                     title = 'Hansen Accessibility',
                     popup.vars = c('Town' = 'Town',
@@ -615,6 +713,7 @@ server <- function(input, output, session) {
             tm_dots(col = 'acc',
                     palette = '-Oranges',
                     style = input$select_class,
+                    n = input$select_numclass,
                     id = 'street',
                     title = 'Hansen Accessibility',
                     popup.vars = c('Town' = 'Town',
@@ -626,6 +725,302 @@ server <- function(input, output, session) {
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
+    
+    
+    output$accmap_play_fitness <- renderTmap({
+        validate(need(input$select_amenity=="play_fitness", message=FALSE))
+        
+        dm <- subset(dm_play_fitness, origin_id %in% hdb_clipped()$ID) %>%
+            select(-origin_id)
+        dm <- as.matrix(dm/1000)
+        acc <- data.frame(ac(hdb_clipped()$children_each_hdb,
+                             play_fitness_capacity_list,
+                             dm,
+                             d0 = 50,
+                             power = input$select_power,
+                             family = 'Hansen'))
+        
+        colnames(acc) <- "acc"
+        acc <- as_tibble(acc)
+        accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility[is.na(accessibility)] <- 0
+        
+        tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
+            tm_shape(town_clipped()) +
+            tm_fill(col = 'lightgray',
+                    alpha = 0.85,
+                    id = 'Town',
+                    popup.vars = c()
+            ) +
+            tm_borders(alpha = 0.6, lwd = 0.5) +
+            # tm_text('Town') +
+            tm_shape(play_fitness) +
+            tm_symbols(size = 0.5,
+                       shape = tmap_icons('icons/triangle.png', width = 12),
+                       popup.vars = FALSE) +
+            tm_shape(accessibility) +
+            tm_dots(col = 'acc',
+                    palette = '-Oranges',
+                    style = input$select_class,
+                    n = input$select_numclass,
+                    id = 'street',
+                    title = 'Hansen Accessibility',
+                    popup.vars = c('Town' = 'Town',
+                                   'House Number' = 'hs_nmbr',
+                                   'Street' = 'street',
+                                   'Postal Code' = 'pstl_cd',
+                                   'Number of Levels' = 'nm_lvls',
+                                   'Number of Children' = 'chldr__')) +
+            tm_view(view.legend.position = c('left', 'bottom'),
+                    leaflet.options = c(attributionControl = FALSE))
+    })
+    
+    
+    
+    output$accmap_parks <- renderTmap({
+        validate(need(input$select_amenity=="parks", message=FALSE))
+        
+        dm <- subset(dm_parks, origin_id %in% hdb_clipped()$ID) %>%
+            select(-origin_id)
+        dm <- as.matrix(dm/1000)
+        acc <- data.frame(ac(hdb_clipped()$children_each_hdb,
+                             parks_capacity_list,
+                             dm,
+                             d0 = 50,
+                             power = input$select_power,
+                             family = 'Hansen'))
+        
+        colnames(acc) <- "acc"
+        acc <- as_tibble(acc)
+        accessibility <- bind_cols(hdb_clipped(), acc)
+        
+        tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
+            tm_shape(town_clipped()) +
+            tm_fill(col = 'lightgray',
+                    alpha = 0.85,
+                    id = 'Town',
+                    popup.vars = c()
+            ) +
+            tm_borders(alpha = 0.6, lwd = 0.5) +
+            # tm_text('Town') +
+            tm_shape(parks) +
+            tm_symbols(col = 'black',
+                       size = 0.5,
+                       shape = tmap_icons('icons/tree.png', width = 20),
+                       id = 'name',
+                       popup.vars = c(),
+                       alpha = 0.5) +
+            tm_shape(accessibility) +
+            tm_dots(col = 'acc',
+                    palette = '-Oranges',
+                    style = input$select_class,
+                    n = input$select_numclass,
+                    id = 'street',
+                    title = 'Hansen Accessibility',
+                    popup.vars = c('Town' = 'Town',
+                                   'House Number' = 'hs_nmbr',
+                                   'Street' = 'street',
+                                   'Postal Code' = 'pstl_cd',
+                                   'Number of Levels' = 'nm_lvls',
+                                   'Number of Children' = 'chldr__')) +
+            tm_view(view.legend.position = c('left', 'bottom'),
+                    leaflet.options = c(attributionControl = FALSE))
+    })
+    
+    
+    output$accmap_community_use_sites <- renderTmap({
+        validate(need(input$select_amenity=="community_use_sites", message=FALSE))
+        
+        dm <- subset(dm_community_use_sites, origin_id %in% hdb_clipped()$ID) %>%
+            select(-origin_id)
+        dm <- as.matrix(dm/1000)
+        acc <- data.frame(ac(hdb_clipped()$children_each_hdb,
+                             community_use_sites_capacity_list,
+                             dm,
+                             d0 = 50,
+                             power = input$select_power,
+                             family = 'Hansen'))
+        
+        colnames(acc) <- "acc"
+        acc <- as_tibble(acc)
+        accessibility <- bind_cols(hdb_clipped(), acc)
+        
+        tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
+            tm_shape(town_clipped()) +
+            tm_fill(col = 'lightgray',
+                    alpha = 0.85,
+                    id = 'Town',
+                    popup.vars = c()
+            ) +
+            tm_borders(alpha = 0.6, lwd = 0.5) +
+            # tm_text('Town') +
+            tm_shape(community_use_sites) +
+            tm_symbols(size = 0.5,
+                       shape = tmap_icons('icons/community.png', width = 20),
+                       id = 'name',
+                       popup.vars = c(),
+                       alpha = 0.5) +
+            tm_shape(accessibility) +
+            tm_dots(col = 'acc',
+                    palette = '-Oranges',
+                    style = input$select_class,
+                    n = input$select_numclass,
+                    id = 'street',
+                    title = 'Hansen Accessibility',
+                    popup.vars = c('Town' = 'Town',
+                                   'House Number' = 'hs_nmbr',
+                                   'Street' = 'street',
+                                   'Postal Code' = 'pstl_cd',
+                                   'Number of Levels' = 'nm_lvls',
+                                   'Number of Children' = 'chldr__')) +
+            tm_view(view.legend.position = c('left', 'bottom'),
+                    leaflet.options = c(attributionControl = FALSE))
+    })
+    
+    
+    output$accmap_activity_area <- renderTmap({
+        validate(need(input$select_amenity=="activity_area", message=FALSE))
+        
+        dm <- subset(dm_activity_area, origin_id %in% hdb_clipped()$ID) %>%
+            select(-origin_id)
+        dm <- as.matrix(dm/1000)
+        acc <- data.frame(ac(hdb_clipped()$children_each_hdb,
+                             activity_area_capacity_list,
+                             dm,
+                             d0 = 50,
+                             power = input$select_power,
+                             family = 'Hansen'))
+        
+        colnames(acc) <- "acc"
+        acc <- as_tibble(acc)
+        accessibility <- bind_cols(hdb_clipped(), acc)
+        
+        tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
+            tm_shape(town_clipped()) +
+            tm_fill(col = 'lightgray',
+                    alpha = 0.85,
+                    id = 'Town',
+                    popup.vars = c()
+            ) +
+            tm_borders(alpha = 0.6, lwd = 0.5) +
+            # tm_text('Town') +
+            tm_shape(activity_area) +
+            tm_symbols(size = 0.5,
+                       shape = tmap_icons('icons/footprint.png', height = 20),
+                       popup.vars = FALSE) +
+            tm_shape(accessibility) +
+            tm_dots(col = 'acc',
+                    palette = '-Oranges',
+                    style = input$select_class,
+                    n = input$select_numclass,
+                    id = 'street',
+                    title = 'Hansen Accessibility',
+                    popup.vars = c('Town' = 'Town',
+                                   'House Number' = 'hs_nmbr',
+                                   'Street' = 'street',
+                                   'Postal Code' = 'pstl_cd',
+                                   'Number of Levels' = 'nm_lvls',
+                                   'Number of Children' = 'chldr__')) +
+            tm_view(view.legend.position = c('left', 'bottom'),
+                    leaflet.options = c(attributionControl = FALSE))
+    })
+ 
+    
+    output$accmap_nature_areas <- renderTmap({
+        validate(need(input$select_amenity=="nature_areas", message=FALSE))
+        
+        dm <- subset(dm_nature_area, origin_id %in% hdb_clipped()$ID) %>%
+            select(-origin_id)
+        dm <- as.matrix(dm/1000)
+        acc <- data.frame(ac(hdb_clipped()$children_each_hdb,
+                             nature_area_capacity_list,
+                             dm,
+                             d0 = 50,
+                             power = input$select_power,
+                             family = 'Hansen'))
+        
+        colnames(acc) <- "acc"
+        acc <- as_tibble(acc)
+        accessibility <- bind_cols(hdb_clipped(), acc)
+        
+        tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
+            tm_shape(town_clipped()) +
+            tm_fill(col = 'lightgray',
+                    alpha = 0.85,
+                    id = 'Town',
+                    popup.vars = c()
+            ) +
+            tm_borders(alpha = 0.6, lwd = 0.5) +
+            # tm_text('Town') +
+            tm_shape(nature_area) +
+            tm_symbols(size = 0.5,
+                       shape = tmap_icons('icons/pine.png', width = 20),
+                       popup.vars = FALSE) +
+            tm_shape(accessibility) +
+            tm_dots(col = 'acc',
+                    palette = '-Oranges',
+                    style = input$select_class,
+                    n = input$select_numclass,
+                    id = 'street',
+                    title = 'Hansen Accessibility',
+                    popup.vars = c('Town' = 'Town',
+                                   'House Number' = 'hs_nmbr',
+                                   'Street' = 'street',
+                                   'Postal Code' = 'pstl_cd',
+                                   'Number of Levels' = 'nm_lvls',
+                                   'Number of Children' = 'chldr__')) +
+            tm_view(view.legend.position = c('left', 'bottom'),
+                    leaflet.options = c(attributionControl = FALSE))
+    })   
+    
+    
+    output$accmap_community_clubs <- renderTmap({
+        validate(need(input$select_amenity=="community_clubs", message=FALSE))
+        
+        dm <- subset(dm_community_clubs, origin_id %in% hdb_clipped()$ID) %>%
+            select(-origin_id)
+        dm <- as.matrix(dm/1000)
+        acc <- data.frame(ac(hdb_clipped()$children_each_hdb,
+                             community_clubs_capacity_list,
+                             dm,
+                             d0 = 50,
+                             power = input$select_power,
+                             family = 'Hansen'))
+        
+        colnames(acc) <- "acc"
+        acc <- as_tibble(acc)
+        accessibility <- bind_cols(hdb_clipped(), acc)
+        
+        tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
+            tm_shape(town_clipped()) +
+            tm_fill(col = 'lightgray',
+                    alpha = 0.85,
+                    id = 'Town',
+                    popup.vars = c()
+            ) +
+            tm_borders(alpha = 0.6, lwd = 0.5) +
+            # tm_text('Town') +
+            tm_shape(community_clubs) +
+            tm_symbols(size = 0.5,
+                       shape = tmap_icons('icons/comm_club.png', width = 20),
+                       id = 'name',
+                       popup.vars = c()) +
+            tm_shape(accessibility) +
+            tm_dots(col = 'acc',
+                    palette = '-Oranges',
+                    style = input$select_class,
+                    n = input$select_numclass,
+                    id = 'street',
+                    title = 'Hansen Accessibility',
+                    popup.vars = c('Town' = 'Town',
+                                   'House Number' = 'hs_nmbr',
+                                   'Street' = 'street',
+                                   'Postal Code' = 'pstl_cd',
+                                   'Number of Levels' = 'nm_lvls',
+                                   'Number of Children' = 'chldr__')) +
+            tm_view(view.legend.position = c('left', 'bottom'),
+                    leaflet.options = c(attributionControl = FALSE))
+    })   
     
     
     ##########################################################################################################
