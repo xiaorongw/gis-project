@@ -1,0 +1,40 @@
+.main-header .logo {
+  padding: 0 0;
+}
+
+.irs-bar, .irs-bar-edge, .irs-single, .irs-grid-pol {
+  background: rgb(83, 167, 173);
+  border-color: rgb(83, 167, 173);
+}
+
+.irs-from, .irs-to {
+  background: rgb(83, 167, 173);
+}
+
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: rgb(83, 167, 173);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}

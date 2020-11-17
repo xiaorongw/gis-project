@@ -197,13 +197,12 @@ hdb_accessibility <-as(hdb_accessibility, "Spatial")
 
 # UI
 ui <- dashboardPagePlus(
-    skin = "purple",
+    skin = "yellow",
     dashboardHeaderPlus(
         title = tagList(
             span(class = "logo-lg", "Tiny Blocks"), 
             #need to change to our icon
-            img(src = "https://image.flaticon.com/icons/svg/204/204074.svg"))
-        #img(src="logo.png"))
+            img(src = "logo2.png", height = '35px'))
     ),
     
     title = "Tiny Blocks",
@@ -217,10 +216,14 @@ ui <- dashboardPagePlus(
     ),
     ## Body content
     dashboardBody(
+        
+        tags$head(
+            tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
+        ),
+        
         tabItems(
             # First tab content
             tabItem(tabName = "Risk",
-                    # Can include our map in this box
                     boxPlus(
                         width = 12,
                         title = "Risk map", 
@@ -257,7 +260,7 @@ ui <- dashboardPagePlus(
                         width = 12,
                         title = "Accessibility Map", 
                         closable = FALSE, 
-                        status = "warning", 
+                        # status = "warning", 
                         solidHeader = FALSE, 
                         collapsible = TRUE,
                         enable_sidebar = TRUE,
