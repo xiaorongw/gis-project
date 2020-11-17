@@ -634,6 +634,7 @@ server <- function(input, output, session) {
                             dist_mat = dm_preschools,
                             capacity_list = preschool_capacity_list,
                             hdb_points = hdb_points())
+        df[is.na(df)] <- 0
         compute_enabling_scores(df)
     })
     
