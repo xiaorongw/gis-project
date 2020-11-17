@@ -9,6 +9,8 @@ library('SpatialAcc')
 library("shinyLP")
 library('shinyWidgets')
 library('scales')
+library('shinycustomloader')
+library('DT')
 
 ###################################################################################################################
 
@@ -214,7 +216,7 @@ compute_enabling_scores <- function(df, name) {
     
     return(df1)
 }
-
+####################################################################################################
 # UI
 ui <- dashboardPagePlus(
     skin = "yellow",
@@ -301,7 +303,7 @@ ui <- dashboardPagePlus(
                                         value = 5,
                                         step = 1)
                         ),
-                        tmapOutput("enabling_index_map", height = '70vh')
+                        withLoader(tmapOutput("enabling_index_map", height = '70vh'),type = "html", loader="loader1")
                     ),
                     boxPlus(
                         width = 12,
@@ -515,19 +517,19 @@ ui <- dashboardPagePlus(
                                         value = 5,
                                         step = 1),
                         ),
-                        conditionalPanel('input.select_amenity == "student_care"', tmapOutput("accmap_student_care", height='80vh')),
-                        conditionalPanel('input.select_amenity == "pri_school"', tmapOutput("accmap_pri_school", height='80vh')),
-                        conditionalPanel('input.select_amenity == "water_sports"', tmapOutput("accmap_water_sports", height='80vh')),
-                        conditionalPanel('input.select_amenity == "dus_sports"', tmapOutput("accmap_dus_sports", height='80vh')),
-                        conditionalPanel('input.select_amenity == "cib_gardens"', tmapOutput("accmap_cib_gardens", height='80vh')),
-                        conditionalPanel('input.select_amenity == "preschools"', tmapOutput("accmap_preschools", height='80vh')),
-                        conditionalPanel('input.select_amenity == "sportsg"', tmapOutput("accmap_sportsg", height='80vh')),
-                        conditionalPanel('input.select_amenity == "play_fitness"', tmapOutput("accmap_play_fitness", height='80vh')),
-                        conditionalPanel('input.select_amenity == "parks"', tmapOutput("accmap_parks", height='80vh')),
-                        conditionalPanel('input.select_amenity == "community_use_sites"', tmapOutput("accmap_community_use_sites", height='80vh')),
-                        conditionalPanel('input.select_amenity == "activity_area"', tmapOutput("accmap_activity_area", height='80vh')),
-                        conditionalPanel('input.select_amenity == "nature_areas"', tmapOutput("accmap_nature_areas", height='80vh')),
-                        conditionalPanel('input.select_amenity == "community_clubs"', tmapOutput("accmap_community_clubs", height='80vh'))
+                        conditionalPanel('input.select_amenity == "student_care"', withLoader(tmapOutput("accmap_student_care", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "pri_school"', withLoader(tmapOutput("accmap_pri_school", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "water_sports"', withLoader(tmapOutput("accmap_water_sports", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "dus_sports"', withLoader(tmapOutput("accmap_dus_sports", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "cib_gardens"', withLoader(tmapOutput("accmap_cib_gardens", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "preschools"', withLoader(tmapOutput("accmap_preschools", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "sportsg"', withLoader(tmapOutput("accmap_sportsg", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "play_fitness"', withLoader(tmapOutput("accmap_play_fitness", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "parks"', withLoader(tmapOutput("accmap_parks", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "community_use_sites"', withLoader(tmapOutput("accmap_community_use_sites", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "activity_area"', withLoader(tmapOutput("accmap_activity_area", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "nature_areas"', withLoader(tmapOutput("accmap_nature_areas", height='80vh'),type = "html", loader="loader1")),
+                        conditionalPanel('input.select_amenity == "community_clubs"', withLoader(tmapOutput("accmap_community_clubs", height='80vh'),type = "html", loader="loader1"))
                     )
             ),
             # Third tab content
@@ -1393,8 +1395,10 @@ server <- function(input, output, session) {
     ##########################################################################################################
     
     output$Table <- DT::renderDataTable({
-        DT::datatable(data = hdb_risk_sf %>%
-                          select(1:15),
+        DT::datatable(data = hdb_enabling_index() %>%
+                          select("ID","hs_nmbr","pstl_cd","street","SUBZONE",
+                                 "chldrn_","Town","physical","social",
+                                 "emotional","enabling_index"),
                       options = list(pageLength = 10),
                       rownames = FALSE)
     })
