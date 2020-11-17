@@ -249,7 +249,7 @@ ui <- dashboardPagePlus(
     dashboardSidebar(
         sidebarMenu(
             menuItem("Home", tabName = "Home", icon = icon("home")),
-            menuItem("Enabling Index Map", tabName = "Enabling", icon = icon("exclamation-triangle")),
+            menuItem("Enabling Index Map", tabName = "Enabling", icon = icon("child")),
             menuItem("Acessibility Map", tabName = "Acessibility", icon = icon("directions")),
             menuItem("Data Explorer", tabName = "Data", icon = icon("table"))
         )
