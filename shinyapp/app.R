@@ -6,6 +6,7 @@ library('sf')
 library('sp')
 library('tmap')
 library('SpatialAcc')
+library("shinyLP")
 
 # Import maps
 # source("prep.R")
@@ -209,6 +210,7 @@ ui <- dashboardPagePlus(
     ## Sidebar content
     dashboardSidebar(
         sidebarMenu(
+            menuItem("Home", tabName = "Home", icon = icon("home")),
             menuItem("Risk Map", tabName = "Risk", icon = icon("exclamation-triangle")),
             menuItem("Acessibility Map", tabName = "Acessibility", icon = icon("directions")),
             menuItem("Data Explorer", tabName = "Data", icon = icon("table"))
@@ -223,6 +225,15 @@ ui <- dashboardPagePlus(
         
         tabItems(
             # First tab content
+            tabItem(tabName = "Home",
+                    jumbotron("Are our built spaces enabling healthy child development?", 
+                              "The physical environment around our homes have an impact in the healthy development of children. 
+                              Research has shown that the built spaces that children access and interact with daily, can enable their social, emotional and physical competence.
+                              As such understanding how well our HDB towns enable development, 
+                              will assist policy planners to improve spatial offerings and to continue enabling the healthy development of children.
+                              This project aims to model the geographic accessibility of these built factors, and to map the developmental enabling score of each town",
+                              button = FALSE),
+                    ),
             tabItem(tabName = "Risk",
                     boxPlus(
                         width = 12,
