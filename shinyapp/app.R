@@ -215,25 +215,6 @@ compute_enabling_scores <- function(df, name) {
     return(df1)
 }
 
-
-####################################################################################################
-# hdb_risk_sf <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
-# hdb_risk_sf <- hdb_risk_sf%>%
-#     rename(risk_cib_gardens = rsk_cb_,
-#            risk_dus_sports = "rsk_ds_",
-#            risk_preschools = "rsk_prs",
-#            risk_pri_schools = "rsk_pr_",
-#            risk_student_care = "rsk_st_",
-#            risk_watersports_facilities = "rsk_wt_")
-# hdb_risk <-as(hdb_risk_sf, "Spatial")
-# 
-# 
-# hdb_accessibility <- st_read(dsn = 'data/geospatial', layer = 'hdb_accessibility') 
-# hdb_accessibility <-as(hdb_accessibility, "Spatial")
-
-###################################################################################################################
-
-
 # UI
 ui <- dashboardPagePlus(
     skin = "yellow",
@@ -271,7 +252,8 @@ ui <- dashboardPagePlus(
                               As such understanding how well our HDB towns enable development, 
                               will assist policy planners to improve spatial offerings and to continue enabling the healthy development of children.
                               This project aims to model the geographic accessibility of these built factors, and to map the developmental enabling score of each town",
-                              button = FALSE)
+                              button = FALSE),
+                    img(src = 'domain.png', width = '100%')
             ),
             
             tabItem(tabName = "Enabling",
