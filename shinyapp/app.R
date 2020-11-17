@@ -1,11 +1,11 @@
-packages = c('shiny','shinydashboard','shinydashboardPlus', 'tidyverse', 'sf', 'sp', 'tmap', 'SpatialAcc')
-
-for(p in packages){
-    if(!require(p, character.only = T)){
-        install.packages(p)
-    }
-    library(p, character.only = T)
-}
+library('shiny')
+library('shinydashboard')
+library('shinydashboardPlus')
+library('tidyverse')
+library('sf')
+library('sp')
+library('tmap')
+library('SpatialAcc')
 
 # Import maps
 # source("prep.R")
