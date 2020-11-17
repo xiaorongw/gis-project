@@ -11,6 +11,12 @@
   background: rgb(83, 167, 173);
 }
 
+.irs-grid-pol.small {height: 0px;}
+
+.content {
+    overflow-y: hidden;
+}
+
 input[type='radio']:after {
     width: 15px;
     height: 15px;
