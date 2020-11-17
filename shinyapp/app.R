@@ -1059,7 +1059,6 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
-        accessibility[is.na(accessibility)] <- 0
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -1110,7 +1109,6 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
-        accessibility[is.na(accessibility)] <- 0
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
