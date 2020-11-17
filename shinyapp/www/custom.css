@@ -78,6 +78,18 @@ input[type='radio']:checked:after {
   background-color: #fff;
 }
 
+h4 {
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgb(83, 167, 173);
+  margin-bottom: 25px;
+  margin-top: 30px;
+  font-weight: 600;
+}
+
+.box-title {
+  font-weight: 900;
+}
+
 
 
 

@@ -277,7 +277,7 @@ ui <- dashboardPagePlus(
             tabItem(tabName = "Enabling",
                     boxPlus(
                         width = 12,
-                        title = "Enabling Index Map", 
+                        title = "ENABLING INDEX MAP", 
                         closable = FALSE, 
                         # status = "warning", 
                         solidHeader = FALSE, 
@@ -319,18 +319,18 @@ ui <- dashboardPagePlus(
                                         value = 5,
                                         step = 1)
                         ),
-                        tmapOutput("enabling_index_map")
+                        tmapOutput("enabling_index_map", height = '70vh')
                     ),
                     boxPlus(
                         width = 12,
-                        title = 'settings',
+                        title = 'ADJUST PARAMETERS',
                         closable = FALSE,
                         solidHeader = FALSE, 
                         collapsible = TRUE,
                         enable_sidebar = FALSE,
                         fluidRow(
                             column(width = 12,
-                                   h3('Domain Weights'))
+                                   h4('Domain Weights'))
                         ),
                         fluidRow(
                             column(width = 4,
@@ -368,7 +368,7 @@ ui <- dashboardPagePlus(
                         ),
                         fluidRow(
                             column(width = 12,
-                                   h3('Distance Decay Parameter'))
+                                   h4('Distance Decay Parameter'))
                         ),
                         fluidRow(
                             column(width = 3,
@@ -476,7 +476,7 @@ ui <- dashboardPagePlus(
             tabItem(tabName = "Acessibility",
                     boxPlus(
                         width = 12,
-                        title = "Accessibility Map", 
+                        title = "ACCESSIBILITY MAP", 
                         closable = FALSE, 
                         # status = "warning", 
                         solidHeader = FALSE, 
