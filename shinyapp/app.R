@@ -1043,7 +1043,7 @@ server <- function(input, output, session) {
             tm_shape(preschools) +
             tm_symbols(col = 'black',
                        size = 0.5,
-                       shape = tmap_icons('icons/teddy-bear.png', width = 20),
+                       shape = tmap_icons('icons/kid.png', height = 20),
                        id = 'name',
                        popup.vars = c()) +
             tm_shape(accessibility) +
