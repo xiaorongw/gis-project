@@ -8,9 +8,6 @@ library('tmap')
 library('SpatialAcc')
 library("shinyLP")
 
-# Import maps
-# source("prep.R")
-
 ###################################################################################################################
 
 # Data preparation
@@ -177,21 +174,60 @@ community_clubs_capacity_list <- rep(1, nrow(community_clubs))
 #      dm_preschools, dm_pri_schools, dm_sportsg_facilities, dm_student_care, dm_watersports_facilities,
 #      file = 'distance_matrices.rda')
 
+
 ####################################################################################################
 
-hdb_risk_sf <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
-hdb_risk_sf <- hdb_risk_sf%>%
-    rename(risk_cib_gardens = rsk_cb_,
-           risk_dus_sports = "rsk_ds_",
-           risk_preschools = "rsk_prs",
-           risk_pri_schools = "rsk_pr_",
-           risk_student_care = "rsk_st_",
-           risk_watersports_facilities = "rsk_wt_")
-hdb_risk <-as(hdb_risk_sf, "Spatial")
+# Risk map computation
+
+# Function to calculate hansen accessibility
+calculate_acc <- function(power, dist_mat, capacity_list, hdb_points) {
+    dm <- subset(dist_mat, origin_id %in% hdb_points$ID) %>%
+        select(-origin_id)
+    dm <- as.matrix(dm/1000)
+    acc <- data.frame(ac(hdb_points$children_each_hdb,
+                         capacity_list,
+                         dm,
+                         d0 = 50,
+                         power = power,
+                         family = 'Hansen'))
+    
+    colnames(acc) <- "acc"
+    acc <- as_tibble(acc)
+    return(bind_cols(hdb_points, acc)) 
+}
+
+# Function to compute risk weights
+compute_risk_weights <- function(df, name) {
+    first_quantile_hansen <- quantile(df$acc, 0.25)[[1]]
+    median_hansen <- median(df$acc)
+    third_quantile_hansen <- quantile(df$acc, 0.75)[[1]]
+    max_hansen <- max(df$acc)
+    
+    df1 <- df %>%
+        mutate('risk' := case_when(
+            acc < first_quantile_hansen ~ 4,
+            (acc >= first_quantile_hansen) & (acc < median_hansen) ~ 3,
+            (acc >= median_hansen) & (acc < third_quantile_hansen) ~ 2,
+            (acc >= third_quantile_hansen) ~ 1))
+    
+    return(df1)
+}
 
 
-hdb_accessibility <- st_read(dsn = 'data/geospatial', layer = 'hdb_accessibility') 
-hdb_accessibility <-as(hdb_accessibility, "Spatial")
+####################################################################################################
+# hdb_risk_sf <- st_read(dsn = 'data/geospatial', layer = 'hdb_risk') 
+# hdb_risk_sf <- hdb_risk_sf%>%
+#     rename(risk_cib_gardens = rsk_cb_,
+#            risk_dus_sports = "rsk_ds_",
+#            risk_preschools = "rsk_prs",
+#            risk_pri_schools = "rsk_pr_",
+#            risk_student_care = "rsk_st_",
+#            risk_watersports_facilities = "rsk_wt_")
+# hdb_risk <-as(hdb_risk_sf, "Spatial")
+# 
+# 
+# hdb_accessibility <- st_read(dsn = 'data/geospatial', layer = 'hdb_accessibility') 
+# hdb_accessibility <-as(hdb_accessibility, "Spatial")
 
 ###################################################################################################################
 
@@ -222,9 +258,10 @@ ui <- dashboardPagePlus(
         tags$head(
             tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
         ),
+        tags$script(HTML("$('body').addClass('fixed');")),
         
         tabItems(
-            # First tab content
+            
             tabItem(tabName = "Home",
                     jumbotron("Are our built spaces enabling healthy child development?", 
                               "The physical environment around our homes have an impact in the healthy development of children. 
@@ -233,7 +270,8 @@ ui <- dashboardPagePlus(
                               will assist policy planners to improve spatial offerings and to continue enabling the healthy development of children.
                               This project aims to model the geographic accessibility of these built factors, and to map the developmental enabling score of each town",
                               button = FALSE)
-                    ),
+            ),
+            
             tabItem(tabName = "Risk",
                     boxPlus(
                         width = 12,
@@ -253,19 +291,142 @@ ui <- dashboardPagePlus(
                         collapsible = TRUE,
                         enable_sidebar = FALSE,
                         fluidRow(
+                            column(width = 12,
+                                   h3('View by')) 
+                        ),
+                        fluidRow(
+                            column(width = 4,
+                                   radioButtons(
+                                       inputId = 'select_zoom',
+                                       label = '',
+                                       choices = c('Whole Singapore' = 'sg',
+                                                   'HDB Town' = 'town'),
+                                       selected = 'town')),
+                            column(width = 4,
+                                   conditionalPanel(
+                                       condition = "input.select_zoom == 'town'",
+                                       selectInput(
+                                           inputId = 'select_zoom_town',
+                                           label = 'HDB Town',
+                                           choices = sort(towns$Town))))
+                        ),
+                        #   fluidRow(
+                        #     # column(width = 4,
+                        #     #        sliderInput('physical_perc',
+                        #     #                    label = "Physical Health & Wellbeing Domain",
+                        #     #                    min = 0,
+                        #     #                    max = 100,
+                        #     #                    value = 30,
+                        #     #                    step = 1),
+                        #     #        uiOutput('component_slider')
+                        #     #        # sliderInput('social_perc',
+                        #     #        #             label = "Social Competence Domain",
+                        #     #        #             min = 0,
+                        #     #        #             max = 70,
+                        #     #        #             value = 40,
+                        #     #        #             step = 1)
+                        #   )
+                        # ),
+                        fluidRow(
+                            column(width = 12,
+                                   h3('Distance Decay Parameter'))
+                        ),
+                        fluidRow(
                             column(width = 3,
-                                   'test'),
+                                   sliderInput("power_activityarea",
+                                               "Activity Areas",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
                             column(width = 3,
-                                   'test'),
+                                   sliderInput("power_commclub",
+                                               "Community Clubs",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
                             column(width = 3,
-                                   'test'),
+                                   sliderInput("power_cib",
+                                               "Community in Bloom Gardens",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
                             column(width = 3,
-                                   'test'),
+                                   sliderInput("power_commuse",
+                                               "Community Use Sites",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_dus",
+                                               "DUS School Sports Facility",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_naturearea",
+                                               "Nature Areas",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_park",
+                                               "Parks",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_playfitness",
+                                               "Play and Fitness Equipment",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_preschool",
+                                               "Pre-schools",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_prischool",
+                                               "Primary Schools",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_sportsg",
+                                               "SportSG Facilities",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_studentcare",
+                                               "Student Care",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1)),
+                            column(width = 3,
+                                   sliderInput("power_watersports",
+                                               "Water Sports Facilities",
+                                               min = 0.5,
+                                               max = 2.5, 
+                                               value = 2,
+                                               step = 0.1))
                         )
                     )
             ),
             
-            # Second tab content
             tabItem(tabName = "Acessibility",
                     boxPlus(
                         width = 12,
@@ -288,8 +449,8 @@ ui <- dashboardPagePlus(
                                 label = 'Amenity',
                                 choices = c('Activity Areas' = 'activity_area',
                                             'Community Clubs' = 'community_clubs',
-                                            'Community in Bloom Gardens' = 'cib_gardens',
                                             'Community Use Sites' = 'community_use_sites',
+                                            'Community in Bloom Gardens' = 'cib_gardens',
                                             'Dual Use Scheme School Sports Facility' = 'dus_sports',
                                             'Nature Areas' = 'nature_areas',
                                             'Parks' = 'parks',
@@ -301,7 +462,6 @@ ui <- dashboardPagePlus(
                                             'Water Sports Facilities' = 'water_sports'),
                                 selected = 'preschools'
                             ),
-                            tags$style(type = "text/css", ".irs-grid-pol.small {height: 0px;}"),
                             sliderInput("select_power",
                                         "Distance Decay Parameter",
                                         min = 0.5,
@@ -312,10 +472,10 @@ ui <- dashboardPagePlus(
                                 inputId = 'select_class',
                                 label = 'Classification Method',
                                 choices = sort(c('Quantile' = 'quantile',
-                                            'Pretty' = 'pretty',
-                                            'Equal Interval' = 'equal',
-                                            'Standard Deviation' = 'sd',
-                                            'Jenks' = 'jenks')),
+                                                 'Pretty' = 'pretty',
+                                                 'Equal Interval' = 'equal',
+                                                 'Standard Deviation' = 'sd',
+                                                 'Jenks' = 'jenks')),
                                 selected = 'quantile'
                             ),
                             sliderInput("select_numclass",
@@ -352,10 +512,179 @@ ui <- dashboardPagePlus(
 
 server <- function(input, output, session) {
     
-    # Interactive tmap output 
+    ######################################## RISK MAP ######################################## 
+    
+    hdb_points <- reactive({
+        if (input$select_zoom != 'sg') {
+            st_intersection(hdb, subset(towns, Town == input$select_zoom_town))
+        }
+        else {
+            hdb
+        }
+        
+    })
+    
+    sg_polygon <- reactive({
+        if (input$select_zoom != 'sg') {
+            subset(towns, Town == input$select_zoom_town)
+        }
+        else {
+            towns
+        }
+        
+    })
+    
+    
+    ## Compute hansen accessibility and risk weights
+    hansen_activityarea <- reactive({
+        df <- calculate_acc(power = input$power_activityarea,
+                            dist_mat = dm_activity_area,
+                            capacity_list = activity_area_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_commclub <- reactive({
+        df <- calculate_acc(power = input$power_commclub,
+                            dist_mat = dm_community_clubs,
+                            capacity_list = community_clubs_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_cib <- reactive({
+        df <- calculate_acc(power = input$power_cib,
+                            dist_mat = dm_cib_gardens,
+                            capacity_list = cib_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_commuse <- reactive({
+        df <- calculate_acc(power = input$power_commuse,
+                            dist_mat = dm_community_use_sites,
+                            capacity_list = community_use_sites_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_dus <- reactive({
+        df <- calculate_acc(power = input$power_dus,
+                            dist_mat = dm_dus_school_sports_facilities,
+                            capacity_list = dus_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_naturearea <- reactive({
+        df <- calculate_acc(power = input$power_naturearea,
+                            dist_mat = dm_nature_area,
+                            capacity_list = nature_area_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_park <- reactive({
+        df <- calculate_acc(power = input$power_park,
+                            dist_mat = dm_parks,
+                            capacity_list = parks_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_playfitness <- reactive({
+        df <- calculate_acc(power = input$power_playfitness,
+                            dist_mat = dm_play_fitness,
+                            capacity_list = play_fitness_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_preschool <- reactive({
+        df <- calculate_acc(power = input$power_preschool,
+                            dist_mat = dm_preschools,
+                            capacity_list = preschool_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_prischool <- reactive({
+        df <- calculate_acc(power = input$power_prischool,
+                            dist_mat = dm_pri_schools,
+                            capacity_list = school_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_sportsg <- reactive({
+        df <- calculate_acc(power = input$power_sportsg,
+                            dist_mat = dm_sportsg_facilities,
+                            capacity_list = sportsg_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_studentcare <- reactive({
+        df <- calculate_acc(power = input$power_studentcare,
+                            dist_mat = dm_student_care,
+                            capacity_list = student_care_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    hansen_watersports <- reactive({
+        df <- calculate_acc(power = input$power_watersports,
+                            dist_mat = dm_watersports_facilities,
+                            capacity_list = watersports_capacity_list,
+                            hdb_points = hdb_points())
+        compute_risk_weights(df)
+    })
+    
+    
+    hdb_risk <- reactive({
+        df <- hdb_points() %>%
+            as.data.frame() %>%
+            cbind(hansen_activityarea()$risk,
+                  hansen_cib()$risk,
+                  hansen_commuse()$risk,
+                  hansen_commclub()$risk,
+                  hansen_dus()$risk,
+                  hansen_naturearea()$risk,
+                  hansen_park()$risk,
+                  hansen_playfitness()$risk,
+                  hansen_preschool()$risk,
+                  hansen_prischool()$risk,
+                  hansen_sportsg()$risk,
+                  hansen_studentcare()$risk,
+                  hansen_watersports()$risk) %>%
+            # mutate(physical_health_risk = hansen_prischool.risk) %>%
+            st_as_sf(sf_column_name = 'geometry')
+        
+        print(df)
+        
+        df
+        #     
+        #     hansen_cib_gardens$risk_cib_gardens,
+        #       hansen_dus_school_sports_facilities$risk_dus_sports,
+        #       hansen_preschools$risk_preschools,
+        #       hansen_pri_schools$risk_pri_schools,
+        #       hansen_student_care$risk_student_care,
+        #       hansen_watersports_facilities$risk_watersports_facilities) %>%
+        # rename(risk_cib_gardens = hansen_cib_gardens.risk_cib_gardens,
+        #        risk_dus_sports = hansen_dus_school_sports_facilities.risk_dus_sports,
+        #        risk_preschools = hansen_preschools.risk_preschools,
+        #        risk_pri_schools = hansen_pri_schools.risk_pri_schools,
+        #        risk_student_care = hansen_student_care.risk_student_care,
+        #        risk_watersports_facilities = hansen_watersports_facilities.risk_watersports_facilities) %>%
+        # mutate(physical_health_risk = (risk_dus_sports + risk_watersports_facilities) / 2) %>%
+        # mutate(social_competence_risk = (risk_dus_sports + risk_preschools + risk_pri_schools + risk_student_care + risk_watersports_facilities) / 5) %>%
+        # mutate(emotional_maturity_risk = risk_cib_gardens) %>%
+        # mutate(composite_risk = (physical_health_risk + social_competence_risk + emotional_maturity_risk) / 3)
+    })
+    
     output$risk_map <- renderTmap({
-        tm_shape(hdb_risk) +
-            tm_bubbles(col = 'cmpst_r',
+        tm_shape(hdb_risk()) +
+            tm_bubbles(col = 'hansen_prischool()$risk',
                        size = 0.1,
                        alpha = 0.5,
                        border.lwd = 0.01)
@@ -366,11 +695,11 @@ server <- function(input, output, session) {
     hdb_clipped <- reactive({
         st_intersection(hdb, subset(towns, Town == input$select_town))
     })
-
+    
     town_clipped <- reactive({
         subset(towns, Town == input$select_town)
     })
-
+    
     # dm_clipped <- reactive({
     #     dm <- subset(dm_student_care, origin_id %in% hdb_clipped()$ID) %>%
     #         select(-origin_id)
@@ -389,7 +718,7 @@ server <- function(input, output, session) {
     #     acc <- as_tibble(acc)
     #     bind_cols(hdb_clipped(), acc)
     # })
-
+    
     output$accmap_student_care <- renderTmap({
         validate(need(input$select_amenity=="student_care", message=FALSE))
         
@@ -408,21 +737,21 @@ server <- function(input, output, session) {
         accessibility <- bind_cols(hdb_clipped(), acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
-        tm_shape(town_clipped()) +
+            tm_shape(town_clipped()) +
             tm_fill(col = 'lightgray',
                     alpha = 0.85,
                     id = 'Town',
                     popup.vars = c()
-                    ) +
+            ) +
             tm_borders(alpha = 0.6, lwd = 0.5) +
             # tm_text('Town') +
-        tm_shape(student_care) +
+            tm_shape(student_care) +
             tm_symbols(col = 'black',
                        size = 0.5,
                        shape = tmap_icons('icons/school-book-bag.png', width = 20),
                        id = 'name',
                        popup.vars = c()) +
-        tm_shape(accessibility) +
+            tm_shape(accessibility) +
             tm_dots(col = 'acc',
                     palette = '-Oranges',
                     style = input$select_class,
@@ -435,8 +764,8 @@ server <- function(input, output, session) {
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children' = 'chldr__')) +
-        tm_view(view.legend.position = c('left', 'bottom'),
-                leaflet.options = c(attributionControl = FALSE))
+            tm_view(view.legend.position = c('left', 'bottom'),
+                    leaflet.options = c(attributionControl = FALSE))
     })
     
     output$accmap_pri_school <- renderTmap({
@@ -588,7 +917,7 @@ server <- function(input, output, session) {
                     leaflet.options = c(attributionControl = FALSE))
     })
     
-
+    
     output$accmap_cib_gardens <- renderTmap({
         validate(need(input$select_amenity=="cib_gardens", message=FALSE))
         
@@ -938,7 +1267,7 @@ server <- function(input, output, session) {
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
- 
+    
     
     output$accmap_nature_areas <- renderTmap({
         validate(need(input$select_amenity=="nature_areas", message=FALSE))
