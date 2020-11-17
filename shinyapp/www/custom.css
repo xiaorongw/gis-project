@@ -65,6 +65,10 @@ input[type='radio']:checked:after {
     background-color: #fff;
 }
 
+.dropdown-menu>li>a {
+    color: #333;
+}
+
 
 
 
