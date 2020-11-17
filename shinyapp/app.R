@@ -8,6 +8,7 @@ library('tmap')
 library('SpatialAcc')
 library("shinyLP")
 library('shinyWidgets')
+library('scales')
 
 ###################################################################################################################
 
@@ -281,7 +282,27 @@ ui <- dashboardPagePlus(
                         status = "warning", 
                         solidHeader = FALSE, 
                         collapsible = TRUE,
-                        enable_sidebar = FALSE,
+                        enable_sidebar = TRUE,
+                        sidebar_width = 25,
+                        sidebar_start_open = TRUE,
+                        sidebar_content = tagList(
+                            radioGroupButtons(
+                                inputId = "select_zoom",
+                                label = "Zoom Level", 
+                                choices = c('Singapore' = 'sg',
+                                            'HDB Town' = 'town'),
+                                selected = 'town',
+                                status = "warning"),
+                            conditionalPanel(
+                                condition = "input.select_zoom == 'town'",
+                                pickerInput(
+                                    inputId = 'select_zoom_town',
+                                    label = 'HDB Town',
+                                    choices = sort(towns$Town),
+                                    options = list(`live-search` = TRUE,
+                                                   size = 5)
+                                ))
+                        ),
                         tmapOutput("enabling_index_map")
                     ),
                     boxPlus(
@@ -291,26 +312,6 @@ ui <- dashboardPagePlus(
                         solidHeader = FALSE, 
                         collapsible = TRUE,
                         enable_sidebar = FALSE,
-                        fluidRow(
-                            column(width = 12,
-                                   h3('View by')) 
-                        ),
-                        fluidRow(
-                            column(width = 4,
-                                   radioButtons(
-                                       inputId = 'select_zoom',
-                                       label = '',
-                                       choices = c('Whole Singapore' = 'sg',
-                                                   'HDB Town' = 'town'),
-                                       selected = 'town')),
-                            column(width = 4,
-                                   conditionalPanel(
-                                       condition = "input.select_zoom == 'town'",
-                                       selectInput(
-                                           inputId = 'select_zoom_town',
-                                           label = 'HDB Town',
-                                           choices = sort(towns$Town))))
-                        ),
                         fluidRow(
                             column(width = 12,
                                    h3('Domain Weights'))
@@ -636,6 +637,7 @@ server <- function(input, output, session) {
                             dist_mat = dm_preschools,
                             capacity_list = preschool_capacity_list,
                             hdb_points = hdb_points())
+        df$acc <- rescale(df$acc)
         df[is.na(df)] <- 0
         compute_enabling_scores(df)
     })
@@ -726,25 +728,6 @@ server <- function(input, output, session) {
         subset(towns, Town == input$select_town)
     })
     
-    # dm_clipped <- reactive({
-    #     dm <- subset(dm_student_care, origin_id %in% hdb_clipped()$ID) %>%
-    #         select(-origin_id)
-    #     as.matrix(dm/1000)
-    # })
-    # 
-    # accessibility <- reactive({
-    #     acc <- data.frame(ac(hdb_clipped()$children_each_hdb,
-    #                          student_care_capacity_list,
-    #                          dm_clipped(),
-    #                          d0 = 50,
-    #                          power = input$select_power,
-    #                          family = 'Hansen'))
-    # 
-    #     colnames(acc) <- "acc"
-    #     acc <- as_tibble(acc)
-    #     bind_cols(hdb_clipped(), acc)
-    # })
-    
     output$accmap_student_care <- renderTmap({
         validate(need(input$select_amenity=="student_care", message=FALSE))
         
@@ -761,6 +744,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -812,6 +796,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -861,6 +846,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -910,6 +896,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -960,6 +947,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -1010,6 +998,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         accessibility[is.na(accessibility)] <- 0
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
@@ -1061,6 +1050,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -1111,6 +1101,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -1160,6 +1151,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -1211,6 +1203,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -1261,6 +1254,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -1308,7 +1302,8 @@ server <- function(input, output, session) {
         
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
-        accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility <- bind_cols(hdb_clipped(), acc) 
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
@@ -1357,6 +1352,7 @@ server <- function(input, output, session) {
         colnames(acc) <- "acc"
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
+        accessibility$acc <- rescale(accessibility$acc)
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
