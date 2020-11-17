@@ -7,6 +7,7 @@ library('sp')
 library('tmap')
 library('SpatialAcc')
 library("shinyLP")
+library('shinyWidgets')
 
 ###################################################################################################################
 
@@ -316,33 +317,36 @@ ui <- dashboardPagePlus(
                         ),
                         fluidRow(
                             column(width = 4,
-                                   numericInput('physical_perc',
-                                                label = "Physical Health & Wellbeing Domain",
-                                                value = 40,
-                                                min = 0,
-                                                max = 100,
-                                                step = 5)),
+                                   numericInputIcon('physical_perc',
+                                                    label = "Physical Health & Wellbeing Domain",
+                                                    value = 40,
+                                                    min = 0,
+                                                    max = 100,
+                                                    step = 5,
+                                                    icon = list(icon('shoe-prints'), icon('percent')))),
                             column(width = 4,
-                                   numericInput('social_perc',
-                                                label = "Social Competence Domain",
-                                                value = 30,
-                                                min = 0,
-                                                max = 100,
-                                                step = 5)),
+                                   numericInputIcon('social_perc',
+                                                    label = "Social Competence Domain",
+                                                    value = 30,
+                                                    min = 0,
+                                                    max = 100,
+                                                    step = 5,
+                                                    icon = list(icon('comments'), icon('percent')))),
                             column(width = 4, 
-                                   numericInput('emotional_perc',
-                                                label = "Emotional Maturity Domain",
-                                                value = 30,
-                                                min = 0,
-                                                max = 100,
-                                                step = 5)),
+                                   numericInputIcon('emotional_perc',
+                                                    label = "Emotional Maturity Domain",
+                                                    value = 30,
+                                                    min = 0,
+                                                    max = 100,
+                                                    step = 5,
+                                                    icon = list(icon('brain'), icon('percent')))),
                         ),
                         fluidRow(
                             column(width = 12,
                                    conditionalPanel(
                                        condition = "(input.physical_perc + input.social_perc + input.emotional_perc) != 100",
                                        p('Domain weights must sum up to 100!',
-                                         style='background-color:#c7542e; padding:10px; color:white; border-radius:10px')
+                                         style='background-color:#c4603f; padding:10px; color:white; border-radius:10px')
                                    ))
                         ),
                         fluidRow(
