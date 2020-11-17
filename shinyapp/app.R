@@ -232,7 +232,7 @@ ui <- dashboardPagePlus(
                               As such understanding how well our HDB towns enable development, 
                               will assist policy planners to improve spatial offerings and to continue enabling the healthy development of children.
                               This project aims to model the geographic accessibility of these built factors, and to map the developmental enabling score of each town",
-                              button = FALSE),
+                              button = FALSE)
                     ),
             tabItem(tabName = "Risk",
                     boxPlus(
