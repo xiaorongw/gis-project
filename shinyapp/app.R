@@ -468,10 +468,12 @@ ui <- dashboardPagePlus(
                         sidebar_width = 25,
                         sidebar_start_open = TRUE,
                         sidebar_content = tagList(
-                            selectInput(
+                            pickerInput(
                                 inputId = 'select_town',
                                 label = 'HDB Town',
-                                choices = sort(towns$Town)
+                                choices = sort(towns$Town),
+                                options = list(`live-search` = TRUE,
+                                               size = 5)
                             ),
                             selectInput(
                                 inputId = 'select_amenity',
