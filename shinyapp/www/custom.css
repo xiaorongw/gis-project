@@ -129,6 +129,13 @@ h5 {
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
 
+.amenity-dropdown > img {
+  margin-right: 8px;
+}
+
+.amenity-dropdown {
+  vertical-align: center ;
+}
 
 
 

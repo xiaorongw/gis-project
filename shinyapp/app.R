@@ -16,6 +16,21 @@ library('DT')
 
 # Data preparation
 
+images <- c("<div class='amenity-dropdown'><img src='footprint.png' width=15px>Activity Areas</div>",
+            "<div class='amenity-dropdown'><img src='comm_club.png' width=15px>Community Clubs</div>",
+            "<div class='amenity-dropdown'><img src='community.png' width=15px>Community Use Sites</div>",
+            "<div class='amenity-dropdown'><img src='flower.png' width=15px>Community in Bloom Gardens</div>",
+            "<div class='amenity-dropdown'><img src='football.png' width=15px>Dual Use Scheme School Sports Facility</div>",
+            "<div class='amenity-dropdown'><img src='pine.png' width=15px>Nature Areas</div>",
+            "<div class='amenity-dropdown'><img src='tree.png' width=15px>Parks</div>",
+            "<div class='amenity-dropdown'><img src='triangle.png' width=13px>Play and Fitness Equipment</div>",
+            "<div class='amenity-dropdown'><img src='kid.png' width=13px>Pre-schools</div>",
+            "<div class='amenity-dropdown'><img src='grad_cap.png' width=15px>Primary Schools</div>",
+            "<div class='amenity-dropdown'><img src='badminton.png' width=15px>SportSG Facilities</div>",
+            "<div class='amenity-dropdown'><img src='school-book-bag.png' width=15px>Student Care</div>",
+            "<div class='amenity-dropdown'><img src='swimming.png' height=15px>Water Sports Facilities</div>")
+
+
 towns <- st_read(dsn = 'data/geospatial', layer = 'plan_area')
 sf::st_crs(towns) <- 3414
 
@@ -318,7 +333,7 @@ ui <- dashboardPagePlus(
                                     label = 'Planning Area',
                                     choices = sort(towns$Town),
                                     options = list(`live-search` = TRUE,
-                                                   size = 5)
+                                                   size = 6)
                                 )),
                             radioButtons(
                                 inputId = 'select_class_index',
@@ -530,9 +545,9 @@ ui <- dashboardPagePlus(
                                 label = 'Planning Area',
                                 choices = sort(towns$Town),
                                 options = list(`live-search` = TRUE,
-                                               size = 5)
+                                               size = 6)
                             ),
-                            selectInput(
+                            pickerInput(
                                 inputId = 'select_amenity',
                                 label = 'Amenity',
                                 choices = c('Activity Areas' = 'activity_area',
@@ -548,7 +563,9 @@ ui <- dashboardPagePlus(
                                             'SportSG Facilities' = 'sportsg',
                                             'Student Care' = 'student_care',
                                             'Water Sports Facilities' = 'water_sports'),
-                                selected = 'preschools'
+                                selected = 'preschools',
+                                choicesOpt = list(content = images),
+                                options = list(size = 6)
                             ),
                             sliderInput("select_power",
                                         "Distance Decay Parameter",
