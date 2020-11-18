@@ -11,6 +11,7 @@ library('shinyWidgets')
 library('scales')
 library('shinycustomloader')
 library('DT')
+library('bsplus')
 
 ###################################################################################################################
 
@@ -250,10 +251,9 @@ ui <- dashboardPagePlus(
             tabItem(tabName = "Home",
                     jumbotron("Are our built spaces enabling healthy child development?", 
                               "The physical environment around our homes have an impact in the healthy development of children. 
-                              Research has shown that the built spaces that children access and interact with daily, can enable their social, emotional and physical competence.
-                              As such understanding how well our HDB towns enable development, 
-                              will assist policy planners to improve spatial offerings and to continue enabling the healthy development of children.
-                              This project aims to model the geographic accessibility of these built factors, and to map the developmental enabling score of each town",
+                              Research has shown that the built spaces that children (aged 0 to 7) access and interact with daily, can enable their social, emotional and physical competence.
+                              As such, an understanding of how well our HDB towns enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children.
+                              This project aims to model the geographic accessibility of built factors, and map the developmental enabling index of each HDB town.",
                               button = FALSE),
                     img(src = 'domain.png', width = '100%')
             ),
@@ -266,6 +266,12 @@ ui <- dashboardPagePlus(
                         # status = "warning", 
                         solidHeader = FALSE, 
                         collapsible = TRUE,
+                        enable_dropdown = TRUE,
+                        dropdown_icon = 'info',
+                        dropdown_menu = dropdownItemList(
+                            dropdownItem(name = 'Enabling index (1 to 4) is a measure of how well children in a specific HDB are developmentally enabled by the built environment surrounding them. A higher enabling index indicates a better environment for child development.'),
+                            width = '200px'
+                        ),
                         enable_sidebar = TRUE,
                         sidebar_width = 25,
                         sidebar_start_open = TRUE,
@@ -304,6 +310,10 @@ ui <- dashboardPagePlus(
                                         step = 1)
                         ),
                         withLoader(tmapOutput("enabling_index_map", height = '70vh'), type = "html", loader="loader1")
+                        # bsTooltip(id = 'enabling_index_map',
+                        #           title = 'Enabling index (1 to 4) is a measure of how well children in a specific HDB are developmentally enabled 
+                        #                  by the built environment surrounding them. A higher enabling index indicates a better environment for child development.',
+                        #           placement = 'bottom')
                     ),
                     boxPlus(
                         width = 12,

@@ -95,5 +95,17 @@ h4 {
     text-transform: uppercase;
 }
 
+.box-header>.box-tools.pull-right .dropdown-menu {
+  z-index: 100000;
+}
+
+.box-header>.box-tools .dropdown-menu>li>a {
+    width: 400px;
+}
+
+.dropdown-menu>li>a {
+    white-space: break-spaces;
+}
+
 
 
