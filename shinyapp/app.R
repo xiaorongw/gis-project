@@ -215,21 +215,36 @@ calculate_acc <- function(power, dist_mat, capacity_list, hdb_points) {
 
 # Function to compute enabling scores
 compute_enabling_scores <- function(df, name) {
-    first_quantile_hansen <- quantile(df$acc, 0.25)[[1]]
-    median_hansen <- median(df$acc)
-    third_quantile_hansen <- quantile(df$acc, 0.75)[[1]]
-    max_hansen <- max(df$acc)
+    decile <- quantile(df$acc, prob = seq(0, 1, length = 11), type=5)
+    
+    decile10 <- decile[[2]]
+    decile20 <- decile[[3]]
+    decile30 <- decile[[4]]
+    decile40 <- decile[[5]]
+    decile50 <- decile[[6]]
+    decile60 <- decile[[7]]
+    decile70 <- decile[[8]]
+    decile80 <- decile[[9]]
+    decile90 <- decile[[10]]
     
     df1 <- df %>%
-        mutate('score' := case_when(
-            acc < first_quantile_hansen ~ 1,
-            (acc >= first_quantile_hansen) & (acc < median_hansen) ~ 2,
-            (acc >= median_hansen) & (acc < third_quantile_hansen) ~ 3,
-            (acc >= third_quantile_hansen) ~ 4))
+        mutate('score' = case_when(
+            acc < decile10 ~ 1,
+            (acc >= decile10) & (acc < decile20) ~ 2,
+            (acc >= decile20) & (acc < decile30) ~ 3,
+            (acc >= decile30) & (acc < decile40) ~ 4,
+            (acc >= decile40) & (acc < decile50) ~ 5,
+            (acc >= decile50) & (acc < decile60) ~ 6,
+            (acc >= decile60) & (acc < decile70) ~ 7,
+            (acc >= decile70) & (acc < decile80) ~ 8,
+            (acc >= decile80) & (acc < decile90) ~ 9,
+            (acc >= decile90) ~ 10))
     
     return(df1)
 }
+
 ####################################################################################################
+
 # UI
 ui <- dashboardPagePlus(
     skin = "yellow",
@@ -283,7 +298,7 @@ ui <- dashboardPagePlus(
                         enable_dropdown = TRUE,
                         dropdown_icon = 'info',
                         dropdown_menu = dropdownItemList(
-                            dropdownItem(name = 'Enabling index (1 to 4) is a measure of how well children in a specific HDB are developmentally enabled by the built environment surrounding them.'),
+                            dropdownItem(name = 'Enabling index (1 to 10) is a measure of how well children in a specific HDB are developmentally enabled by the built environment surrounding them.'),
                             dropdownItem(name = 'A higher enabling index indicates a better environment for child development.')
                         ),
                         enable_sidebar = TRUE,
@@ -762,7 +777,7 @@ server <- function(input, output, session) {
             # tm_text('Town') +
             tm_shape(hdb_enabling_index()) +
             tm_dots(col = 'enabling_index',
-                    palette = '-Greens',
+                    palette = 'Greens',
                     style = input$select_class_index,
                     n = input$select_numclass_index,
                     id = 'street',

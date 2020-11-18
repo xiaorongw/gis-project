@@ -1133,7 +1133,7 @@ compute_enabling_score <- function(df, name) {
   decile90 <- decile[[10]]
   
   df1 <- df %>%
-    mutate('score' := case_when(
+    mutate('score' = case_when(
       accHansen < decile10 ~ 1,
       (accHansen >= decile10) & (accHansen < decile20) ~ 2,
       (accHansen >= decile20) & (accHansen < decile30) ~ 3,
