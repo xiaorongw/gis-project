@@ -11,7 +11,6 @@ library('shinyWidgets')
 library('scales')
 library('shinycustomloader')
 library('DT')
-library('bsplus')
 
 ###################################################################################################################
 
@@ -19,9 +18,10 @@ library('bsplus')
 
 towns <- st_read(dsn = 'data/geospatial', layer = 'hdb_towns')
 towns <- st_transform(towns, 3414)
+sf::st_crs(towns) <- 3414
 
 hdb <- st_read(dsn = 'data/geospatial', layer = 'hdb_processed')
-
+sf::st_crs(hdb) <- 3414
 ### data from distance_matrix_ ###
 
 load(file = 'distance_matrices.rda')
@@ -32,6 +32,7 @@ student_care <- st_read(dsn = 'data/geospatial', layer = 'student_care') %>%
     rename(name = Name,
            address = ADDRESSSTR,
            postal_code = ADDRESSPOS)
+sf::st_crs(student_care) <- 3414
 # dm_student_care <- read_csv('data/aspatial/distance matrix/hdb_studentcare.csv')
 # dm_student_care <- dm_student_care %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -44,6 +45,7 @@ pri_schools <- st_read(dsn = 'data/geospatial', layer = 'schools_primary') %>%
     select(ID, school_nam, address, postal_cod) %>%
     rename(name = school_nam,
            postal_code = postal_cod)
+sf::st_crs(pri_schools) <- 3414
 # dm_pri_schools <- read_csv('data/aspatial/distance matrix/hdb_school.csv')
 # dm_pri_schools <- dm_pri_schools %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -57,6 +59,7 @@ watersports_facilities <- st_read(dsn = 'data/geospatial', layer = 'water_sport_
     rename(name = NAME,
            address = ADDRESSSTR,
            postal_code = ADDRESSPOS)
+sf::st_crs(watersports_facilities) <- 3414
 # dm_watersports_facilities <- read_csv('data/aspatial/distance matrix/hdb_watersports.csv')
 # dm_watersports_facilities <- dm_watersports_facilities %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -70,6 +73,7 @@ dus_sports_facilities <- st_read(dsn = 'data/geospatial', layer = 'dus_school_sp
            address = ADDRESS,
            postal_code = POSTAL_COD,
            facilities = FACILITIES)
+sf::st_crs(dus_sports_facilities) <- 3414
 # dm_dus_school_sports_facilities <- read_csv('data/aspatial/distance matrix/hdb_dus.csv')
 # dm_dus_school_sports_facilities <- dm_dus_school_sports_facilities %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -83,6 +87,7 @@ cib_gardens <- st_read(dsn = 'data/geospatial', layer = 'cib_gardens') %>%
            division = DIVISION, 
            constituency = CONSTITUEN,
            category = CATEGORY)
+sf::st_crs(cib_gardens) <- 3414
 # dm_cib_gardens <- read_csv('data/aspatial/distance matrix/hdb_cib.csv')
 # dm_cib_gardens <- dm_cib_gardens %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -95,6 +100,7 @@ preschools <- st_read(dsn = 'data/geospatial', layer = 'preschools') %>%
     rename(name = CENTRE_NAM,
            address = ADDRESS,
            postal_code = POSTAL_COD)
+sf::st_crs(preschools) <- 3414
 # dm_preschools <- read_csv('data/aspatial/distance matrix/hdb_preschools.csv')
 # dm_preschools <- dm_preschools %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -107,6 +113,7 @@ sportsg_facilities <- st_read(dsn = 'data/geospatial', layer = 'sportsg_sports_f
     select(ROAD_NAME, FACILITIES) %>%
     rename(address = ROAD_NAME,
            facilities = FACILITIES)
+sf::st_crs(sportsg_facilities) <- 3414
 # dm_sportsg_facilities <- read_csv('data/aspatial/distance matrix/hdb_sportsg.csv')
 # dm_sportsg_facilities <- dm_sportsg_facilities %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -116,6 +123,7 @@ sportsg_capacity_list <- rep(1, nrow(sportsg_facilities))
 ## Play and fitness equipment
 play_fitness <- st_read(dsn = 'data/geospatial', layer = 'nparks_play_fitness_equipment') %>%
     select(geometry)
+sf::st_crs(play_fitness) <- 3414
 # dm_play_fitness <- read_csv('data/aspatial/distance matrix/hdb_play_fitness.csv')
 # dm_play_fitness <- dm_play_fitness %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -126,6 +134,7 @@ play_fitness_capacity_list <- rep(1, nrow(play_fitness))
 parks <- st_read(dsn = 'data/geospatial', layer = 'nparks_parks')  %>%
     select(Name) %>%
     rename(name = Name)
+sf::st_crs(parks) <- 3414
 # dm_parks <- read_csv('data/aspatial/distance matrix/hdb_nparks.csv')
 # dm_parks <- dm_parks %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -136,6 +145,7 @@ parks_capacity_list <- rep(1, nrow(parks))
 community_use_sites <- st_read(dsn = 'data/geospatial', layer = 'community_use_sites') %>%
     select(Name) %>%
     rename(name = Name)
+sf::st_crs(community_use_sites) <- 3414
 # dm_community_use_sites <- read_csv('data/aspatial/distance matrix/hdb_community_use_sites.csv')
 # dm_community_use_sites <- dm_community_use_sites %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -145,6 +155,7 @@ community_use_sites_capacity_list <- rep(1, nrow(community_use_sites))
 ## Activity areas
 activity_area <- st_read(dsn = 'data/geospatial', layer = 'nparks_activity_area') %>%
     select(geometry)
+sf::st_crs(activity_area) <- 3414
 # dm_activity_area <- read_csv('data/aspatial/distance matrix/hdb_activity_areas.csv')
 # dm_activity_area <- dm_activity_area %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -155,6 +166,7 @@ activity_area_capacity_list <- rep(1, nrow(activity_area))
 ## Nature areas
 nature_area <- st_read(dsn = 'data/geospatial', layer = 'nature_areas') %>%
     select(geometry)
+sf::st_crs(nature_area) <- 3414
 # dm_nature_area <- read_csv('data/aspatial/distance matrix/hdb_nature_areas.csv')
 # dm_nature_area <- dm_nature_area %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -168,6 +180,7 @@ community_clubs <- st_read(dsn = 'data/geospatial', layer = 'community_clubs') %
            type = descriptio,
            address = ADDRESSSTR,
            postal_code = ADDRESSPOS)
+sf::st_crs(community_clubs) <- 3414
 # dm_community_clubs <- read_csv('data/aspatial/distance matrix/hdb_community_clubs.csv')
 # dm_community_clubs <- dm_community_clubs %>%
 #     select(origin_id, destination_id, total_cost) %>%
@@ -178,7 +191,6 @@ community_clubs_capacity_list <- rep(1, nrow(community_clubs))
 #      dm_dus_school_sports_facilities, dm_nature_area, dm_parks, dm_play_fitness,
 #      dm_preschools, dm_pri_schools, dm_sportsg_facilities, dm_student_care, dm_watersports_facilities,
 #      file = 'distance_matrices.rda')
-
 
 ####################################################################################################
 
