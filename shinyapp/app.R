@@ -16,6 +16,7 @@ library('DT')
 
 # Data preparation
 
+# icons for dropdown menu
 images <- c("<div class='amenity-dropdown'><img src='footprint.png' width=15px>Activity Areas</div>",
             "<div class='amenity-dropdown'><img src='comm_club.png' width=15px>Community Clubs</div>",
             "<div class='amenity-dropdown'><img src='community.png' width=15px>Community Use Sites</div>",
@@ -36,6 +37,7 @@ sf::st_crs(towns) <- 3414
 
 hdb <- st_read(dsn = 'data/geospatial', layer = 'hdb_processed')
 sf::st_crs(hdb) <- 3414
+
 ### data from distance_matrix_ ###
 
 load(file = 'distance_matrices.rda')
@@ -176,7 +178,6 @@ sf::st_crs(activity_area) <- 3414
 #     pivot_wider(names_from = destination_id, values_from = total_cost)
 activity_area_capacity_list <- rep(1, nrow(activity_area))
 
-
 ## Nature areas
 nature_area <- st_read(dsn = 'data/geospatial', layer = 'nature_areas') %>%
     select(geometry)
@@ -298,7 +299,7 @@ ui <- dashboardPagePlus(
                     br(),
                     h5('The project evaluates the child development based on the following three developmental domains. The accessibility of various built factors is used to measure these domains.'),
                     br(),
-                    img(src = 'domain.png', width = '100%')
+                    img(src = 'domain2.png', width = '100%')
             ),
             
             tabItem(tabName = "Enabling",
@@ -363,7 +364,8 @@ ui <- dashboardPagePlus(
                         enable_sidebar = FALSE,
                         fluidRow(
                             column(width = 12,
-                                   h4('Domain Weights'))
+                                   h4('Domain Weights'),
+                                   p('A larger percentage places a greater importance on the developmental domain.', class='param-desc'))
                         ),
                         fluidRow(
                             column(width = 4,
@@ -401,8 +403,8 @@ ui <- dashboardPagePlus(
                         ),
                         fluidRow(
                             column(width = 12,
-                                   h4('Distance Decay Parameter', class = 'dist-decay'),
-                                   p('A larger value indicates a greater sensitivity of the willingness to travel to the destination.', class = 'dist-decay-desc'))
+                                   h4('Distance Decay Parameter'),
+                                   p('A larger value indicates a greater sensitivity of the willingness to travel (from source to destination) to distance.', class='param-desc'))
                         ),
                         fluidRow(
                             column(width = 3,
@@ -803,6 +805,7 @@ server <- function(input, output, session) {
                                    'House Number' = 'hs_nmbr',
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
+                                   'Planning Area' = 'Town',
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),

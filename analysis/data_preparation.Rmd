@@ -44,9 +44,11 @@ na_validity_check <-function(input){
 ```
 
 ```{r message=FALSE, warning=FALSE}
-subzone = st_read(dsn = "data/geospatial/subzone.kml")
+subzone = st_read(dsn = "data/geospatial", layer = "subzone_2019")
+subzone <- st_set_crs(subzone, 3414)
 # towns = st_read(dsn = "data/geospatial", layer = "hdb_towns")
 towns <- st_read(dsn = 'data/geospatial', layer = 'plan_area')
+towns <- st_set_crs(towns, 3414)
 ```
 
 ```{r}
@@ -60,24 +62,31 @@ na_validity_check(subzone)
 ```
 
 ```{r warning=FALSE}
-subzone <- st_transform(subzone, 3414)
-subzone<- st_make_valid(subzone)
+# subzone <- st_transform(subzone, 3414)
+# subzone<- st_make_valid(subzone)
 ```
 
 ```{r}
-getName <- function(input){
-  noHtml <- str_replace_all(input,"<.*?>","")
-  matched_str <- str_match(noHtml, "\\sSUBZONE_N (.*?) SUBZONE_C")[,2]
-  return(str_trim(matched_str))
-}
-
-subzone <- subzone %>%
-  mutate(`SUBZONE_N` = getName(subzone$Description)) 
-head(subzone, 1)
+# getName <- function(input){
+#   noHtml <- str_replace_all(input,"<.*?>","")
+#   matched_str <- str_match(noHtml, "\\sSUBZONE_N (.*?) SUBZONE_C")[,2]
+#   return(str_trim(matched_str))
+# }
+# 
+# subzone <- subzone %>%
+#   mutate(`SUBZONE_N` = getName(subzone$Description)) 
+# head(subzone, 1)
 ```
 
+```{r}
+subzone <- subzone %>%
+  select(SUBZONE_N, PLN_AREA_N)
+glimpse(subzone)
+```
+
+
 ```{r warning=FALSE}
-towns <- st_transform(towns, 3414)
+# towns <- st_transform(towns, 3414)
 ```
 
 <br>
@@ -115,7 +124,6 @@ population <- read_csv('data/aspatial/population.csv')
   * Number of children aged 5 to 7 is estimated as 3/5 of the total number of children aged 5 to 9
   
 $$Number\ of\ children\ aged\ 0\ to\ 7\ in\ subzone\ =\ Number\ of\ children\ aged\ 0\ to\ 4 + (\frac{3}{5}*Number\ of\ children\  aged\ 5\ to\ 9)$$
-
 ```{r}
 children_population <- population %>%
   filter(Time == 2020) %>%
@@ -139,8 +147,7 @@ children_population
 
 ```{r}
 subzone_children <- subzone %>%
-  left_join(children_population, by = c('SUBZONE_N' = 'SZ')) %>%
-  select(-c(Description, Name))
+  left_join(children_population, by = c('SUBZONE_N' = 'SZ'))
 
 glimpse(subzone_children)
 ```
@@ -192,6 +199,11 @@ tm_shape(subzone_children) +
 
 <br>
 
+```{r}
+summary(subzone_children$children_each_hdb)
+```
+
+
 **Add information on number of children for each HDB to HDB data**
 
 ```{r}
@@ -201,7 +213,8 @@ hdb <- hdb %>%
          postal_code = addr_postc,
          street = addr_stree,
          num_levels = building_l) %>%
-  st_join(subzone_children, join = st_intersects)
+  st_join(subzone_children, join = st_intersects) %>%
+  rename(Town = PLN_AREA_N)
 
 glimpse(hdb)
 ```
@@ -211,7 +224,6 @@ glimpse(hdb)
 ```{r}
 # st_write(hdb, '../shinyapp/data/geospatial/hdb_processed.shp', driver = 'ESRI Shapefile')
 ```
-
 
 ```{r}
 # tmap_mode('plot')
