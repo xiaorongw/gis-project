@@ -547,9 +547,8 @@ ui <- dashboardPagePlus(
                         conditionalPanel('input.select_amenity == "community_clubs"', withLoader(tmapOutput("accmap_community_clubs", height='80vh'),type = "html", loader="loader1"))
                     )
             ),
-            # Third tab content
             tabItem(tabName = "Data",
-                    DT::dataTableOutput('Table'),
+                    DT::dataTableOutput('raw_table'),
             )
         )
     ))
@@ -1405,16 +1404,15 @@ server <- function(input, output, session) {
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })   
-    
+
     
     ##########################################################################################################
     
     output$table <- DT::renderDataTable({
         data_table <- hdb_enabling_index() %>%
             st_set_geometry(NULL) %>%
-            select("Town", "hs_nmbr","street", "pstl_cd", "chldr__",
-                   "physical","social",
-                   "emotional","enabling_index") %>%
+            select("Town", "hs_nmbr","street", "pstl_cd", "chldr__", "physical","social",
+                   "emotional", "enabling_index") %>%
             mutate(`enabling_index` = round(enabling_index, 1),
                    physical = round(physical, 1),
                    social = round(social, 1), 
@@ -1430,12 +1428,22 @@ server <- function(input, output, session) {
         data_table <- data_table[order(data_table$`Enabling Index`, decreasing=TRUE),]
         DT::datatable(data = data_table,
                       options = list(pageLength = 5,
-                                     scrollX = TRUE,
-                                     initComplete = JS(
-                                         "function(settings, json) {",
-                                         "$(this.api().table().header()).css({'background-color': '#53a7ad', 'color': '#fff'});",
-                                         "}")
+                                     scrollX = TRUE
+                                     # initComplete = JS(
+                                     #     "function(settings, json) {",
+                                     #     "$(this.api().table().header()).css({'background-color': '#53a7ad', 'color': '#fff'});",
+                                     #     "}")
                                      ),
+                      rownames = FALSE)
+    })
+    
+    output$raw_table <- DT::renderDataTable({
+        DT::datatable(data = hdb %>%
+                          st_set_geometry(NULL) %>%
+                          select(-c(chldrn_, num_hdb)),
+                      options = list(pageLength = 10,
+                                     scrollX = TRUE
+                      ),
                       rownames = FALSE)
     })
     
