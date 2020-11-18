@@ -387,7 +387,8 @@ ui <- dashboardPagePlus(
                         ),
                         fluidRow(
                             column(width = 12,
-                                   h4('Distance Decay Parameter'))
+                                   h4('Distance Decay Parameter', class = 'dist-decay'),
+                                   p('A larger value indicates a greater sensitivity of the willingness to travel to the destination.', class = 'dist-decay-desc'))
                         ),
                         fluidRow(
                             column(width = 3,

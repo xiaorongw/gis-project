@@ -78,12 +78,24 @@ input[type='radio']:checked:after {
   background-color: #fff;
 }
 
-h4 {
+h4:not(.dist-decay) {
   padding-bottom: 5px;
   border-bottom: 2px solid rgb(83, 167, 173);
   margin-bottom: 25px;
   margin-top: 30px;
   font-weight: 600;
+}
+
+.dist-decay {
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgb(83, 167, 173);
+  margin-top: 30px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dist-decay-desc {
+  margin-bottom: 25px;
 }
 
 .box-title {
