@@ -45,9 +45,14 @@ na_validity_check <-function(input){
 
 ```{r message=FALSE, warning=FALSE}
 subzone = st_read(dsn = "data/geospatial/subzone.kml")
-towns = st_read(dsn = "data/geospatial", layer = "hdb_towns")
-planning_area <- st_read(dsn = 'data/geospatial', layer = 'plan_area')
+# towns = st_read(dsn = "data/geospatial", layer = "hdb_towns")
+towns <- st_read(dsn = 'data/geospatial', layer = 'plan_area')
 ```
+
+```{r}
+st_bbox(towns[towns$Town == 'ANG MO KIO',])
+```
+
 
 ## Data Cleaning and Transforming Subzone Layer
 ```{r}

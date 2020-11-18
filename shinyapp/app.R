@@ -789,7 +789,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(hdb_enabling_index()))
     })
     
     ######################################## ACCESSIBILITY MAP ######################################## 
@@ -848,7 +849,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     output$accmap_pri_school <- renderTmap({
@@ -899,7 +901,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     output$accmap_water_sports <- renderTmap({
@@ -948,7 +951,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     output$accmap_dus_sports <- renderTmap({
@@ -997,7 +1001,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     
@@ -1047,7 +1052,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     
@@ -1098,7 +1104,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     
@@ -1148,7 +1155,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     
@@ -1196,7 +1204,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     
@@ -1248,7 +1257,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     
@@ -1298,7 +1308,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     
@@ -1346,7 +1357,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })
     
     
@@ -1394,7 +1406,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })   
     
     
@@ -1443,7 +1456,8 @@ server <- function(input, output, session) {
                                    'Number of Levels' = 'nm_lvls',
                                    'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
-                    leaflet.options = c(attributionControl = FALSE))
+                    leaflet.options = c(attributionControl = FALSE),
+                    bbox = st_bbox(accessibility))
     })   
 
     
