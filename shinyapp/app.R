@@ -278,8 +278,8 @@ ui <- dashboardPagePlus(
                     h2('Are our built spaces enabling healthy child development?'),
                     h5('The physical environment around our homes have an impact in the healthy development of children. 
                               Research has shown that the built spaces that children (aged 0 to 7) access and interact with daily, can enable their social, emotional and physical competence.
-                              As such, an understanding of how well our HDB towns enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children.
-                              This project aims to model the geographic accessibility of built factors, and map the developmental enabling index of each HDB town.'),
+                              As such, an understanding of how well our HDBs enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children.
+                              This project aims to model the geographic accessibility of built factors, and map the developmental enabling index of HDBs in each planning area.'),
                     br(),
                     h5('The project evaluates the child development based on the following three developmental domains. The accessibility of various built factors is used to measure these domains.'),
                     br(),
@@ -308,14 +308,14 @@ ui <- dashboardPagePlus(
                                 inputId = "select_zoom",
                                 label = "Zoom Level", 
                                 choices = c('Singapore' = 'sg',
-                                            'HDB Town' = 'town'),
+                                            'Planning Area' = 'town'),
                                 selected = 'town',
                                 status = "warning"),
                             conditionalPanel(
                                 condition = "input.select_zoom == 'town'",
                                 pickerInput(
                                     inputId = 'select_zoom_town',
-                                    label = 'HDB Town',
+                                    label = 'Planning Area',
                                     choices = sort(towns$Town),
                                     options = list(`live-search` = TRUE,
                                                    size = 5)
@@ -527,7 +527,7 @@ ui <- dashboardPagePlus(
                         sidebar_content = tagList(
                             pickerInput(
                                 inputId = 'select_town',
-                                label = 'HDB Town',
+                                label = 'Planning Area',
                                 choices = sort(towns$Town),
                                 options = list(`live-search` = TRUE,
                                                size = 5)
