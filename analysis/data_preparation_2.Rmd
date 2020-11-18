@@ -1091,26 +1091,87 @@ hansen_community_clubs
 
 <br>
 
+```{r}
+library('StatMeasures')
+```
 
+```{r}
+median(hansen_community_clubs$accHansen)
+```
+
+
+```{r}
+decile <- quantile(hansen_community_clubs$accHansen, prob = seq(0, 1, length = 11), type=5)
+decile
+
+decile10 <- decile[[2]]
+decile20 <- decile[[3]]
+decile30 <- decile[[4]]
+decile40 <- decile[[5]]
+decile50 <- decile[[6]]
+decile60 <- decile[[7]]
+decile70 <- decile[[8]]
+decile80 <- decile[[9]]
+decile90 <- decile[[10]]
+
+decile10
+decile90
+```
+
+```{r}
+compute_enabling_score <- function(df, name) {
+  decile <- quantile(df$accHansen, prob = seq(0, 1, length = 11), type=5)
+
+  decile10 <- decile[[2]]
+  decile20 <- decile[[3]]
+  decile30 <- decile[[4]]
+  decile40 <- decile[[5]]
+  decile50 <- decile[[6]]
+  decile60 <- decile[[7]]
+  decile70 <- decile[[8]]
+  decile80 <- decile[[9]]
+  decile90 <- decile[[10]]
+  
+  df1 <- df %>%
+    mutate('score' := case_when(
+      accHansen < decile10 ~ 1,
+      (accHansen >= decile10) & (accHansen < decile20) ~ 2,
+      (accHansen >= decile20) & (accHansen < decile30) ~ 3,
+      (accHansen >= decile30) & (accHansen < decile40) ~ 4,
+      (accHansen >= decile40) & (accHansen < decile50) ~ 5,
+      (accHansen >= decile50) & (accHansen < decile60) ~ 6,
+      (accHansen >= decile60) & (accHansen < decile70) ~ 7,
+      (accHansen >= decile70) & (accHansen < decile80) ~ 8,
+      (accHansen >= decile80) & (accHansen < decile90) ~ 9,
+      (accHansen >= decile90) ~ 10))
+  
+  return(df1)
+}
+```
+
+
+```{r}
+summary(compute_enabling_score(hansen_activity_area)$score)
+```
 
 **Function to compute risk weights**
 
 ```{r}
-compute_risk_weights <- function(df, name) {
-  first_quantile_hansen <- quantile(df$accHansen, 0.25)[[1]]
-  median_hansen <- median(df$accHansen)
-  third_quantile_hansen <- quantile(df$accHansen, 0.75)[[1]]
-  max_hansen <- max(df$accHansen)
-
-  df1 <- df %>%
-    mutate('risk_{name}' := case_when(
-      accHansen < first_quantile_hansen ~ 4,
-      (accHansen >= first_quantile_hansen) & (accHansen < median_hansen) ~ 3,
-      (accHansen >= median_hansen) & (accHansen < third_quantile_hansen) ~ 2,
-      (accHansen >= third_quantile_hansen) ~ 1))
-  
-  return(df1)
-}
+# compute_risk_weights <- function(df, name) {
+#   first_quantile_hansen <- quantile(df$accHansen, 0.25)[[1]]
+#   median_hansen <- median(df$accHansen)
+#   third_quantile_hansen <- quantile(df$accHansen, 0.75)[[1]]
+#   max_hansen <- max(df$accHansen)
+# 
+#   df1 <- df %>%
+#     mutate('risk_{name}' := case_when(
+#       accHansen < first_quantile_hansen ~ 4,
+#       (accHansen >= first_quantile_hansen) & (accHansen < median_hansen) ~ 3,
+#       (accHansen >= median_hansen) & (accHansen < third_quantile_hansen) ~ 2,
+#       (accHansen >= third_quantile_hansen) ~ 1))
+#   
+#   return(df1)
+# }
 ```
 
 <br>
