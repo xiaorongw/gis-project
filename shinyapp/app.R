@@ -16,8 +16,7 @@ library('DT')
 
 # Data preparation
 
-towns <- st_read(dsn = 'data/geospatial', layer = 'hdb_towns')
-towns <- st_transform(towns, 3414)
+towns <- st_read(dsn = 'data/geospatial', layer = 'plan_area')
 sf::st_crs(towns) <- 3414
 
 hdb <- st_read(dsn = 'data/geospatial', layer = 'hdb_processed')
@@ -769,12 +768,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(sg_polygon()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(hdb_enabling_index()) +
             tm_dots(col = 'enabling_index',
@@ -823,12 +822,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(student_care) +
             tm_symbols(col = 'black',
@@ -874,12 +873,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(pri_schools) +
             tm_symbols(col = 'black',
@@ -923,12 +922,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(watersports_facilities) +
             tm_symbols(col = 'black',
@@ -972,12 +971,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(dus_sports_facilities) +
             tm_symbols(col = 'black',
@@ -1022,12 +1021,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(cib_gardens) +
             tm_symbols(col = 'black',
@@ -1073,12 +1072,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(preschools) +
             tm_symbols(col = 'black',
@@ -1123,12 +1122,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(sportsg_facilities) +
             tm_symbols(col = 'black',
@@ -1173,12 +1172,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(play_fitness) +
             tm_symbols(size = 0.5,
@@ -1222,12 +1221,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(parks) +
             tm_symbols(col = 'black',
@@ -1273,12 +1272,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(community_use_sites) +
             tm_symbols(size = 0.5,
@@ -1323,12 +1322,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(activity_area) +
             tm_symbols(size = 0.5,
@@ -1371,12 +1370,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(nature_area) +
             tm_symbols(size = 0.5,
@@ -1419,12 +1418,12 @@ server <- function(input, output, session) {
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
-            tm_fill(col = 'lightgray',
-                    alpha = 0.85,
+            tm_fill(col = 'white',
+                    alpha = 0.5,
                     id = 'Town',
                     popup.vars = c()
             ) +
-            tm_borders(alpha = 0.6, lwd = 0.5) +
+            tm_borders(alpha = 0.9, lwd = 1.8, col = 'black') +
             # tm_text('Town') +
             tm_shape(community_clubs) +
             tm_symbols(size = 0.5,

@@ -29,6 +29,7 @@ for(p in packages){
 }
 ```
 
+
 # Importing Geospatial Data
 ```{r}
 na_validity_check <-function(input){
@@ -45,6 +46,7 @@ na_validity_check <-function(input){
 ```{r message=FALSE, warning=FALSE}
 subzone = st_read(dsn = "data/geospatial/subzone.kml")
 towns = st_read(dsn = "data/geospatial", layer = "hdb_towns")
+planning_area <- st_read(dsn = 'data/geospatial', layer = 'plan_area')
 ```
 
 ## Data Cleaning and Transforming Subzone Layer
