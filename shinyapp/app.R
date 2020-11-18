@@ -303,7 +303,7 @@ ui <- dashboardPagePlus(
                                         value = 5,
                                         step = 1)
                         ),
-                        withLoader(tmapOutput("enabling_index_map", height = '70vh'),type = "html", loader="loader1")
+                        withLoader(tmapOutput("enabling_index_map", height = '70vh'), type = "html", loader="loader1")
                     ),
                     boxPlus(
                         width = 12,
@@ -454,6 +454,21 @@ ui <- dashboardPagePlus(
                                                step = 0.1))
                             )
                         
+                    ),
+                    boxPlus(
+                        width = 12,
+                        title = "ENABLING INDEX TABLE", 
+                        closable = FALSE, 
+                        # status = "warning", 
+                        solidHeader = FALSE, 
+                        collapsible = TRUE,
+                        enable_sidebar = FALSE,
+                        fluidRow(
+                            column(width = 12,
+                                   withLoader(DT::dataTableOutput('table'), type = "html", loader="loader1")
+                                   )
+                            
+                        )
                     )
             ),
             
@@ -1394,12 +1409,33 @@ server <- function(input, output, session) {
     
     ##########################################################################################################
     
-    output$Table <- DT::renderDataTable({
-        DT::datatable(data = hdb_enabling_index() %>%
-                          select("ID","hs_nmbr","pstl_cd","street","SUBZONE",
-                                 "chldrn_","Town","physical","social",
-                                 "emotional","enabling_index"),
-                      options = list(pageLength = 10),
+    output$table <- DT::renderDataTable({
+        data_table <- hdb_enabling_index() %>%
+            st_set_geometry(NULL) %>%
+            select("Town", "hs_nmbr","street", "pstl_cd", "chldr__",
+                   "physical","social",
+                   "emotional","enabling_index") %>%
+            mutate(`enabling_index` = round(enabling_index, 1),
+                   physical = round(physical, 1),
+                   social = round(social, 1), 
+                   emotional = round(emotional, 1)) %>%
+            rename(`Physical Domain` = physical,
+                   `Social Domain` = social,
+                   `Emotional Domain` = emotional,
+                   `Enabling Index` = enabling_index,
+                   `House Number` = hs_nmbr,
+                   Street = street,
+                   `Postal Code` = pstl_cd,
+                   `Number of Children` = chldr__)
+        data_table <- data_table[order(data_table$`Enabling Index`, decreasing=TRUE),]
+        DT::datatable(data = data_table,
+                      options = list(pageLength = 5,
+                                     scrollX = TRUE,
+                                     initComplete = JS(
+                                         "function(settings, json) {",
+                                         "$(this.api().table().header()).css({'background-color': '#53a7ad', 'color': '#fff'});",
+                                         "}")
+                                     ),
                       rownames = FALSE)
     })
     
