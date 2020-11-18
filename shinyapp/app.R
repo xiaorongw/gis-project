@@ -247,14 +247,16 @@ ui <- dashboardPagePlus(
         tags$script(HTML("$('body').addClass('fixed');")),
         
         tabItems(
-            
+        
             tabItem(tabName = "Home",
-                    jumbotron("Are our built spaces enabling healthy child development?", 
-                              "The physical environment around our homes have an impact in the healthy development of children. 
+                    h2('Are our built spaces enabling healthy child development?'),
+                    h5('The physical environment around our homes have an impact in the healthy development of children. 
                               Research has shown that the built spaces that children (aged 0 to 7) access and interact with daily, can enable their social, emotional and physical competence.
                               As such, an understanding of how well our HDB towns enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children.
-                              This project aims to model the geographic accessibility of built factors, and map the developmental enabling index of each HDB town.",
-                              button = FALSE),
+                              This project aims to model the geographic accessibility of built factors, and map the developmental enabling index of each HDB town.'),
+                    br(),
+                    h5('The project evaluates the child development based on the following three developmental domains. The accessibility of various built factors is used to measure these domains.'),
+                    br(),
                     img(src = 'domain.png', width = '100%')
             ),
             
@@ -758,7 +760,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -817,7 +819,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -868,7 +870,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -917,7 +919,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -966,7 +968,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -1016,7 +1018,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -1067,7 +1069,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -1117,7 +1119,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -1165,7 +1167,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -1217,7 +1219,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -1267,7 +1269,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -1315,7 +1317,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })
@@ -1363,7 +1365,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })   
@@ -1412,7 +1414,7 @@ server <- function(input, output, session) {
                                    'Street' = 'street',
                                    'Postal Code' = 'pstl_cd',
                                    'Number of Levels' = 'nm_lvls',
-                                   'Number of Children' = 'chldr__')) +
+                                   'Number of Children (estimated)' = 'chldr__')) +
             tm_view(view.legend.position = c('left', 'bottom'),
                     leaflet.options = c(attributionControl = FALSE))
     })   

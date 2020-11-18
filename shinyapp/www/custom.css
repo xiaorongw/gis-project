@@ -100,12 +100,24 @@ h4 {
 }
 
 .box-header>.box-tools .dropdown-menu>li>a {
-    width: 400px;
+    width: 350px;
 }
 
 .dropdown-menu>li>a {
     white-space: break-spaces;
 }
+
+h2 {
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 18px;
+  text-align: justify;
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+
 
 
 
