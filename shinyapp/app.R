@@ -269,8 +269,8 @@ ui <- dashboardPagePlus(
                         enable_dropdown = TRUE,
                         dropdown_icon = 'info',
                         dropdown_menu = dropdownItemList(
-                            dropdownItem(name = 'Enabling index (1 to 4) is a measure of how well children in a specific HDB are developmentally enabled by the built environment surrounding them. A higher enabling index indicates a better environment for child development.'),
-                            width = '200px'
+                            dropdownItem(name = 'Enabling index (1 to 4) is a measure of how well children in a specific HDB are developmentally enabled by the built environment surrounding them.'),
+                            dropdownItem(name = 'A higher enabling index indicates a better environment for child development.')
                         ),
                         enable_sidebar = TRUE,
                         sidebar_width = 25,
@@ -310,10 +310,6 @@ ui <- dashboardPagePlus(
                                         step = 1)
                         ),
                         withLoader(tmapOutput("enabling_index_map", height = '70vh'), type = "html", loader="loader1")
-                        # bsTooltip(id = 'enabling_index_map',
-                        #           title = 'Enabling index (1 to 4) is a measure of how well children in a specific HDB are developmentally enabled 
-                        #                  by the built environment surrounding them. A higher enabling index indicates a better environment for child development.',
-                        #           placement = 'bottom')
                     ),
                     boxPlus(
                         width = 12,
@@ -490,6 +486,12 @@ ui <- dashboardPagePlus(
                         # status = "warning", 
                         solidHeader = FALSE, 
                         collapsible = TRUE,
+                        enable_dropdown = TRUE,
+                        dropdown_icon = 'info',
+                        dropdown_menu = dropdownItemList(
+                            dropdownItem(name = 'Hansen accessibility index is a measure of geographical accessibility between a source and destination, taking into account the capacity of the destination. It includes a distance decay parameter that is calibrated to reflect the willingness to travel from source to destination in the real world.'),
+                            dropdownItem(name = 'A higher hansen accessibility index indicates greater accessibility. This index has been standardised (min-max standardisation) for consistency purposes.')
+                        ),
                         enable_sidebar = TRUE,
                         sidebar_width = 25,
                         sidebar_start_open = TRUE,
