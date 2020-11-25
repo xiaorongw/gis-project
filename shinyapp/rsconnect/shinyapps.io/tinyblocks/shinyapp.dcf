@@ -4,7 +4,7 @@ username:
 account: tinyblocks
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 3247416
-bundleId: 3875455
+appId: 3299006
+bundleId: 3903547
 url: https://tinyblocks.shinyapps.io/shinyapp/
-when: 1605693469.21051
+when: 1606294094.85543

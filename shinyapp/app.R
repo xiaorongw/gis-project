@@ -31,7 +31,8 @@ images <- c("<div class='amenity-dropdown'><img src='footprint.png' width=15px>A
             "<div class='amenity-dropdown'><img src='school-book-bag.png' width=15px>Student Care</div>",
             "<div class='amenity-dropdown'><img src='swimming.png' height=15px>Water Sports Facilities</div>")
 
-
+# save(activity_area, cib_gardens, community_clubs,community_use_sites,dus_sports_facilities,hdb,nature_area,parks,play_fitness,preschools,pri_schools,sportsg_facilities,student_care,towns,watersports_facilities, file = "spatial_data.rda")
+# load(file = "spatial_data.rda")
 towns <- st_read(dsn = 'data/geospatial', layer = 'plan_area')
 sf::st_crs(towns) <- 3414
 
@@ -100,7 +101,7 @@ dus_capacity_list <- rep(1, nrow(dus_sports_facilities))
 cib_gardens <- st_read(dsn = 'data/geospatial', layer = 'cib_gardens') %>%
     select(ID, ADDRESS, DIVISION, CONSTITUEN, CATEGORY) %>%
     rename(address = ADDRESS,
-           division = DIVISION, 
+           division = DIVISION,
            constituency = CONSTITUEN,
            category = CATEGORY)
 sf::st_crs(cib_gardens) <- 3414

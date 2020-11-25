@@ -21,3 +21,4 @@ analysis/data/aspatial/distance matrix/hdb_activity_areas.csv
 analysis/data/aspatial/distance matrix/hdb_nature_areas.csv
 analysis/data/aspatial/distance matrix/hdb_activity_nature_areas.zip
 shinyapp/distance_matrices.rda
+shinyapp/spatial_data.rda
