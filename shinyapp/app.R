@@ -321,22 +321,13 @@ ui <- dashboardPagePlus(
                         sidebar_width = 25,
                         sidebar_start_open = TRUE,
                         sidebar_content = tagList(
-                            radioGroupButtons(
-                                inputId = "select_zoom",
-                                label = "Zoom Level", 
-                                choices = c('Singapore' = 'sg',
-                                            'Planning Area' = 'town'),
-                                selected = 'town',
-                                status = "warning"),
-                            conditionalPanel(
-                                condition = "input.select_zoom == 'town'",
                                 pickerInput(
                                     inputId = 'select_zoom_town',
                                     label = 'Planning Area',
                                     choices = sort(towns$Town),
                                     options = list(`live-search` = TRUE,
                                                    size = 6)
-                                )),
+                                ),
                             radioButtons(
                                 inputId = 'select_class_index',
                                 label = 'Classification Method',
@@ -622,22 +613,12 @@ server <- function(input, output, session) {
     ######################################## ENABLING INDEX MAP ######################################## 
     
     hdb_points <- reactive({
-        if (input$select_zoom != 'sg') {
             st_intersection(hdb, subset(towns, Town == input$select_zoom_town))
-        }
-        else {
-            hdb
-        }
         
     })
     
     sg_polygon <- reactive({
-        if (input$select_zoom != 'sg') {
             subset(towns, Town == input$select_zoom_town)
-        }
-        else {
-            towns
-        }
         
     })
     
