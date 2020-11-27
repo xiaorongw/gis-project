@@ -129,6 +129,13 @@ h5 {
   vertical-align: center ;
 }
 
+#sidebarCollapsed {
+    z-index: 10000;
+}
+.main-header {
+    z-index: 100000;
+}
+
 
 
 
