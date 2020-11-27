@@ -31,8 +31,9 @@ images <- c("<div class='amenity-dropdown'><img src='footprint.png' width=15px>A
             "<div class='amenity-dropdown'><img src='school-book-bag.png' width=15px>Student Care</div>",
             "<div class='amenity-dropdown'><img src='swimming.png' height=15px>Water Sports Facilities</div>")
 
-# save(activity_area, cib_gardens, community_clubs,community_use_sites,dus_sports_facilities,hdb,nature_area,parks,play_fitness,preschools,pri_schools,sportsg_facilities,student_care,towns,watersports_facilities, file = "spatial_data.rda")
+# save(activity_area, cib_gardens, community_clubs,community_use_sites, dus_sports_facilities, hdb,nature_area ,parks, play_fitness, preschools, pri_schools, sportsg_facilities, student_care, towns, watersports_facilities, file = "spatial_data.rda")
 # load(file = "spatial_data.rda")
+
 towns <- st_read(dsn = 'data/geospatial', layer = 'plan_area')
 sf::st_crs(towns) <- 3414
 
@@ -1500,7 +1501,8 @@ server <- function(input, output, session) {
                    `House Number` = hs_nmbr,
                    Street = street,
                    `Postal Code` = pstl_cd,
-                   `Number of Children` = chldr__)
+                   `Number of Children` = chldr__) %>%
+            distinct()
         data_table <- data_table[order(data_table$`Enabling Index`, decreasing=TRUE),]
         DT::datatable(data = data_table,
                       options = list(pageLength = 5,
