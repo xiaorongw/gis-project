@@ -713,8 +713,7 @@ server <- function(input, output, session) {
                             dist_mat = dm_preschools,
                             capacity_list = preschool_capacity_list,
                             hdb_points = hdb_points())
-        df$acc <- rescale(df$acc)
-        df[is.na(df)] <- 0
+        df$acc[is.na(df$acc)] <- 0
         compute_enabling_scores(df)
     })
     
@@ -1096,7 +1095,7 @@ server <- function(input, output, session) {
         acc <- as_tibble(acc)
         accessibility <- bind_cols(hdb_clipped(), acc)
         accessibility$acc <- rescale(accessibility$acc)
-        accessibility[is.na(accessibility)] <- 0
+        accessibility$acc[is.na(accessibility$acc)] <- 0
         
         tm_basemap(leaflet::providers$Esri.WorldTopoMap) +
             tm_shape(town_clipped()) +
