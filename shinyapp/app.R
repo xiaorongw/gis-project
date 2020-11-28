@@ -269,7 +269,13 @@ ui <- dashboardPagePlus(
         title = tagList(
             span(class = "logo-lg", "Tiny Blocks"), 
             #need to change to our icon
-            img(src = "logo2.png", height = '35px'))
+            img(src = "logo2.png", height = '35px')),
+        tags$li(a(onclick = "onclick =window.open('https://github.com/xiaorongw/tinyblocks')",
+                  href = NULL,
+                  icon("github"),
+                  title = "Project GitHub Page",
+                  style = "cursor: pointer;"),
+                class = "dropdown")
     ),
     
     title = "Tiny Blocks",
