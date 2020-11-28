@@ -1518,7 +1518,14 @@ server <- function(input, output, session) {
     output$raw_table <- DT::renderDataTable({
         DT::datatable(data = hdb %>%
                           st_set_geometry(NULL) %>%
-                          select(-c(chldrn_, num_hdb)),
+                          select(-c(chldrn_, num_hdb)) %>%
+                          rename(`House Number` = hs_nmbr,
+                                 `Postal Code` = pstl_cd,
+                                 `Street` = street,
+                                 `Number of Levels` = nm_lvls,
+                                 `Subzone` = SUBZONE,
+                                 `Planning Area` = Town,
+                                 `Number of Children` = chldr__),
                       options = list(pageLength = 10,
                                      scrollX = TRUE
                       ),
