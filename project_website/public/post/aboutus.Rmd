@@ -9,5 +9,5 @@ output: html_document
 ---
 
 ```{r echo=FALSE, fig.retina=2}
-knitr::include_graphics('/images/About_Us.png', error=FALSE)
+knitr::include_graphics('/images/about_us.png', error=FALSE)
 ```

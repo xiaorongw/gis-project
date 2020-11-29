@@ -2,45 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Tiny Blocks</title>
-    <link>http://tinyblocks.rbind.io/post/</link>
+    <link>/post/</link>
     <description>Recent content in Posts on Tiny Blocks</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://tinyblocks.rbind.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Project Poster</title>
-      <link>http://tinyblocks.rbind.io/2020/11/project-poster/</link>
+      <link>/2020/11/project-poster/</link>
       <pubDate>Sun, 29 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://tinyblocks.rbind.io/2020/11/project-poster/</guid>
+      <guid>/2020/11/project-poster/</guid>
       <description>Click in to view a summary of the steps taken and insights gained through this project as we aim to make our cities more developmentally friendly for children</description>
     </item>
     
     <item>
+      <title>Project Report</title>
+      <link>/2020/11/project-report/</link>
+      <pubDate>Sun, 29 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/project-report/</guid>
+      <description>Are our built spaces enabling healthy child development? The physical environment around our homes have an impact in the healthy development of children. Research has shown that the built spaces that children (aged 0 to 7) access and interact with daily, can enable their social, emotional and physical competence. As such, an understanding of how well our HDBs enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children.</description>
+    </item>
+    
+    <item>
+      <title>Project Video</title>
+      <link>/2020/11/project-video/</link>
+      <pubDate>Sun, 29 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/project-video/</guid>
+      <description>Click in to learn more about our project through our project video and application walkthrough</description>
+    </item>
+    
+    <item>
       <title>Project Proposal: Identifying Neighbourhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces</title>
-      <link>http://tinyblocks.rbind.io/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</link>
+      <link>/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</link>
       <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://tinyblocks.rbind.io/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</guid>
+      <guid>/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</guid>
       <description>Children are the future of a nation’s well-being. We propose a project to geospatially analyse Singapore’s neighborhoods so as to map and understand geospatial gaps and to pinpoint child development risk areas that might require intervention.</description>
     </item>
     
     <item>
       <title>Who are we?</title>
-      <link>http://tinyblocks.rbind.io/2020/10/who-are-we/</link>
+      <link>/2020/10/who-are-we/</link>
       <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://tinyblocks.rbind.io/2020/10/who-are-we/</guid>
+      <guid>/2020/10/who-are-we/</guid>
       <description>A quick look at the people behind this project.</description>
-    </item>
-    
-    <item>
-      <title>Project Report</title>
-      <link>http://tinyblocks.rbind.io/1/01/project-report/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://tinyblocks.rbind.io/1/01/project-report/</guid>
-      <description>Are our built spaces enabling healthy child development? The physical environment around our homes have an impact in the healthy development of children. Research has shown that the built spaces that children (aged 0 to 7) access and interact with daily, can enable their social, emotional and physical competence. As such, an understanding of how well our HDBs enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children.</description>
     </item>
     
   </channel>

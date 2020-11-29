@@ -1,16 +1,17 @@
 ---
-title: "Project Report"
-date: "11/30/2020"
+title: Project Report
+date: '2020-11-29'
 thumbnailImage: "images/architecture.png"
 thumbnailImagePosition: "right"
 summary: "Are our built spaces enabling healthy child development? The physical environment around our homes have an impact in the healthy development of children. Research has shown that the built spaces that children (aged 0 to 7) access and interact with daily, can enable their social, emotional and physical competence. As such, an understanding of how well our HDBs enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children."
-showDate: false
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# Click to View More
+
+## Click to View More
+
 [![report](/images/Report.jpg){width=75%,height=100%}](https://smu-my.sharepoint.com/:b:/g/personal/xrwong_2017_sis_smu_edu_sg/Eb35Q7OToARJt1sY20C9nnsBwD0i2ta2csLgjv32Wu3jJQ?e=cxasHP)
 
