@@ -97,20 +97,17 @@ The enabling index is a composite score utilised by the project to measure the e
 $$
 Index=w_1x_1+\ w_2x_2+w_3x_3
 $$
-The enabling index scores HDBs based on a weighted average of the HDB’s enabling score in each developmental domain (physical, social and emotional). To do so, Hansen accessibility scores for each built environment factor were first binned based on deciles, after which the composite binned scores for each developmental domain based on corresponding built factors were calculated. The final enabling index score was then computed by using the weighted average of the domain composite scores. As such, the enabling index score ranges from 1 to 10, where a higher value indicates that the HDB is a better enabler for child development. 
+The enabling index scores HDBs based on a weighted average of the HDB’s enabling score in each developmental domain (physical, social and emotional). To do so, Hansen accessibility scores for each built environment factor were first binned based on deciles, after which the composite binned scores for each developmental domain based on corresponding built factors were calculated. The final enabling index score was then computed by using the weighted average of the domain composite scores. As such, the enabling index score ranges from 1 to 10, where a higher value indicates that the HDB is a better enabler for child development.
 
+# Results
+Upon the computation of the Hansen accessibility indices and enabling indices, the geospatial application was developed to allow for better spatial visualisation of the scores and for more dynamic user control. This will serve as an interactive tool to provide policy planners the opportunity to visually pinpoint areas of improvement, so as to better provide built services for child development
 
-#	Results
-Upon the computation of the Hansen accessibility indices and enabling indices, the geospatial application was developed to allow for better spatial visualisation of the scores and for more dynamic user control (refer to Figure 1 for application architecture). This will serve as an interactive tool to provide policy planners the opportunity to visually pinpoint areas of improvement, so as to better provide built services for child development.
-```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("f1.png")
-```
 To build the interactive geospatial analytics application, R and its related packages, including R shiny, was utilised for the development of the application. The application was then deployed on the free tier service of shinyapps.io (https://tinyblocks.shinyapps.io/shinyapp/). The application can be freely accessed by users, who can provide user inputs into the application based on their analysis needs. The application will then dynamically render and visualise the data for their analysis. 
 
 Through the application,  users can navigate to different maps, where they will be able to conduct more in-depth analysis to understand how well children in different HDB flats are developmentally enabled by their built environment, and to explore how accessible HDBs are to various built environment features.
 
 ## Enabling Index
-The application provides an enabling index map (Figure 2), where users are presented with a point feature map at a planning area, with each point representing a HDB block in the planning area. The points are coloured based on the enabling index score, with a darker colour indicating a higher score, and a lighter colour indicating a lower score. 
+The application provides an enabling index map (Figure 1), where users are presented with a point feature map at a planning area, with each point representing a HDB block in the planning area. The points are coloured based on the enabling index score, with a darker colour indicating a higher score, and a lighter colour indicating a lower score. 
 ```{r echo=FALSE, out.width="100%"}
 knitr::include_graphics("f2.png")
 ```
@@ -118,28 +115,28 @@ At a glance, policy planners will be able to identify areas in darker green (hig
 
 Policy planners can utilise this map to identify and zoom into lighter coloured points, which are HDB flats where children are less developmentally enabled by the surrounding built environment. The location of these blocks can be noted, so as to cater more policy intervention to these areas. 
 
-Users can additionally view the information in a tabular form (Figure 3), and sort HDBs by a particular column by clicking on the field name. Policy planners can utilise this to pinpoint HDB blocks and areas that require specific policy focus, by sorting HDBs according to how well they fare in a particular domain (e.g. physical domain). HDB blocks with a lower domain score will require more intervention in that area. 
+Users can additionally view the information in a tabular form (Figure 2), and sort HDBs by a particular column by clicking on the field name. Policy planners can utilise this to pinpoint HDB blocks and areas that require specific policy focus, by sorting HDBs according to how well they fare in a particular domain (e.g. physical domain). HDB blocks with a lower domain score will require more intervention in that area. 
 ```{r echo=FALSE, out.width="100%"}
 knitr::include_graphics("f3.png")
 ```
-Users are also provided with a variety of user input features (Figure 2, Figure 4) that can be adjusted to dynamically update the enabling index map and table, to better understand the results provided and draw insights. Users can zoom into different planning areas using the dropdown selection box. They can additionally reclassify the scores and colour breakdowns based on different classification methods. Additionally, they can increase the number of classes for less data generalisation, and break HDBs down into more detailed classes based on the enabling index.
+Users are also provided with a variety of user input features (Figure 1, Figure 3) that can be adjusted to dynamically update the enabling index map and table, to better understand the results provided and draw insights. Users can zoom into different planning areas using the dropdown selection box. They can additionally reclassify the scores and colour breakdowns based on different classification methods. Additionally, they can increase the number of classes for less data generalisation, and break HDBs down into more detailed classes based on the enabling index.
 ```{r echo=FALSE, out.width="100%"}
 knitr::include_graphics("f4.png")
 ```
-Beyond this, users can also utilise the input features to adjust parameters in the computation of the enabling index (Figure 4), to create more specific analysis that is relevant to their current situation and analysis needs.
+Beyond this, users can also utilise the input features to adjust parameters in the computation of the enabling index (Figure 3), to create more specific analysis that is relevant to their current situation and analysis needs.
 
 For example, in the event of new research on the importance of emotional maturity to a child’s overall development, domain weight allocations can be reassigned, to afford higher scores to emotional maturity. Similarly, based on new surveys on travel sensitivity, users may find that people are more sensitive to traveling distance for play and fitness equipment. As such, users can increase the distance decay parameter for play and fitness equipment using the slider.
 
 All these changes to user inputs are updated dynamically and automatically reflected in the map and table accordingly. In the local version of this application, users are also able to view the information at the whole of Singapore level, to broadly identify areas and HDB blocks that are most at need of policy intervention (The whole of Singapore view is unavailable in the online version of shinyapps.io due to limits imposed by the free tier subscription).
 
 ##	Accessibility Map 
-Apart from the enabling index, users may want to look at accessibility to the specific built features that are utilised in the calculation of this index. In that event, the accessibility map (Figure 5) can be utilised. Users are presented with a point feature map at a particular planning area. Each point represents a HDB block in the planning area, and are coloured based on their accessibility to a selected built factor, such as preschools. 
+Apart from the enabling index, users may want to look at accessibility to the specific built features that are utilised in the calculation of this index. In that event, the accessibility map (Figure 4) can be utilised. Users are presented with a point feature map at a particular planning area. Each point represents a HDB block in the planning area, and are coloured based on their accessibility to a selected built factor, such as preschools. 
 
 A darker colour indicates a lower accessibility score, which means that the HDB block has a lower accessibility to the built factor. On the other hand, a lighter colour represents a higher accessibility score, indicating that the HDB has better accessibility to the built factor. Clicking on the points will provide more information about the HDB block, such as its location and the estimated number of children living in the block.
 ```{r echo=FALSE, out.width="100%"}
 knitr::include_graphics("f5.png")
 ```
-The selected built factor, in the case of Figure 5, pre-schools, is also visualized using location icons for better reference. Hovering over the icons will display information about the amenity where available. As such, policy planners can utilise this accessibility map to identify underserved blocks (red points) which have lower accessibility to certain built features. Based on this, they can potentially increase the provisioning of the built feature in the area, or implement policy intervention as required.
+The selected built factor, in the case of Figure 4, pre-schools, is also visualized using location icons for better reference. Hovering over the icons will display information about the amenity where available. As such, policy planners can utilise this accessibility map to identify underserved blocks (red points) which have lower accessibility to certain built features. Based on this, they can potentially increase the provisioning of the built feature in the area, or implement policy intervention as required.
 
 Users are also provided with user input features that can be utilised to create more specific analysis that is relevant to their current situation. The accessibility to different built factors can be toggled by utilising the dropdown menu to select the amenity required for the analysis. Users can zoom to different planning areas by utilising the dropdown box. They can additionally reclassify the scores and colour breakdowns based on other classification methods, or modify the number of classes using the slider. They can also experiment with the distance decay parameter and select appropriate values based on existing information and knowledge.
 
