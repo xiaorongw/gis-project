@@ -11,4 +11,4 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-![Image Title](/images/Report.pdf){width=75%}.
+![Image Title](/images/Report.pdf){width=75%,height=100%}.
