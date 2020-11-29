@@ -15,6 +15,6 @@ Item         | Link
 -------------|------
 Proposal     | [Click here](/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/)
 Poster       | [Click here](/2020/11/project-poster/)
-Report       | [Click here](https://smu-my.sharepoint.com/:b:/g/personal/xrwong_2017_sis_smu_edu_sg/Eb35Q7OToARJt1sY20C9nnsBwD0i2ta2csLgjv32Wu3jJQ?e=cxasHP)
+Report       | [Click here](/2020/11/project-report/)
 Video        | [Click here](/2020/11/project-video/)
 
