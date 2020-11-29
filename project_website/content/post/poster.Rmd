@@ -1,7 +1,7 @@
 ---
 title: "Project Poster"
 date: "2020-11-29"
-thumbnailImage: "images/IS415_Team4_TinyBlocks_Poster.jpg"
+thumbnailImage: "images/poster.jpg"
 thumbnailImagePosition: "right"
 summary: "Click in to view a summary of the steps taken and insights gained through this project as we aim to make our cities more developmentally friendly for children"
 output: html_document
@@ -12,5 +12,5 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r echo=FALSE, fig.retina=2}
-knitr::include_graphics('/images/IS415_Team4_TinyBlocks_Poster.jpg', error=FALSE)
+knitr::include_graphics('/images/poster.jpg', error=FALSE)
 ```
