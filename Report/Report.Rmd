@@ -8,7 +8,7 @@ author:
     email: xrwong.2017@sis.smu.edu.sg
     affiliation: Singapore Management University
 abstract: |
-  Are our built spaces enabling healthy child development? The physical environment around our homes have an impact in the healthy development of children. Research has shown that the built spaces that children (aged 0 to 7) access and interact with daily, can enable their social, emotional and physical competence. As such, an understanding of how well our HDBs enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children. Thus, this project aims to model the geographic accessibility of built factors and map the developmental enabling index of HDBs in each planning area through providing a proof-of-concept geospatial analytics application will utilise open source data.
+  Are our built spaces enabling healthy child development? The physical environment around our homes have an impact in the healthy development of children. Research has shown that the built spaces that children (aged 0 to 7) access and interact with daily, can enable their social, emotional and physical competence. As such, an understanding of how well our HDBs enable development will assist policy planners to improve amenity provision and continue enabling the healthy development of children. Thus, this project aims to model the geographic accessibility of built factors and map the developmental enabling index of HDBs in each planning area while providing a proof-of-concept application which utilises open source data 
   
   Keywords: Child Development, Built Spaces, Geospatial, Analytics, Policy Planning
 bibliography: ref.bib
@@ -155,9 +155,18 @@ While the provisioning of these programmes and policies might still be constrain
 Additionally, parents can also potentially utilise this application to self-evaluate the gaps in development that might be brought about by the lack of access to certain built factors. They can then take steps to ensure that their children are still receiving the required environmental stimulation and experience for growth in all of the developmental domains.
 
 
+# Future Work
+As research into how the built environment affects childhood development continues to expand and grow, further work can be carried out in the future. Firstly, the project can be further scoped to the Singapore context, since the built environment factors and developmental domains are currently based on research outside Singapore. With the availability of future research on the impact of built spaces in Singapore to Singapore’s children, new developmental domains and built environment factors can be utilised to complement or replace the current data and analysis.
+
+Beyond that, the project was constrained by the current availability of open data that was utilised in the application and analysis. As such, future work will include procuring and including additional built environment data into the application. This is to provide an even more accurate representation of the spatial situation of Singapore’s built environment.
+
+Finally, the application user interface and functionality can be further improved in future work through the conduct of user testing and experimentation. This may include testing with policy planners from specific public agencies.
+
+
 # Conclusion
-Duis nec purus sed neque porttitor tincidunt vitae quis augue. Donec porttitor aliquam ante, nec convallis nisl ornare eu. Morbi ut purus et justo commodo dignissim et nec nisl. Donec imperdiet tellus dolor, vel dignissim risus venenatis eu. Aliquam tempor imperdiet massa, nec fermentum tellus sollicitudin vulputate. Integer posuere porttitor pharetra. Praesent vehicula elementum diam a suscipit. Morbi viverra velit eget placerat pellentesque. Nunc congue augue non nisi ultrices tempor. [@boller2019measuring] [@engemann2019residential] [@christian2017relationship]
-[@dunn2012levels] [@horner_2018] [@halden2003accessibility] [@hansen1959accessibility] [@qian2019centroid] [@cnn]
+In conclusion, this project has explored how we can make our homes more developmentally enabled for the benefit of our children. It has demonstrated the use of open source data in the creation of a geospatial application as a tool for more evidence-based planning. The application developed in this project serves to provide users with a better understanding of how well HDBs at different areas enable healthy child development through its built environment. 
+
+Additionally, this paper has discussed potential uses of the application and analysis that might be derived to benefit policy planning. The responsibility for the healthy development of children does not only fall on parents or schools alone, but also the built environment of the entire nation and this has to be executed in a data driven way. 
 
 # References
 
