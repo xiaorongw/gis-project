@@ -5,9 +5,7 @@
 # Identifying Neighbourhoods that Enable Healthy Child Development through Geospatial Analysis of Built Spaces
 
 ## Project Motivation
-Children are the future of a nation's well-being. There is therefore an incentive for the nation to ensure the healthy development of a child into adulthood. 
-There have been studies on the how built spaces affect the development of children. Based on recurring key factors identified across these studies, geospatial analysis of Singapore’s neighborhoods can be conducted, to map and understand geospatial gaps, pinpointing risk areas that might require intervention. 
-This is especially relevant for public housing, that is sometimes at a disadvantage compared to private housing where developers are already incentivized or expected to provide some of these built environment factors (e.g. green spaces, recreation spaces). As such, identifying risk areas for childhood development in public housing will be the focus area for this project.
+Children are the future of a nation's well-being. There is therefore an incentive for the nation to ensure the healthy development of a child into adulthood. There have been studies on the how built spaces affect the development of children. Based on recurring key factors identified across these studies, geospatial analysis of Singapore's neighbourhoods can be conducted to map and understand gaps in spatial planning, pinpointing areas that might require intervention. In Singapore, this is especially relevant for public housing. Public estates are sometimes at a disadvantage, as compared to private housing where developers are already incentivised or expected to provide some of the built environment factors (e.g. green spaces, recreation spaces). As such, understanding how enabling different public housing are for childhood development will be the focus area for this project.
 
 ## Project Objective 
 Through this project we aim to:
