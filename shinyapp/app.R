@@ -307,7 +307,7 @@ ui <- dashboardPagePlus(
                     br(),
                     h5('The project evaluates the child development based on the following three developmental domains. The accessibility of various built factors is used to measure these domains.'),
                     br(),
-                    img(src = 'domain2.png', width = '100%')
+                    img(src = 'domain.png', width = '100%')
             ),
             
             tabItem(tabName = "Enabling",
