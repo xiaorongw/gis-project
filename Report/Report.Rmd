@@ -123,7 +123,7 @@ Users are also provided with a variety of user input features (Figure 1, Figure 
 ```{r echo=FALSE, out.width="100%"}
 knitr::include_graphics("f4.png")
 ```
-Beyond this, users can also utilise the input features to adjust parameters in the computation of the enabling index (Figure 4), to create more specific analysis that is relevant to their current situation and analysis needs.
+Beyond this, users can also utilise the input features to adjust parameters in the computation of the enabling index (Figure 3), to create more specific analysis that is relevant to their current situation and analysis needs.
 
 For example, in the event of new research on the importance of emotional maturity to a child’s overall development, domain weight allocations can be reassigned, to afford higher scores to emotional maturity. Similarly, based on new surveys on travel sensitivity, users may find that people are more sensitive to traveling distance for play and fitness equipment. As such, users can increase the distance decay parameter for play and fitness equipment using the slider.
 
