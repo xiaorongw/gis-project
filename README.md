@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/xiaorongw/tinyblocks/blob/master/shinyapp/www/logo2.png" height="300">
+<img src="https://github.com/xiaorongw/tinyblocks/blob/master/shinyapp/www/logo2.png" width="20%">
 </p>
 
 # Identifying Neighbourhoods that Enable Healthy Child Development through Geospatial Analysis of Built Spaces
