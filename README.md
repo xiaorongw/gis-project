@@ -23,9 +23,11 @@ The project will take the following steps in its development:
 + Thematic mapping of HDBs based on enabling index, to identify how well public housing in towns enable healthy child development
 
 ## Application System Architecture 
-This project will be developed with R, as it will enable us to utilise the geospatial analysis and data manipulation libraries, in union with R Shiny to create an integrated web-based GIS application. The R Shiny application runs on a Shiny server, hosted on shinyapps.io along with the data for the application. The data and maps will be loaded by the application and displayed to the user whenever they access the application.
+This project will be developed with R, as it will enable us to utilise the geospatial analysis and data manipulation libraries. R Shiny will be utilised to create an interactive web-based GIS application. The R Shiny application runs on a Shiny server, hosted on shinyapps.io along with the data for the application. The data and maps will be loaded by the application and displayed to the user whenever they access the application, dynamically updating based on user inputs.
 
-![Architecture](https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/architecture.png)
+<img src="https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/architecture.png" width="75%">
+
+## Application Demo
 
 ![](intro_gif.gif)
 
