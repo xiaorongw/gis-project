@@ -27,6 +27,8 @@ This project will be developed with R, as it will enable us to utilise the geosp
 
 ![Architecture](https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/architecture.png)
 
+![](intro_gif.gif)
+
 ## Folder Information
 + shinyapp - You will be able to find the source code for the [geospatial application](https://tinyblocks.shinyapps.io/shinyapp/) and related data files here. (Change branch to shinyapp-1 for the version on sinyapps.io)
 + analysis - Provides rmarkdown documents of preliminary data cleaning and analysis that was conducted
