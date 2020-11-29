@@ -3,49 +3,50 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://tinyblocks.rbind.io/aboutus/</loc>
+    <loc>/post/</loc>
+    <lastmod>2020-11-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/11/project-poster/</loc>
+    <lastmod>2020-11-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-11-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/aboutus/</loc>
     <lastmod>2020-10-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tinyblocks.rbind.io/post/</loc>
+    <loc>/deliverables/</loc>
     <lastmod>2020-10-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tinyblocks.rbind.io/deliverables/</loc>
+    <loc>/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</loc>
     <lastmod>2020-10-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tinyblocks.rbind.io/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</loc>
+    <loc>/2020/10/who-are-we/</loc>
     <lastmod>2020-10-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tinyblocks.rbind.io/</loc>
-    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
+    <loc>/archives/</loc>
   </url>
   
   <url>
-    <loc>http://tinyblocks.rbind.io/2020/10/who-are-we/</loc>
-    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
+    <loc>/categories/</loc>
   </url>
   
   <url>
-    <loc>http://tinyblocks.rbind.io/archives/</loc>
-  </url>
-  
-  <url>
-    <loc>http://tinyblocks.rbind.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>http://tinyblocks.rbind.io/1/01/project-poster/</loc>
-  </url>
-  
-  <url>
-    <loc>http://tinyblocks.rbind.io/tags/</loc>
+    <loc>/tags/</loc>
   </url>
   
 </urlset>
