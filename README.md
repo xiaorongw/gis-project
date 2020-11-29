@@ -17,12 +17,12 @@ Through this project we aim to:
 
 ## Methodology 
 The project will take the following steps in its development:
-•	Identification of key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research
-•	Data collection from various governmental data and open data
-•	Data cleaning and wrangling
-•	Formulation of enabling index to measure how well children in HDBs are developmentally enabled, based on key domains and built environment factors
-•	Computation of enabling index utilising Hansen accessibility measures between HDBs and built factors.
-•	Thematic mapping of HDBs based on enabling index, to identify how well public housing in towns enable healthy child development
++ Identification of key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research
++ Data collection from various governmental data and open data
++ Data cleaning and wrangling
++ Formulation of enabling index to measure how well children in HDBs are developmentally enabled, based on key domains and built environment factors
++ Computation of enabling index utilising Hansen accessibility measures between HDBs and built factors
++ Thematic mapping of HDBs based on enabling index, to identify how well public housing in towns enable healthy child development
 
 ## Application System Architecture 
 This project will be developed with R, as it will enable us to utilise the geospatial analysis and data manipulation libraries, in union with R Shiny to create an integrated web-based GIS application. The R Shiny application runs on a Shiny server, hosted on shinyapps.io along with the data for the application. The data and maps will be loaded by the application and displayed to the user whenever they access the application.
