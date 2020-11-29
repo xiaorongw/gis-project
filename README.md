@@ -11,27 +11,30 @@ This is especially relevant for public housing, that is sometimes at a disadvant
 
 ## Project Objective 
 Through this project we aim to:
-+	Investigate the spatial distribution of key factors of the built environment affecting child development, relative to public housing estates in Singapore.
-+ Identify high risk neighbourhoods for healthy child development, based on built environment factors.
-+ Provide possible recommendations to mitigate these risks.
-+ Utilise open source data to build a proof-of-concept web-based geospatial application.
+1.	Utilise open source data to build a proof-of-concept web-based geospatial application that is dynamic and reactive to user inputs.
+2.	Identify how well HDB flats in different areas enable healthy child development, based on built environment factors.
+3.	Enable more evidence-based policy decisions through a better understanding of the current spatial situation.
 
 
 ## Methodology 
 The project will take the following steps in its development:
-+ Identify key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research
-+ Data collection from various governmental data and open data
-+ Data cleaning and wrangling
-+ Formulate risk matrices based on built environment factors (e.g. proximity to green spaces)
-+ Spatially map and analyse built factors and their spatial relation to public housing (e.g. point pattern analysis)
-+ Utilise risk matrices to compute risk scores for each HDB new town (e.g. accessibility analysis)
-+ Identify at-risk areas for healthy child development in relation to public housing (e.g. localised geospatial analysis)
-+ Propose recommendations for improvement and highlight key findings 
+•	Identification of key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research
+•	Data collection from various governmental data and open data
+•	Data cleaning and wrangling
+•	Formulation of enabling index to measure how well children in HDBs are developmentally enabled, based on key domains and built environment factors
+•	Computation of enabling index utilising Hansen accessibility measures between HDBs and built factors.
+•	Thematic mapping of HDBs based on enabling index, to identify how well public housing in towns enable healthy child development
 
 ## Application System Architecture 
 This project will be developed with R, as it will enable us to utilise the geospatial analysis and data manipulation libraries, in union with R Shiny to create an integrated web-based GIS application. The R Shiny application runs on a Shiny server, hosted on shinyapps.io along with the data for the application. The data and maps will be loaded by the application and displayed to the user whenever they access the application.
 
 ![Architecture](https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/architecture.png)
+
+## Folder Information
++ shinyapp - You will be able to find the source code for the [geospatial application](https://tinyblocks.shinyapps.io/shinyapp/) and related data files here. (Change branch to shinyapp-1 for the version on sinyapps.io)
++ analysis - Provides rmarkdown documents of preliminary data cleaning and analysis that was conducted
++ project_website - Provides the source code for the project website
++ Report - Project report written in R code utilising rticles package 
 
 ## Project Website
 You can follow our project progress via our [project website](https://tinyblocks.rbind.io/) as well. 
