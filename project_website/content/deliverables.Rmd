@@ -14,4 +14,5 @@ knitr::opts_chunk$set(echo = TRUE)
 Item         | Link
 -------------|------
 Proposal     | [Click here](/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/)
+Poster       | [Click here](https://tinyblocks.rbind.io/1/01/project-poster/)
 

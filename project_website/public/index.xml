@@ -2,45 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tiny Blocks</title>
-    <link>/</link>
+    <link>http://tinyblocks.rbind.io/</link>
     <description>Recent content on Tiny Blocks</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://tinyblocks.rbind.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>/aboutus/</link>
+      <link>http://tinyblocks.rbind.io/aboutus/</link>
       <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/aboutus/</guid>
+      <guid>http://tinyblocks.rbind.io/aboutus/</guid>
       <description>A quick look at the people behind this project.</description>
     </item>
     
     <item>
       <title>Project Deliverables</title>
-      <link>/deliverables/</link>
+      <link>http://tinyblocks.rbind.io/deliverables/</link>
       <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/deliverables/</guid>
+      <guid>http://tinyblocks.rbind.io/deliverables/</guid>
       <description>Table of ContentsItemLinkProposalClick here</description>
     </item>
     
     <item>
       <title>Project Proposal: Identifying Neighbourhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces</title>
-      <link>/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</link>
+      <link>http://tinyblocks.rbind.io/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</link>
       <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</guid>
+      <guid>http://tinyblocks.rbind.io/2020/10/project-proposal-identifying-neighbourhoods-with-childhood-developmental-risk-through-geospatial-analysis-of-built-spaces/</guid>
       <description>Children are the future of a nation’s well-being. We propose a project to geospatially analyse Singapore’s neighborhoods so as to map and understand geospatial gaps and to pinpoint child development risk areas that might require intervention.</description>
     </item>
     
     <item>
       <title>Who are we?</title>
-      <link>/2020/10/who-are-we/</link>
+      <link>http://tinyblocks.rbind.io/2020/10/who-are-we/</link>
       <pubDate>Fri, 09 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/10/who-are-we/</guid>
+      <guid>http://tinyblocks.rbind.io/2020/10/who-are-we/</guid>
       <description>A quick look at the people behind this project.</description>
+    </item>
+    
+    <item>
+      <title>Project Poster</title>
+      <link>http://tinyblocks.rbind.io/1/01/project-poster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://tinyblocks.rbind.io/1/01/project-poster/</guid>
+      <description>Click in to view a quick summary of the steps taken and insights gained through this prokect</description>
     </item>
     
   </channel>

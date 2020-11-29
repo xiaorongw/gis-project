@@ -123,6 +123,36 @@ Users can additionally view the information in a tabular form (Figure 3), and so
 knitr::include_graphics("f3.png")
 ```
 Users are also provided with a variety of user input features (Figure 2, Figure 4) that can be adjusted to dynamically update the enabling index map and table, to better understand the results provided and draw insights. Users can zoom into different planning areas using the dropdown selection box. They can additionally reclassify the scores and colour breakdowns based on different classification methods. Additionally, they can increase the number of classes for less data generalisation, and break HDBs down into more detailed classes based on the enabling index.
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("f4.png")
+```
+Beyond this, users can also utilise the input features to adjust parameters in the computation of the enabling index (Figure 4), to create more specific analysis that is relevant to their current situation and analysis needs.
+
+For example, in the event of new research on the importance of emotional maturity to a child’s overall development, domain weight allocations can be reassigned, to afford higher scores to emotional maturity. Similarly, based on new surveys on travel sensitivity, users may find that people are more sensitive to traveling distance for play and fitness equipment. As such, users can increase the distance decay parameter for play and fitness equipment using the slider.
+
+All these changes to user inputs are updated dynamically and automatically reflected in the map and table accordingly. In the local version of this application, users are also able to view the information at the whole of Singapore level, to broadly identify areas and HDB blocks that are most at need of policy intervention (The whole of Singapore view is unavailable in the online version of shinyapps.io due to limits imposed by the free tier subscription).
+
+##	Accessibility Map 
+Apart from the enabling index, users may want to look at accessibility to the specific built features that are utilised in the calculation of this index. In that event, the accessibility map (Figure 5) can be utilised. Users are presented with a point feature map at a particular planning area. Each point represents a HDB block in the planning area, and are coloured based on their accessibility to a selected built factor, such as preschools. 
+
+A darker colour indicates a lower accessibility score, which means that the HDB block has a lower accessibility to the built factor. On the other hand, a lighter colour represents a higher accessibility score, indicating that the HDB has better accessibility to the built factor. Clicking on the points will provide more information about the HDB block, such as its location and the estimated number of children living in the block.
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("f5.png")
+```
+The selected built factor, in the case of Figure 5, pre-schools, is also visualized using location icons for better reference. Hovering over the icons will display information about the amenity where available. As such, policy planners can utilise this accessibility map to identify underserved blocks (red points) which have lower accessibility to certain built features. Based on this, they can potentially increase the provisioning of the built feature in the area, or implement policy intervention as required.
+
+Users are also provided with user input features that can be utilised to create more specific analysis that is relevant to their current situation. The accessibility to different built factors can be toggled by utilising the dropdown menu to select the amenity required for the analysis. Users can zoom to different planning areas by utilising the dropdown box. They can additionally reclassify the scores and colour breakdowns based on other classification methods, or modify the number of classes using the slider. They can also experiment with the distance decay parameter and select appropriate values based on existing information and knowledge.
+
+
+#	Discussion
+Through utilising open-source data to build an interactive proof-of-concept geospatial application which is dynamic and reactive to user inputs, the project has been able to demonstrate that it is possible to utilise open data in the pursuit of more evidence-based policy planning. 
+
+From the application, policy planners will be able to pinpoint exact HDB blocks that are not as enabled in providing built spaces for healthy child development. Through that, they will be able to conduct focused interventions, like providing community-based activities such as field trips to the museums or parks for children from these HDB blocks, so as to encourage greater social bonding and physical and emotional development. Other policies might include providing new shuttle or bus services to these blocks, to enable its residents to access facilities that might be otherwise out of reach. 
+
+Urban and public service planning agencies will also be able to utilise this application to visualise HDBs which do not have as equal access to amenities compared to others, through the accessibility map. This will allow them to justify the implementation of new amenities and services in these areas for the benefit of healthy child development. 
+While the provisioning of these programmes and policies might still be constrained by an agency’s resource and logistics, the geospatial application still provides an avenue for conversation to be generated in these agencies on how to better raise children with healthier development. 
+
+Additionally, parents can also potentially utilise this application to self-evaluate the gaps in development that might be brought about by the lack of access to certain built factors. They can then take steps to ensure that their children are still receiving the required environmental stimulation and experience for growth in all of the developmental domains.
 
 
 # Conclusion
