@@ -2,7 +2,7 @@
 <img src="https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/logo.png" width="460" height="300">
 </p>
 
-# Identifying Neighborhoods with Childhood Developmental Risk through Geospatial Analysis of Built Spaces 
+# Identifying Neighbourhoods that Enable Healthy Child Development through Geospatial Analysis of Built Spaces
 
 ## Project Motivation
 Children are the future of a nation's wellbeing. There is therefore an incentive for the nation to ensure the healthy development of a child into adulthood. 
@@ -14,7 +14,6 @@ Through this project we aim to:
 1.	Utilise open source data to build a proof-of-concept web-based geospatial application that is dynamic and reactive to user inputs.
 2.	Identify how well HDB flats in different areas enable healthy child development, based on built environment factors.
 3.	Enable more evidence-based policy decisions through a better understanding of the current spatial situation.
-
 
 ## Methodology 
 The project will take the following steps in its development:
