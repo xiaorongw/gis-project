@@ -11,4 +11,6 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-![Image Title](/images/Report.pdf){width=75%,height=100%}.
+# Click to View More
+[![report](/images/Report.jpg){width=75%,height=100%}](https://smu-my.sharepoint.com/:b:/g/personal/xrwong_2017_sis_smu_edu_sg/Eb35Q7OToARJt1sY20C9nnsBwD0i2ta2csLgjv32Wu3jJQ?e=cxasHP)
+
