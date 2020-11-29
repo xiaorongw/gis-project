@@ -9,12 +9,12 @@ Children are the future of a nation's well-being. There is therefore an incentiv
 
 ## Project Objective 
 Through this project we aim to:
-1.	Utilise open source data to build a proof-of-concept web-based geospatial application that is dynamic and reactive to user inputs.
-2.	Identify how well HDB flats in different areas enable healthy child development, based on built environment factors.
-3.	Enable more evidence-based policy decisions through a better understanding of the current spatial situation.
+1.	Utilise open source data to build a proof-of-concept web-based geospatial application that is dynamic and reactive to user inputs
+2.	Identify how well HDB flats in different areas enable healthy child development, based on built environment factors
+3.	Enable more evidence-based policy decisions through a better understanding of the current spatial situation
 
 ## Methodology 
-The project will take the following steps in its development:
+The project took the following steps in its development:
 + Identification of key domains for child development (physical health and well-being, social competence, emotional maturity) and their corresponding built environment factors, based on existing research
 + Data collection from various governmental data and open data
 + Data cleaning and wrangling
@@ -23,7 +23,7 @@ The project will take the following steps in its development:
 + Thematic mapping of HDBs based on enabling index, to identify how well public housing in towns enable healthy child development
 
 ## Application System Architecture 
-This project will be developed with R, as it will enable us to utilise the geospatial analysis and data manipulation libraries. R Shiny will be utilised to create an interactive web-based GIS application. The R Shiny application runs on a Shiny server, hosted on shinyapps.io along with the data for the application. The data and maps will be loaded by the application and displayed to the user whenever they access the application, dynamically updating based on user inputs.
+This project is developed with R, to leverage on its powerful data manipulation and geospatial analysis libraries. R Shiny will be utilised to create an interactive web-based GIS application. The R Shiny application runs on a Shiny server, hosted on shinyapps.io along with the data for the application. The data and maps will be loaded by the application and displayed to the user whenever they access the application, dynamically updating based on user inputs.
 
 <img src="https://github.com/xiaorongw/gis-project/blob/master/project_website/static/images/architecture.png" width="75%">
 
@@ -33,7 +33,7 @@ This project will be developed with R, as it will enable us to utilise the geosp
 
 ## Folder Information
 + shinyapp - Source code for the [interactive geospatial application](https://tinyblocks.shinyapps.io/shinyapp/) and related data files (Change branch to shinyapp-1 for the version on shinyapps.io)
-+ project_website - Provides the source code for the project website
++ project_website - Source code for the project website
 + Report - Project report written in R code utilising rticles package 
 
 ## Project Website
