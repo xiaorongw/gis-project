@@ -1,0 +1,14 @@
+---
+title: "Project Poster"
+date: "11/29/2020"
+thumbnailImagePosition: "right"
+summary: "Click in to view a quick summary of the steps taken and insights gained through this prokect"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r echo=FALSE, fig.retina=2}
+knitr::include_graphics('/images/IS415_Team4_TinyBlocks_Poster.jpg', error=FALSE)
+```
