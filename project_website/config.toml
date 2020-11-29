@@ -70,9 +70,16 @@ canonifyurls = true
   name = "Who Are We?"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
   url = "/aboutus"
-
+  
 [[menu.links]]
   weight = 1
+  identifier = "application"
+  name = "Application"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-desktop\"></i>"
+  url = "https://tinyblocks.shinyapps.io/shinyapp/"
+
+[[menu.links]]
+  weight = 2
   identifier = "github"
   name = "GitHub"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
