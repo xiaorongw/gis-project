@@ -1,6 +1,6 @@
 ---
 title: "Project Poster"
-date: "11/29/2020"
+date: "2020-11-29"
 thumbnailImage: "images/IS415_Team4_TinyBlocks_Poster.jpg"
 thumbnailImagePosition: "right"
 summary: "Click in to view a summary of the steps taken and insights gained through this project as we aim to make our cities more developmentally friendly for children"
